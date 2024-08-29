@@ -1,5 +1,11 @@
+import FeatureSection from "./components/Section/FeatureSection";
+
 function App() {
-  return <div>Hola Mundo</div>;
+  return (
+    <>
+      <FeatureSection />
+    </>
+  );
 }
 
 export default App;

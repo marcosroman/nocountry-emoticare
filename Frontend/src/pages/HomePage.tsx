@@ -4,7 +4,7 @@ import HeroSection from "../components/Section/HeroSection";
 function HomePage() {
   return (
     <>
-    <HeroSection />
+      <HeroSection />
       <FeatureSection />
     </>
   );

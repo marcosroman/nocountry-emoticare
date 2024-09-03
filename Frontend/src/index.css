@@ -4,6 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .input-light-background {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: black;
+        transition: background-color 5000s ease-in-out 0s;
+        box-shadow: inset 0 0 20px 20px #ffffff00;
+    }
+
+    .input-dark-background {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: white;
+        transition: background-color 5000s ease-in-out 0s;
+        box-shadow: inset 0 0 20px 20px #ffffff00;
+    }
+  }
+
 h1,
 h2,
 h3,

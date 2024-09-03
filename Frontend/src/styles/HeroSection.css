@@ -54,7 +54,8 @@
 .hero-image {
   display: none;
 }
-button {
+
+.hero-button {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -64,13 +65,13 @@ button {
 }
 
 @media screen and (min-width: 425px) {
-  button {
+  .hero-button {
     left: 4rem;
   }
 }
 
 @media screen and (min-width: 768px) {
-  button {
+  .hero-button {
     left: 15rem;
   }
 }
@@ -96,7 +97,7 @@ button {
     height: 500px;
   }
 
-  button {
+  .hero-button {
     display: flex;
     padding: 0;
     margin: 0;
@@ -105,7 +106,7 @@ button {
     cursor: pointer;
   }
 
-  button {
+  .hero-button {
     --primary-color: #111;
     --hovered-color: #ffffff;
     position: relative;
@@ -116,7 +117,7 @@ button {
     right: 4rem;
   }
 
-  button p {
+  .hero-button p {
     margin: 0;
     position: relative;
     font-size: 20px;
@@ -124,7 +125,7 @@ button {
     color: var(--primary-color);
   }
 
-  button::after {
+  .hero-button::after {
     position: absolute;
     content: "";
     width: 0;
@@ -135,7 +136,7 @@ button {
     transition: 0.3s ease-out;
   }
 
-  button p::before {
+  .hero-button p::before {
     position: absolute;
     content: "Start your Consultation";
     width: 0%;
@@ -145,20 +146,20 @@ button {
     transition: 0.3s ease-out;
   }
 
-  button:hover::after {
+  .hero-button:hover::after {
     width: 100%;
   }
 
-  button:hover p::before {
+  .hero-button:hover p::before {
     width: 100%;
   }
 
-  button:hover svg {
+  .hero-button:hover svg {
     transform: translateX(4px);
     color: var(--hovered-color);
   }
 
-  button svg {
+  .hero-button svg {
     color: var(--primary-color);
     transition: 0.2s;
     position: relative;

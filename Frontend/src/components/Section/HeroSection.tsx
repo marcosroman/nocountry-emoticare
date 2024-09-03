@@ -1,4 +1,5 @@
-import "./Header.css";
+import "../../styles/HeroSection.css";
+import doctorPreview from "../../images/doctor-preview.png"
 
 const Hero = () => {
   return (
@@ -6,7 +7,7 @@ const Hero = () => {
       <div className="hero-content">
         <div>
           <img
-            src="src/images/doctor-preview.png"
+            src={doctorPreview}
             alt="Doctor"
             className="hero-image"
           />
@@ -29,11 +30,11 @@ const Hero = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              stroke-width="4"
+              strokeWidth="4"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               ></path>
             </svg>

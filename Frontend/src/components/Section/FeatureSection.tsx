@@ -1,22 +1,22 @@
 import FeatureCard from "../Card/FeatureCard";
 import VideocameraIcon from "../../icons/Videocamera";
-import CalendarIcon from "../../icons/Calendar"
+import TimeIcon from "../../icons/Time"
 import UsersIcon from "../../icons/Users";
 import HistoryIcon from "../../icons/History";
 
 function FeatureSection() {
   return (
-    <section className="bg-gray-100 px-6 py-8">
-      <h2 className="text-3xl font-semibold text-center py-6">
-        Servicios
+    <section className="px-6 py-8 max-w-4xl mx-auto">
+      <h2 className="text-3xl font-semibold text-center py-6 text-blue-500 mb-4">
+        Nuestros Servicios de Telemedicina
       </h2>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
+      <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 ">
         <li>
           <FeatureCard
             title="Horario Flexible"
             desc="Agenda tu cita en el horario que mejor se adapte a tu rutina."
           >
-            <CalendarIcon className="text-blue-400 size-10" />
+            <TimeIcon className="text-blue-400 size-10" />
           </FeatureCard>
         </li>
         <li>
@@ -37,7 +37,7 @@ function FeatureSection() {
         </li>
         <li>
           <FeatureCard
-            title="Respaldo de tu Historial Médico"
+            title="Historial Médico Digital"
             desc="Lleva en un solo lugar tu historial médico para que puedas observar tu progreso."
           >
             <HistoryIcon className="text-blue-400 size-10" />

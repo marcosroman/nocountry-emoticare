@@ -1,13 +1,13 @@
-
-import FeatureSection from "./components/Section/FeatureSection";
-import HeroSection from "./components/Section/HeroSection";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <>
-    <HeroSection/>
-      <FeatureSection />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

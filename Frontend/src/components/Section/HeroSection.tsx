@@ -22,7 +22,7 @@ const Hero = () => {
             </p>
           </div>
           <div className="section_button">
-          <button>
+          <button className="hero-button">
             <p>Start your Consultation</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"

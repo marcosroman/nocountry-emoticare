@@ -2,6 +2,7 @@ CREATE TABLE usuarios(
 	nro_documento INTEGER PRIMARY KEY,
 	nombre varchar(255) NOT NULL,
 	apellido VARCHAR(255) NOT NULL,
+  genero VARCHAR(25) NOT NULL CHECK (genero IN('Masculino','Femenino')),
 	fecha_nacimiento varchar(20) NOT NULL,
 	email VARCHAR(100) UNIQUE NOT NULL,
 	password VARCHAR(100) NOT NULL,

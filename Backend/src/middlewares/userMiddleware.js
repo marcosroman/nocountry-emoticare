@@ -26,6 +26,13 @@ const schemaRegister = Joi.object({
       'any.required': 'El campo apellido es obligatorio.'
     }),
 
+  genero: Joi.string()
+  .valid('Masculino','Femenino')
+  .required()
+    .messages({
+      'any.required': 'El campo fecha_nacimiento es obligatorio.'
+    }),
+
   fecha_nacimiento: Joi.date()
     .required()
     .messages({
@@ -104,7 +111,7 @@ const schemaRegister = Joi.object({
 
   direccion: Joi.string().when('rol', { is: 'paciente', then: Joi.required(), otherwise: Joi.forbidden() }).messages({
     'string.base': 'El campo direccion debe ser una cadena de texto.',
-    'any.required': 'El campo direccion es obligatorio para pacientes.'
+    'any.required': 'El campo direccion es obligatorio.'
   })
 
 })

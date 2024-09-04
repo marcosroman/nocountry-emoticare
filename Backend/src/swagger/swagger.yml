@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Swagger Telemedicina - OpenAPI 3.0
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000/
+tags:
+  - name: user
+    description: Everything about user
+  - name: login
+    description: Access to app
+paths:
+  /register:
+    post:
+      tags:
+        - user
+      summary: add a new user
+      description: add a new user to database
+      operationId: addUser
+      requestBody:
+        description: create a new user a database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        nro_documento:
+          type: integer
+          format: int64
+          example: 123456789
+        nombre:
+          type: string
+          example: Jorge
+        apellido:
+          type: string
+          example: Perez
+        genero:
+          type: string
+          enum:
+            - Masculino
+            - Femenino
+          example: Masculino
+        fecha_nacimiento:
+          type: string
+          example: 05-04-2000
+        email:
+          type: string
+          example: example@email.com
+        password:
+          type: string
+          example: '12345'
+        repeat_password:
+          type: string
+          example: '12345'
+        rol:
+          type: string
+          enum:
+            - paciente
+            - medico
+            - admin
+          example: paciente
+        nacionalidad:
+          type: string
+          example: Chilena
+        tipo_documento:
+          type: string
+          example: DNI
+        telefono:
+          type: string
+          example: '+56936522365'
+        direccion:
+          type: string
+          example: Los Lagos 1520

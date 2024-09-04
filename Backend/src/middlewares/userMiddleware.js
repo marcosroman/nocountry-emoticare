@@ -30,7 +30,7 @@ const schemaRegister = Joi.object({
   .valid('Masculino','Femenino')
   .required()
     .messages({
-      'any.required': 'El campo fecha_nacimiento es obligatorio.'
+      'any.required': 'El campo genero es obligatorio.'
     }),
 
   fecha_nacimiento: Joi.date()
@@ -72,7 +72,7 @@ const schemaRegister = Joi.object({
     .required()
     .messages({
       'string.base': 'El campo rol debe ser una cadena de texto.',
-      'string.valid': 'El campo rol debe ser uno de los siguientes valores: paciente, admin, medico.',
+      'any.only': 'El campo rol debe ser uno de los siguientes valores: paciente, admin, medico.',
       'any.required': 'El campo rol es obligatorio.'
     }),
 
@@ -124,7 +124,7 @@ const validateRegister = async (req, res, next) => {
     const { error } = schemaRegister.validate(req.body);
 
     if (error) {
-      return res.status(400).json({ error: error.details[0].message })
+      return res.status(200).json({ error: error.details[0].message })
     }
 
     next()

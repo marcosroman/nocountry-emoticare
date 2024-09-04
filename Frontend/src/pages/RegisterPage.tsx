@@ -12,12 +12,13 @@ function RegisterPage() {
   } = useForm();
 
   const onSubmit = handleSubmit((values) => {
+    values.rol = "paciente";
     console.log({ ...values });
     reset();
   });
 
   return (
-    <main className="p-4 flex flex-col min-h-screen justify-center items-center bg-gradient-to-r from-blue-400 to-violet-100">
+    <main className="p-4 flex flex-col min-h-screen justify-center items-center bg-gradient-to-b from-blue-100 to-sky-200">
       <form
         className="shadow-lg grid md:grid-cols-2 max-w-5xl"
         onSubmit={onSubmit}
@@ -28,7 +29,7 @@ function RegisterPage() {
             <FormInput
               type="text"
               placeholder="Nombre"
-              config={register("name", {
+              config={register("nombre", {
                 required: {
                   value: true,
                   message: "Este campo es obligatorio",
@@ -36,15 +37,15 @@ function RegisterPage() {
               })}
               classes="autofill:input-light-background"
             >
-              {errors.name && (
-                <FormInputError message={String(errors.name.message)} />
+              {errors.nombre && (
+                <FormInputError message={String(errors.nombre.message)} />
               )}
             </FormInput>
-            
+
             <FormInput
               type="text"
               placeholder="Apellido"
-              config={register("lastname", {
+              config={register("apellido", {
                 required: {
                   value: true,
                   message: "Este campo es obligatorio",
@@ -52,8 +53,8 @@ function RegisterPage() {
               })}
               classes="autofill:input-light-background"
             >
-              {errors.lastname && (
-                <FormInputError message={String(errors.lastname.message)} />
+              {errors.apellido && (
+                <FormInputError message={String(errors.apellido.message)} />
               )}
             </FormInput>
           </div>
@@ -62,20 +63,24 @@ function RegisterPage() {
             <label className="grid gap-2 items-center">
               <select
                 className="ps-1 pb-1 border-b-2 border-gray-200 text-black focus:outline-none focus:border-gray-300"
-                {...register("sex", {
+                {...register("genero", {
                   required: {
                     value: true,
                     message: "Este campo es obligatorio",
                   },
+                  pattern: {
+                    value: /^(masculino|femenino)$/,
+                    message: "Seleccione uno de los dos géneros disponibles",
+                  },
                 })}
               >
-                <option value="">Sexo</option>
-                <option value="man">Hombre</option>
-                <option value="woman">Mujer</option>
+                <option value="">Género</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
               </select>
             </label>
-            {errors.sex && (
-              <FormInputError message={String(errors.sex.message)} />
+            {errors.genero && (
+              <FormInputError message={String(errors.genero.message)} />
             )}
           </div>
 
@@ -86,7 +91,7 @@ function RegisterPage() {
                 type="date"
                 max={new Date().toISOString().split("T")[0]}
                 className="ps-2 pb-1 text-black border-b-2 bg-transparent border-gray-200 focus:outline-none"
-                {...register("birthdate", {
+                {...register("fecha_nacimiento", {
                   required: {
                     value: true,
                     message: "Este campo es obligatorio",
@@ -94,10 +99,28 @@ function RegisterPage() {
                 })}
               />
             </label>
-            {errors.birthdate && (
-              <FormInputError message={String(errors.birthdate.message)} />
+            {errors.fecha_nacimiento && (
+              <FormInputError
+                message={String(errors.fecha_nacimiento.message)}
+              />
             )}
           </div>
+
+          <FormInput
+            type="email"
+            placeholder="Correo Electrónico"
+            classes="autofill:input-light-background"
+            config={register("email", {
+              required: {
+                value: true,
+                message: "Este campo es obligatorio",
+              },
+            })}
+          >
+            {errors.email && (
+              <FormInputError message={String(errors.email.message)} />
+            )}
+          </FormInput>
 
           <FormInput
             type="password"
@@ -127,7 +150,7 @@ function RegisterPage() {
             type="password"
             placeholder="Confirmar Contraseña"
             classes="autofill:input-light-background"
-            config={register("confirm_password", {
+            config={register("repeat_password", {
               required: {
                 value: true,
                 message: "Este campo es obligatorio",
@@ -141,9 +164,9 @@ function RegisterPage() {
               },
             })}
           >
-            {errors.confirm_password && (
+            {errors.repeat_password && (
               <FormInputError
-                message={String(errors.confirm_password.message)}
+                message={String(errors.repeat_password.message)}
               />
             )}
           </FormInput>
@@ -153,9 +176,9 @@ function RegisterPage() {
           <h2 className="text-2xl mb-5 text-white">Información de Contacto</h2>
 
           <FormInput
-            type="email"
-            placeholder="Correo Electrónico"
-            config={register("email", {
+            type="text"
+            placeholder="País"
+            config={register("nacionalidad", {
               required: {
                 value: true,
                 message: "Este campo es obligatorio",
@@ -163,15 +186,15 @@ function RegisterPage() {
             })}
             classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
           >
-            {errors.email && (
-              <FormInputError message={String(errors.email.message)} />
+            {errors.nacionalidad && (
+              <FormInputError message={String(errors.nacionalidad.message)} />
             )}
           </FormInput>
 
           <FormInput
             type="text"
-            placeholder="País"
-            config={register("country", {
+            placeholder="Tipo de Documento"
+            config={register("tipo_documento", {
               required: {
                 value: true,
                 message: "Este campo es obligatorio",
@@ -179,15 +202,43 @@ function RegisterPage() {
             })}
             classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
           >
-            {errors.country && (
-              <FormInputError message={String(errors.country.message)} />
+            {errors.tipo_documento && (
+              <FormInputError message={String(errors.tipo_documento.message)} />
+            )}
+          </FormInput>
+
+          <FormInput
+            type="number"
+            placeholder="Nro de Documento"
+            config={register("nro_documento", {
+              required: {
+                value: true,
+                message: "Este campo es obligatorio",
+              },
+              pattern: {
+                value: /\d+/,
+                message: "Este campo debe ser un número",
+              },
+              min: {
+                value: 0,
+                message: "Este campo debe ser un número entero",
+              },
+              maxLength: {
+                value: 9,
+                message: "Este campo no puede tener más de 9 dígitos",
+              },
+            })}
+            classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
+          >
+            {errors.nro_documento && (
+              <FormInputError message={String(errors.nro_documento.message)} />
             )}
           </FormInput>
 
           <FormInput
             type="tel"
             placeholder="Teléfono"
-            config={register("telephone", {
+            config={register("telefono", {
               required: {
                 value: true,
                 message: "Este campo es obligatorio",
@@ -195,8 +246,24 @@ function RegisterPage() {
             })}
             classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
           >
-            {errors.telephone && (
-              <FormInputError message={String(errors.telephone.message)} />
+            {errors.telefono && (
+              <FormInputError message={String(errors.telefono.message)} />
+            )}
+          </FormInput>
+
+          <FormInput
+            type="text"
+            placeholder="Dirección"
+            config={register("direccion", {
+              required: {
+                value: true,
+                message: "Este campo es obligatorio",
+              },
+            })}
+            classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
+          >
+            {errors.direccion && (
+              <FormInputError message={String(errors.direccion.message)} />
             )}
           </FormInput>
 

@@ -22,6 +22,7 @@ const createUserController = async (req, res) =>{
         user.nro_documento,
         user.nombre,
         user.apellido,
+        user.genero,
         user.fecha_nacimiento,
         user.email,
         user.password,

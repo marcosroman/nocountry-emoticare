@@ -18,13 +18,13 @@ function RegisterPage() {
   });
 
   return (
-    <main className="p-4 flex flex-col min-h-screen justify-center items-center bg-gradient-to-b from-blue-100 to-sky-200">
+    <main className="p-4 flex flex-col min-h-screen justify-center items-center bg-gradient-to-br from-blue-200 to-blue-500">
       <form
         className="shadow-lg grid md:grid-cols-2 max-w-5xl"
         onSubmit={onSubmit}
       >
         <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none ps-10 pe-10 py-10 gap-10">
-          <h2 className="text-2xl mb-5 text-[#2371de]">Información General</h2>
+          <h2 className="text-2xl mb-5 text-blue-600">Información General</h2>
           <div className="grid gap-10 md:grid-cols-2">
             <FormInput
               type="text"
@@ -172,7 +172,7 @@ function RegisterPage() {
           </FormInput>
         </section>
 
-        <section className="flex flex-col bg-[#4935d4] rounded-b-lg md:rounded-e-lg md:rounded-s-none ps-10 pe-10 py-10 gap-10 relative">
+        <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none ps-10 pe-10 py-10 gap-10 relative">
           <h2 className="text-2xl mb-5 text-white">Información de Contacto</h2>
 
           <FormInput

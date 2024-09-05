@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../components/Form/FormInput";
 import FormInputError from "../components/Form/FormInputError";
+import { useState } from "react";
+import EyeIcon from "../icons/Eye";
+import EyeoffIcon from "../icons/Eyeoff";
 
 function RegisterPage() {
   const {
@@ -11,6 +14,9 @@ function RegisterPage() {
     reset,
   } = useForm();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const onSubmit = handleSubmit((values) => {
     values.rol = "paciente";
     console.log({ ...values });
@@ -18,13 +24,13 @@ function RegisterPage() {
   });
 
   return (
-    <main className="p-4 flex flex-col min-h-screen justify-center items-center bg-gradient-to-b from-blue-100 to-sky-200">
+    <main className="p-4 flex flex-col min-h-screen justify-center items-center bg-gradient-to-br from-blue-200 to-blue-500">
       <form
         className="shadow-lg grid md:grid-cols-2 max-w-5xl"
         onSubmit={onSubmit}
       >
         <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none ps-10 pe-10 py-10 gap-10">
-          <h2 className="text-2xl mb-5 text-[#2371de]">Información General</h2>
+          <h2 className="text-2xl mb-5 text-blue-600">Información General</h2>
           <div className="grid gap-10 md:grid-cols-2">
             <FormInput
               type="text"
@@ -122,57 +128,83 @@ function RegisterPage() {
             )}
           </FormInput>
 
-          <FormInput
-            type="password"
-            placeholder="Contraseña"
-            classes="autofill:input-light-background"
-            config={register("password", {
-              required: {
-                value: true,
-                message: "Este campo es obligatorio",
-              },
-              minLength: {
-                value: 3,
-                message: "La contraseña debe tener entre 3 y 30 caracteres",
-              },
-              maxLength: {
-                value: 30,
-                message: "La contraseña debe tener entre 3 y 30 caracteres",
-              },
-            })}
-          >
-            {errors.password && (
-              <FormInputError message={String(errors.password.message)} />
-            )}
-          </FormInput>
+          <div className="relative">
+            <FormInput
+              type={showPassword ? "text" : "password"}
+              placeholder="Contraseña"
+              classes="autofill:input-light-background"
+              config={register("password", {
+                required: {
+                  value: true,
+                  message: "Este campo es obligatorio",
+                },
+                minLength: {
+                  value: 3,
+                  message: "La contraseña debe tener entre 3 y 30 caracteres",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "La contraseña debe tener entre 3 y 30 caracteres",
+                },
+              })}
+            >
+              {errors.password && (
+                <FormInputError message={String(errors.password.message)} />
+              )}
+            </FormInput>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-0 right-0"
+            >
+              {showPassword ? (
+                <EyeoffIcon className="hover:opacity-60" />
+              ) : (
+                <EyeIcon className="hover:opacity-60" />
+              )}
+            </button>
+          </div>
 
-          <FormInput
-            type="password"
-            placeholder="Confirmar Contraseña"
-            classes="autofill:input-light-background"
-            config={register("repeat_password", {
-              required: {
-                value: true,
-                message: "Este campo es obligatorio",
-              },
-              validate: (value) => {
-                if (value === watch("password")) {
-                  return true;
-                } else {
-                  return "Las contraseñas no coinciden";
-                }
-              },
-            })}
-          >
-            {errors.repeat_password && (
-              <FormInputError
-                message={String(errors.repeat_password.message)}
-              />
-            )}
-          </FormInput>
+          <div className="relative">
+            <FormInput
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirmar Contraseña"
+              classes="autofill:input-light-background"
+              config={register("repeat_password", {
+                required: {
+                  value: true,
+                  message: "Este campo es obligatorio",
+                },
+                validate: (value) => {
+                  if (value === watch("password")) {
+                    return true;
+                  } else {
+                    return "Las contraseñas no coinciden";
+                  }
+                },
+              })}
+            >
+              {errors.repeat_password && (
+                <FormInputError
+                  message={String(errors.repeat_password.message)}
+                />
+              )}
+            </FormInput>
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute top-0 right-0"
+            >
+              {showConfirmPassword ? (
+                <EyeoffIcon className="hover:opacity-60" />
+              ) : (
+                <EyeIcon className="hover:opacity-60" />
+              )}
+            </button>
+          </div>
         </section>
 
-        <section className="flex flex-col bg-[#4935d4] rounded-b-lg md:rounded-e-lg md:rounded-s-none ps-10 pe-10 py-10 gap-10 relative">
+        <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none ps-10 pe-10 py-10 gap-10 relative">
           <h2 className="text-2xl mb-5 text-white">Información de Contacto</h2>
 
           <FormInput

@@ -12,16 +12,16 @@ function Navbar() {
           <img src="src\images\preview-icon.png" alt="icon" className="icon" />
           <MenuIcon className="menu_icon"></MenuIcon>
         </div>
-        <div className="category_span">
+        <div className="category_span text-cyan-950">
           <About_us></About_us>
           <span>About us</span>
           <Specialties></Specialties>
-          <span className="text-red-400">Specialties</span>
+          <span className="text-cyan-950">Specialties</span>
         </div>
-        <div className="login_chart">
-            <button className="sign_up">Sign up</button>
+        <div className="login_chart text-cyan-950">
             <LoginIcon></LoginIcon>
           <h1 className="text_btn">Log in</h1>
+          <a className="sign_up" href="">Sign up</a>
         </div>
       </div>
     </section>

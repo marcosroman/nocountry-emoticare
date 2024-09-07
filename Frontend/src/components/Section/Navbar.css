@@ -2,7 +2,6 @@
   background-color: rgb(241, 241, 241);
   width: 100vw;
   height: 10vh;
-  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -46,7 +45,7 @@
   }
   .navbar {
     display:grid;
-    grid-template-columns: 2fr 2fr 4fr;
+    grid-template-columns: 2fr 2fr 3fr;
   }
   .menu_icon {
     display:none;
@@ -56,7 +55,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap:3rem;
+    gap:1rem;
     position:relative;
     left:2rem;
     white-space: nowrap;
@@ -70,8 +69,15 @@
   .login_chart {
     display: flex;
     font-size: 20px;
+    width:12rem;
     flex-direction: row;
     align-items: center;
+    position:relative;
+    left:5rem;
+  }
+  .login_chart h2 {
+    position:relative;
+    left:2rem;
   }
 
   .sign_up {
@@ -81,6 +87,8 @@
     width: 100px;
     display:flex;
     justify-content: center;
+    position: relative;
+    left:2rem;
     align-items: center;
     border-radius: 50px;
   }
@@ -90,4 +98,36 @@
   .menu_icon {
     display: none;
   }
+
+  .login_chart {
+    left:12rem;
+
+  }
+  .category_span {
+    left:8em;
+  }
+  .icon {
+    left:10rem;
+  }
+}
+
+@media screen and (min-width: 1440px) { 
+
+  .icon {
+    left:20rem;
+  }
+
+}
+
+@media screen and (min-width: 1600px) { 
+  .icon {
+    left:22rem;
+  }
+
+  .login_chart {
+    left:20rem;
+
+  }
+
+
 }

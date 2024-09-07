@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import FormInput from "../components/Form/FormInput";
 import FormInputError from "../components/Form/FormInputError";
+import { useState } from "react";
+import EyeIcon from "../icons/Eye";
+import EyeoffIcon from "../icons/Eyeoff";
 
 function RegisterPage() {
   const {
@@ -10,6 +13,9 @@ function RegisterPage() {
     watch,
     reset,
   } = useForm();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const onSubmit = handleSubmit((values) => {
     values.rol = "paciente";
@@ -122,54 +128,80 @@ function RegisterPage() {
             )}
           </FormInput>
 
-          <FormInput
-            type="password"
-            placeholder="Contraseña"
-            classes="autofill:input-light-background"
-            config={register("password", {
-              required: {
-                value: true,
-                message: "Este campo es obligatorio",
-              },
-              minLength: {
-                value: 3,
-                message: "La contraseña debe tener entre 3 y 30 caracteres",
-              },
-              maxLength: {
-                value: 30,
-                message: "La contraseña debe tener entre 3 y 30 caracteres",
-              },
-            })}
-          >
-            {errors.password && (
-              <FormInputError message={String(errors.password.message)} />
-            )}
-          </FormInput>
+          <div className="relative">
+            <FormInput
+              type={showPassword ? "text" : "password"}
+              placeholder="Contraseña"
+              classes="autofill:input-light-background"
+              config={register("password", {
+                required: {
+                  value: true,
+                  message: "Este campo es obligatorio",
+                },
+                minLength: {
+                  value: 3,
+                  message: "La contraseña debe tener entre 3 y 30 caracteres",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "La contraseña debe tener entre 3 y 30 caracteres",
+                },
+              })}
+            >
+              {errors.password && (
+                <FormInputError message={String(errors.password.message)} />
+              )}
+            </FormInput>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-0 right-0"
+            >
+              {showPassword ? (
+                <EyeoffIcon className="hover:opacity-60" />
+              ) : (
+                <EyeIcon className="hover:opacity-60" />
+              )}
+            </button>
+          </div>
 
-          <FormInput
-            type="password"
-            placeholder="Confirmar Contraseña"
-            classes="autofill:input-light-background"
-            config={register("repeat_password", {
-              required: {
-                value: true,
-                message: "Este campo es obligatorio",
-              },
-              validate: (value) => {
-                if (value === watch("password")) {
-                  return true;
-                } else {
-                  return "Las contraseñas no coinciden";
-                }
-              },
-            })}
-          >
-            {errors.repeat_password && (
-              <FormInputError
-                message={String(errors.repeat_password.message)}
-              />
-            )}
-          </FormInput>
+          <div className="relative">
+            <FormInput
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirmar Contraseña"
+              classes="autofill:input-light-background"
+              config={register("repeat_password", {
+                required: {
+                  value: true,
+                  message: "Este campo es obligatorio",
+                },
+                validate: (value) => {
+                  if (value === watch("password")) {
+                    return true;
+                  } else {
+                    return "Las contraseñas no coinciden";
+                  }
+                },
+              })}
+            >
+              {errors.repeat_password && (
+                <FormInputError
+                  message={String(errors.repeat_password.message)}
+                />
+              )}
+            </FormInput>
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute top-0 right-0"
+            >
+              {showConfirmPassword ? (
+                <EyeoffIcon className="hover:opacity-60" />
+              ) : (
+                <EyeIcon className="hover:opacity-60" />
+              )}
+            </button>
+          </div>
         </section>
 
         <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none ps-10 pe-10 py-10 gap-10 relative">

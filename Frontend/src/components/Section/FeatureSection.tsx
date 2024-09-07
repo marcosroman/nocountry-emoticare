@@ -16,7 +16,7 @@ function FeatureSection() {
             title="Horario Flexible"
             desc="Agenda tu cita en el horario que mejor se adapte a tu rutina."
           >
-            <TimeIcon className="text-blue-400 size-10" />
+            <TimeIcon className="text-blue-400 size-20" />
           </FeatureCard>
         </li>
         <li>
@@ -24,7 +24,7 @@ function FeatureSection() {
             title="Atención Personalizada"
             desc="Consultas privadas y seguras con médicos desde cualquier parte del mundo."
           >
-            <VideocameraIcon className="text-blue-400 size-10" />
+            <VideocameraIcon className="text-blue-400 size-20" />
           </FeatureCard>
         </li>
         <li>
@@ -32,7 +32,7 @@ function FeatureSection() {
             title="Expertos Especialistas"
             desc="Escoge entre una variedad de especialistas el más conveniente a tus necesidades."
           >
-            <UsersIcon className="text-blue-400 size-10" />
+            <UsersIcon className="text-blue-400 size-20" />
           </FeatureCard>
         </li>
         <li>
@@ -40,7 +40,7 @@ function FeatureSection() {
             title="Historial Médico Digital"
             desc="Lleva en un solo lugar tu historial médico para que puedas observar tu progreso."
           >
-            <HistoryIcon className="text-blue-400 size-10" />
+            <HistoryIcon className="text-blue-400 size-20" />
           </FeatureCard>
         </li>
       </ul>

@@ -1,5 +1,5 @@
-import createAdminModel from '../models/adminModel.js';
-import createDoctorModel from '../models/doctorModel.js';
+import {createAdminModel} from '../models/adminModel.js';
+import {createDoctorModel} from '../models/doctorModel.js';
 import createPatientModel from '../models/patientModel.js';
 import {createUserModel, getUserByEmail, getUserByNroDocumento} from '../models/userModel.js';
 

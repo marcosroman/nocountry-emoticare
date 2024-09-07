@@ -6,6 +6,7 @@ const About_us = (props: SVGProps<SVGSVGElement>) => (
     width={24}
     height={24}
     fill="none"
+    viewBox="0 0 24 24"
     stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"

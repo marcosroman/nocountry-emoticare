@@ -52,13 +52,12 @@ CREATE TABLE admins(
 
 /* INSERT TABLA USUARIOS */
 
-INSERT INTO usuarios (nro_documento, nombre, apellido, fecha_nacimiento, email, password, rol, nacionalidad, tipo_documento, telefono, creadaEl, actualizadaEl)
-VALUES
-(123456789, 'Juan', 'Pérez', '12-07-1985', 'juan.perez@example.com', 'password123', 'medico', 'Argentino', 'DNI', '1234567890', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-(987654321, 'Ana', 'Gómez', '23-05-1990', 'ana.gomez@example.com', 'password456', 'paciente', 'Chileno', 'RUT', '0987654321', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-(192837465, 'Luis', 'Martínez', '02-11-1982', 'luis.martinez@example.com', 'password789', 'admin', 'Uruguayo', 'CI', '1122334455', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-(564738291, 'Laura', 'Fernández', '15-08-1995', 'laura.fernandez@example.com', 'password012', 'paciente', 'Peruano', 'DNI', '2233445566', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-(374829165, 'Carlos', 'Vargas', '30-12-1988', 'carlos.vargas@example.com', 'password345', 'medico', 'Boliviano', 'CI', '3344556677', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY'));
+INSERT INTO usuarios (nro_documento, nombre, apellido, genero, fecha_nacimiento, email, password, rol, nacionalidad, tipo_documento, telefono, creadaEl, actualizadaEl) VALUES
+(123456789, 'Juan', 'Pérez', 'Masculino', '12-07-1985', 'juan.perez@example.com', 'password123', 'medico', 'Argentino', 'DNI', '1234567890', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+(987654321, 'Ana', 'Gómez', 'Femenino', '23-05-1990', 'ana.gomez@example.com', 'password456', 'paciente', 'Chileno', 'RUT', '0987654321', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+(192837465, 'Luis', 'Martínez', 'Masculino', '02-11-1982', 'luis.martinez@example.com', 'password789', 'admin', 'Uruguayo', 'CI', '1122334455', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+(564738291, 'Laura', 'Fernández', 'Femenino', '15-08-1995', 'laura.fernandez@example.com', 'password012', 'paciente', 'Peruano', 'DNI', '2233445566', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+(374829165, 'Carlos', 'Vargas', 'Masculino', '30-12-1988', 'carlos.vargas@example.com', 'password345', 'medico', 'Boliviano', 'CI', '3344556677', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY'));
 
 
 
@@ -66,11 +65,14 @@ VALUES
 
 INSERT INTO especialidades (nombre, descripcion, creadaEl, actualizadaEl)
 VALUES
-('Cardiología', 'Especialidad en el corazón y sistema circulatorio', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-('Neurología', 'Especialidad en el sistema nervioso', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-('Pediatría', 'Especialidad en la salud infantil', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-('Dermatología', 'Especialidad en la piel', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
-('Ginecología', 'Especialidad en el sistema reproductor femenino', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY'));
+--('Cardiología', 'Especialidad en el corazón y sistema circulatorio', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+--('Neurología', 'Especialidad en el sistema nervioso', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+--('Pediatría', 'Especialidad en la salud infantil', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+--('Dermatología', 'Especialidad en la piel', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+--('Ginecología', 'Especialidad en el sistema reproductor femenino', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY'));
+('Psicologia', 'Sin pastillas', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY')),
+('Psiquiatria', 'Con pastillas', TO_CHAR(NOW(), 'DD-MM-YYYY'), TO_CHAR(NOW(), 'DD-MM-YYYY'));
+
 
 
 
@@ -118,8 +120,8 @@ VALUES
 -- tambien se podria completar manualmente supongo
 
 CREATE TABLE dias_semana (
-    id INTEGER PRIMARY KEY,
-    nombre TEXT UNIQUE
+	id INTEGER PRIMARY KEY,
+	nombre TEXT UNIQUE
 );
 
 INSERT INTO dias_semana (id, nombre) VALUES

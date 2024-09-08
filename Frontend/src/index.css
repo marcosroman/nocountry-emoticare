@@ -31,6 +31,8 @@ h6 {
     font-family: "Nobile", sans-serif;
 }
 
+/* Estilos para el Scrollbar */
+
 /* width */
 ::-webkit-scrollbar {
     width: 6px;
@@ -52,4 +54,17 @@ h6 {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #3b83f6a8;
+}
+
+
+/* Eliminar las flechas del Input Number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
 }

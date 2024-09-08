@@ -12,4 +12,13 @@ const createDoctorModel = async (nro_documento, especialidad_id, numero_registro
 
 }
 
+export const getDoctorById = async (id_doctor) => {
+	try {
+		const query = await pool.query(`SELECT * FROM medicos WHERE id=$1;`, [id_doctor]);
+		return query.rows[0];
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export default createDoctorModel

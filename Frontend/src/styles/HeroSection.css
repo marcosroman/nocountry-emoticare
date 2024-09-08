@@ -7,7 +7,6 @@
   display: flex;
   color: white;
   text-align: center;
-  padding: 20px;
 }
 
 .hero-content {
@@ -25,9 +24,8 @@
 }
 .hero-content h2 {
   font-size: 20px;
-  color: #0056b3;
+  color:rgb(12, 46, 90);
   margin-bottom: 20px;
-  position: relative;
 }
 
 .hero-content p {
@@ -77,13 +75,28 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .main_text {
+    display:flex;
+    flex-direction: column;
+    position:relative;
+    left:5rem;
+    text-align: start;
+  } 
+
+  .main_text h1 {
+    font-size: 25px;
+  }
+  .main_text h2 {
+    font-size: 20px;
+  }
+  .main_text p {
+    font-size: 20px;
+  }
+
   .hero-content {
     display: flex;
     flex-direction: row;
     gap: 20rem;
-  }
-  .hero-content h2 {
-    right: 7rem;
   }
   .hero-content p {
     width: 20rem;
@@ -92,9 +105,19 @@
   .hero-image {
     display: block;
     position: absolute;
-    bottom: -1.5vw;
+    right: 27rem;
     z-index: 2;
-    height: 500px;
+    height: 300px;
+    bottom: 3rem;
+    left: 0.3px;
+    top: 116px;
+    overflow:hidden;
+
+  }
+  .section_button {
+    position:relative;
+    top:2rem;
+    left:2rem;
   }
 
   .hero-button {
@@ -107,7 +130,7 @@
   }
 
   .hero-button {
-    --primary-color: #111;
+    --primary-color: rgb(12, 46, 90);
     --hovered-color: #ffffff;
     position: relative;
     font-weight: 600;
@@ -121,7 +144,6 @@
     margin: 0;
     position: relative;
     font-size: 20px;
-    left: 1px;
     color: var(--primary-color);
   }
 
@@ -165,13 +187,43 @@
     position: relative;
     width: 15px;
     transition-delay: 0.2s;
-    bottom: 0.7rem;
+  }
+}
+@media screen and (min-width: 1400px) { 
+  .main_text {
+    left: 4rem; 
+  } 
+  .main_text h2 {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .main_text p {
+    white-space: nowrap;
+    font-size: 24px;
+  }
+  .main_text h1 {
+    font-weight: 900; 
+  }
+  .section_button {
+    left:25rem;
+  }
+  .section_button p {
+    font-size: 23px;
+  }
+  .hero-image {
+    right:23rem;
   }
 }
 
 @media screen and (min-width: 1600px) {
+
+  .main_text {
+    left:-6rem;
+  }
+
   .hero-image {
-    height: 700px;
+    height: 400px;
+    top: 59px;
   }
 
   .hero-content {
@@ -181,20 +233,17 @@
   .hero-content p {
     font-size: 1.6rem;
     width: fit-content;
-    right: 3.5rem;
   }
 
   .hero-content h1 {
-    font-size: 3rem;
-    right: 9.5rem;
+    font-size: 2rem;
   }
   .hero-content h2 {
     font-size: 2rem;
-    right: 29.8rem;
   }
   .section_button {
     position: relative;
-    left: 25rem;
+    left: 22rem;
     top: 3rem;
   }
 }

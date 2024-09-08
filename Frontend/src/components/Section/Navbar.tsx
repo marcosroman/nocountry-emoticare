@@ -1,34 +1,39 @@
 import MenuIcon from "../../icons/About";
-import AboutIcon from "../../icons/About";
 import SpecialtiesIcon from "../../icons/Specialties";
 import LoginIcon from "../../icons/LogIn";
 
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
+import Aboutt from "../../icons/About_us";
+import Specialties_of from "../../icons/Specialtiess";
 
 function Navbar() {
   return (
     <section>
-      <div className="flex justify-between px-8">
+      <div className="navbar">
         <div className="mobile_icon">
-          <img src="src\images\preview-icon.png" alt="icon" className="icon" />
+          <img src="src/images/Sin_título-removebg-preview.png" alt="icon" className="icon" />
+          <div className="logo_announce">
+          <span className="logo_text">EmotiHealth</span>
+          <span className="sub_text">Telemedicine</span>
+          </div>
           <MenuIcon className="menu_icon"></MenuIcon>
         </div>
         <div className="flex items-center gap-10">
-          <div className="flex items-center gap-4 hover:text-blue-500 cursor-pointer">
-            <AboutIcon className="size-8"></AboutIcon>
-            <span className="text-lg">About us</span>
+          <div className="flex items-center gap-4 hover:text-blue-900 cursor-pointer">
+            <Aboutt className="size-9"></Aboutt>
+            <span className="text-2xl">About us</span>
           </div>
-          <div className="flex items-center gap-4 hover:text-blue-500 cursor-pointer">
-            <SpecialtiesIcon className="size-8"></SpecialtiesIcon>
-            <span className="text-lg">Specialties</span>
+          <div className="flex items-center gap-4 hover:text-blue-900 cursor-pointer">
+            <Specialties_of className="size-9"></Specialties_of>
+            <span className="text-2xl">Specialties</span>
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <NavLink to="/register" className="sign_up">Sign up</NavLink>
-          <NavLink to="/login" className="flex rounded-lg items-center gap-2 cursor-pointer hover:text-blue-500">
-            <LoginIcon className="size-8"></LoginIcon>
-            <p>Log in</p>
+        <div className="login_chart">
+          <NavLink to="/login" className="flex rounded-lg items-center gap-2 cursor-pointer hover:text-blue-900">
+            <LoginIcon className="size-9"></LoginIcon>
+            <p className="text-2xl">Log in</p>
+            <NavLink to="/register" className="sign_up text-xl">Sign up</NavLink>
           </NavLink>
         </div>
       </div>

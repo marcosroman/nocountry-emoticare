@@ -1,9 +1,6 @@
 import pool from '../config/config.js'
 import format from 'pg-format';
 
-// insertHorarioDisponible?
-// delete?
-
 // poblar horarios disponibles por medico
 export const poblarHorariosDisponiblesPorMedico = async (
 	id_medico, dias_disponibles,
@@ -11,15 +8,19 @@ export const poblarHorariosDisponiblesPorMedico = async (
 	minutos_sesion, minutos_descanso) => {
 	try {
 		const queryString = format(
-			`DELETE FROM horarios_disponibles WHERE id_medico=%s; INSERT INTO horarios_disponibles (id_medico, dia_semana, hora_inicio, hora_fin) VALUES %L RETURNING *`,
+			`DELETE FROM horarios_disponibles WHERE id_medico=%s;
+			INSERT INTO horarios_disponibles
+			  (id_medico, dia_semana, hora_inicio, hora_fin) VALUES %L;
+			SELECT * FROM horarios_disponibles WHERE id_medico=%s;`,
 			id_medico,
 			horariosDisponiblesToInsert(id_medico, dias_disponibles,
 				horario_inicio_jornada, horario_fin_jornada,
-				minutos_sesion, minutos_descanso)
+				minutos_sesion, minutos_descanso),
+			id_medico
 		);
 
-    const query = await pool.query(queryString);
-		return;
+    const res = await pool.query(queryString);
+		return res.rows;
   } catch (error) {
     console.log(error);
   }
@@ -27,7 +28,8 @@ export const poblarHorariosDisponiblesPorMedico = async (
 
 export const getHorariosDisponiblesPorMedico = async (id_medico) => {
 	try {
-    const query = await pool.query(`SELECT * from horarios_disponibles WHERE id_medico=%s RETURNING *`);
+    const query = await pool.query(
+			`SELECT * from horarios_disponibles WHERE id_medico=%s RETURNING *`);
 		return query.rows; // right?
   } catch (error) {
     console.log(error);

@@ -1,5 +1,6 @@
 import { getDoctorById } from '../models/doctorModel.js';
-import { poblarHorariosDisponiblesPorMedico } from '../models/horariosDisponiblesModel.js';
+import { poblarHorariosDisponiblesPorMedico }
+	from '../models/horariosDisponiblesModel.js';
 
 export const updateHorariosController = async (req, res) =>{
   const { id_medico, dias_disponibles,
@@ -10,14 +11,14 @@ export const updateHorariosController = async (req, res) =>{
     const findMedicoId = await getDoctorById(id_medico);
 
 		if (findMedicoId) {
-			await poblarHorariosDisponiblesPorMedico(
+			const horariosDisponibles = await poblarHorariosDisponiblesPorMedico(
 				id_medico, dias_disponibles,
 				horario_inicio_jornada, horario_fin_jornada,
 				minutos_sesion, minutos_descanso);
 
-			return res.json({msg:"horarios actualizados"});
+			return res.json(horariosDisponibles);
 		} else {
-      return res.json({error:"medicx no existe"})
+      return res.json([], {status: 404, statusText: "medicx no existe"})
 		}
 
   } catch (error) {

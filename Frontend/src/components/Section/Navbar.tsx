@@ -1,11 +1,9 @@
-import MenuIcon from "../../icons/About";
-import SpecialtiesIcon from "../../icons/Specialties";
 import LoginIcon from "../../icons/LogIn";
-
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
-import Aboutt from "../../icons/About_us";
 import Specialties_of from "../../icons/Specialtiess";
+import About_icon from "../../icons/About_us";
+import MenuIcon from "../../icons/Menu";
 
 function Navbar() {
   return (
@@ -21,11 +19,11 @@ function Navbar() {
         </div>
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-4 hover:text-blue-900 cursor-pointer">
-            <Aboutt className="size-9"></Aboutt>
+            <About_icon className="size-9"></About_icon>
             <span className="text-2xl">About us</span>
           </div>
           <div className="flex items-center gap-4 hover:text-blue-900 cursor-pointer">
-            <Specialties_of className="size-9"></Specialties_of>
+            <About_icon className="size-9"></About_icon>
             <span className="text-2xl">Specialties</span>
           </div>
         </div>

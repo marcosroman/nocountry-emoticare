@@ -144,8 +144,8 @@ CREATE TABLE agendamientos (
 	fechahora_inicio TIMESTAMP NOT NULL,
 	fechahora_fin TIMESTAMP NOT NULL,
 	estado estado_agendamiento NOT NULL,
-	creadaEl TIMESTAMP NOT NULL,
-	actualizadaEl TIMESTAMP NOT NULL
+	creadaEl VARCHAR(20) NOT NULL,
+	actualizadaEl VARCHAR(20) NOT NULL
 );
 
 -- sesiones: id, id_agendamiento, fechahora_inicio, fechahora_fin, estado 
@@ -154,8 +154,8 @@ CREATE TABLE sesiones (
 	id_agendamiento INTEGER REFERENCES agendamientos(id),
 	fechahora_inicio TIMESTAMP NOT NULL,
 	fechahora_fin TIMESTAMP,
-	creadaEl TIMESTAMP NOT NULL,
-	actualizadaEl TIMESTAMP NOT NULL
+	creadaEl VARCHAR(20) NOT NULL,
+	actualizadaEl VARCHAR(20) NOT NULL
 );
 
 ---- videollamadas: id, id_sesion, hora_inicio, hora_fin
@@ -179,7 +179,7 @@ CREATE TABLE sesiones_notas (
 	id SERIAL PRIMARY KEY,
 	id_sesion INTEGER REFERENCES sesiones(id),
 	nota TEXT NOT NULL,
-	creadaEl TIMESTAMP NOT NULL,
-	actualizadaEl TIMESTAMP NOT NULL
+	creadaEl VARCHAR(20) NOT NULL,
+	actualizadaEl VARCHAR(20) NOT NULL
 );
 

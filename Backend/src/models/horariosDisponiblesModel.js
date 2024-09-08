@@ -1,5 +1,5 @@
 import pool from '../config/config.js'
-var format = require('pg-format');
+import format from 'pg-format';
 
 // insertHorarioDisponible?
 // delete?
@@ -19,13 +19,13 @@ export const poblarHorariosDisponiblesPorMedico = async (
 		);
 
     const query = await pool.query(queryString);
-		return query.rows[0];
+		return;
   } catch (error) {
     console.log(error);
   }
 }
 
-export const getHorariosDisponiblesPorMedico = async (id_medico) {
+export const getHorariosDisponiblesPorMedico = async (id_medico) => {
 	try {
     const query = await pool.query(`SELECT * from horarios_disponibles WHERE id_medico=%s RETURNING *`);
 		return query.rows; // right?

@@ -21,4 +21,14 @@ export const getDoctorById = async (id_doctor) => {
   }
 }
 
+export const getAllDoctorModel = async (id_doctor) => {
+	try {
+		const query = await pool.query(`SELECT * FROM medicos;`);
+		return query.rows;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 export default createDoctorModel

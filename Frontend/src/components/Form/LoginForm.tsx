@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import EmailInput from "../Input/EmailInput";
 import PasswordInput from "../Input/PasswordInput";
 import FullButton from "../Button/FullButton";
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
 
 function LoginForm() {
   const {
@@ -16,13 +18,18 @@ function LoginForm() {
 
   const navigate = useNavigate();
 
+  const { handleLogin } = useContext(UserContext);
+
   const onSubmit = handleSubmit(async (values) => {
     const result = await loginUser(values);
-    if (result.message) {
+
+    if (result.message) { // Si todo salió bien
+      handleLogin(result.user);
       toast.success(result.message, { position: "bottom-right" });
-      navigate("/");
+      navigate("/home");
     }
-    if (result.error) {
+    
+    if (result.error) { // Si hubo un error
       toast.error(result.error, { position: "bottom-right" });
     }
   });

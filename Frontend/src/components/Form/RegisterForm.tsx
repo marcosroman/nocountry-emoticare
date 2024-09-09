@@ -31,7 +31,7 @@ function RegisterForm({ rol }: Props) {
     const result = await registerUser(values);
     if (result.message) {
       toast.success(result.message, { position: "bottom-right" });
-      navigate("/");
+      navigate("/login");
     }
     if (result.error) {
       toast.error(result.error, { position: "bottom-right" });

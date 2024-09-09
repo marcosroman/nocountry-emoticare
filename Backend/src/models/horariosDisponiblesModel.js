@@ -10,13 +10,12 @@ export const poblarHorariosDisponiblesPorMedico = async (
 		const queryString = format(
 			`DELETE FROM horarios_disponibles WHERE id_medico=%s;
 			INSERT INTO horarios_disponibles
-			  (id_medico, dia_semana, hora_inicio, hora_fin) VALUES %L;
-			SELECT * FROM horarios_disponibles WHERE id_medico=%s;`,
+			  (id_medico, dia_semana, hora_inicio, hora_fin) VALUES %L
+     			RETURNING *`,
 			id_medico,
 			horariosDisponiblesToInsert(id_medico, dias_disponibles,
 				horario_inicio_jornada, horario_fin_jornada,
-				minutos_sesion, minutos_descanso),
-			id_medico
+				minutos_sesion, minutos_descanso)
 		);
 
     const res = await pool.query(queryString);

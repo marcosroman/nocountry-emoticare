@@ -12,9 +12,9 @@ const createUserController = async (req, res) =>{
     // Verificar si el email ya está registrado en la base de datos
     const findEmail = await getUserByEmail(user.email)
     if (findNroDocumento) {
-      return res.json({error: "Nro de Documento ya Registrado"})
+      return res.status(400).json({error: "Nro de Documento ya Registrado"})
     } else if (findEmail) {
-      return res.json({error:"Email ya registrado"})
+      return res.status(400).json({error:"Email ya registrado"})
     }
     else{
       // Si el número de documento y el email no están registrados, crear el nuevo usuario en la base de datos

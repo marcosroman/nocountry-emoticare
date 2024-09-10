@@ -29,4 +29,4 @@ app.use(passport.session())
 
 app.use(cors());
 configureRoutes(app)
-app.listen(process.env.PORT,console.log(`Corriendo en  http://localhost:${process.env.PORT}`));
+app.listen(process.env.PORT,console.log(`Corriendo en http://localhost:${process.env.PORT}`));

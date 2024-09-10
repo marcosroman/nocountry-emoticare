@@ -12,4 +12,28 @@ const createDoctorModel = async (nro_documento, especialidad_id, numero_registro
 
 }
 
+export const getDoctorById = async (id_doctor) => {
+	try {
+		const query = await pool.query(`SELECT * FROM medicos WHERE id=$1;`, [id_doctor]);
+		return query.rows[0];
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getAllDoctorModel = async() =>{
+  try {
+    const query = await pool.query(
+      `SELECT u.nro_documento, u.nombre, u.apellido, e.nombre AS especialidad
+      FROM medicos m
+      INNER JOIN usuarios u ON m.usuario_id = u.nro_documento
+      INNER JOIN especialidades e ON m.especialidad_id = e.id;`
+    );
+    return query.rows
+  } catch (error) {
+    console.log(object)
+  }
+}
+
+
 export default createDoctorModel

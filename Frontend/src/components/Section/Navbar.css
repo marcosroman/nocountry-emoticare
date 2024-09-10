@@ -1,0 +1,159 @@
+.navbar {
+  background-color: rgb(241, 241, 241);
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.icon {
+  height: 75px;
+  display: flex;
+}
+
+.mobile_icon {
+  display: flex;
+  flex-direction: row;
+  gap: 12rem;
+  justify-content: center;
+  align-items: center;
+  font-family: "Nobile", sans-serif;
+  font-size: 15px;
+  position: relative;
+}
+.logo_announce {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo_text {
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+}
+
+.sub_text {
+  letter-spacing: 0.1rem;
+  font-size: 11px;
+}
+
+.category_span {
+  display: none;
+}
+.login_chart {
+  display: none;
+}
+
+.menu_icon {
+  display: none;
+}
+
+@media screen and (min-width: 425px) {
+  .mobile_icon {
+    gap: 0.2rem;
+  }
+}
+.primary_icon {
+  height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .icon {
+    left: 3rem;
+  }
+  .navbar {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2.5fr;
+  }
+  .menu_icon {
+    display: none;
+  }
+  .category_span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    left: 2rem;
+    white-space: nowrap;
+  }
+  .category_span span {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .login_chart {
+    display: flex;
+    font-size: 20px;
+    width: 12rem;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    left: 4rem;
+  }
+  .login_chart h2 {
+    position: relative;
+  }
+
+  .sign_up {
+    background-color: rgb(12, 46, 90);
+    color: white;
+    height: 40px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    border-radius: 50px;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  .menu_icon {
+    display: none;
+  }
+
+  .login_chart {
+    left: 10rem;
+  }
+  .category_span {
+    left: 8em;
+  }
+  .icon {
+    left: 10rem;
+  }
+
+  .login_chart p {
+    white-space: nowrap;
+    padding-right: 20px;
+  }
+  .text-lg {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .icon {
+    left: 20rem;
+  }
+  .mobile_icon {
+    left:5rem;
+  }
+  .login_chart {
+    left:17rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .icon {
+    left: 22rem;
+  }
+
+  .login_chart {
+    left: 28rem;
+  }
+}

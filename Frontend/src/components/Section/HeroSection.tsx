@@ -1,5 +1,5 @@
 import "../../styles/HeroSection.css";
-import doctorPreview from "../../images/doctor-preview.png"
+import mental from "../../images/production2Ftreatment2FmentalHealth-removebg-preview.png"
 
 const Hero = () => {
   return (
@@ -7,7 +7,7 @@ const Hero = () => {
       <div className="hero-content">
         <div>
           <img
-            src={doctorPreview}
+            src={mental}
             alt="Doctor"
             className="hero-image"
           />

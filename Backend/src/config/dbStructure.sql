@@ -12,7 +12,6 @@ CREATE TABLE usuarios(
 	telefono VARCHAR(15) NOT NULL,
 	creadaEl VARCHAR(20) NOT NULL,
 	actualizadaEl VARCHAR(20) NOT NULL
-
 );
 
 CREATE TABLE especialidades(
@@ -48,7 +47,11 @@ CREATE TABLE admins(
 	actualizadaEl VARCHAR(20) NOT NULL
 );
 
-
+CREATE TABLE sesiones_usuarios (
+    sid VARCHAR(255) PRIMARY KEY, -- Identificador de sesión
+    sess JSON NOT NULL,            -- Datos de sesión almacenados como JSON
+    expire TIMESTAMPTZ NOT NULL    -- Fecha de expiración de la sesión
+);
 
 /* INSERT TABLA USUARIOS */
 

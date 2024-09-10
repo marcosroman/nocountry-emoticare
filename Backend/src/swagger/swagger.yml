@@ -14,11 +14,11 @@ paths:
     post:
       tags:
         - user
-      summary: add a new user
-      description: add a new user to database
+      summary: Add a new user
+      description: Add a new user to the database based on role
       operationId: addUser
       requestBody:
-        description: create a new user a database
+        description: Add a new user to the database based on role
         content:
           application/json:
             schema:
@@ -44,7 +44,63 @@ paths:
           description: Invalid input
         '422':
           description: Validation exception
-
+  /login:
+    post:
+      tags:
+        - user
+      summary: Login user
+      description: Login user to app
+      requestBody:
+        description: Login user to app
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Login'
+        '404':
+          description: Usuario No Encontrado
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /auth/status:
+    get:
+      tags:
+        - user
+      summary: Authenticated user status
+      description: Get the status of an authenticated user on the server
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authentication'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Authentication'
+        '404':
+          description: Usuario No Encontrado
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
 components:
   schemas:
     User:
@@ -97,3 +153,18 @@ components:
         direccion:
           type: string
           example: Los Lagos 1520
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: example@gmail.com
+        password:
+          type: string
+          example: '12345'
+    Authentication:
+      type: object
+      properties:
+        authenticated:
+          type: boolean
+          example: true

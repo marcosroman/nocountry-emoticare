@@ -1,18 +1,21 @@
-import FeatureSection from "../components/Section/FeatureSection";
-import HeroSection from "../components/Section/HeroSection";
-import TestimonialsSection from "../components/Section/TestimonialsSection.js";
-import WhyUsSection from "../components/Section/WhyUsSection.js";
-import Navbar from "../components/Section/Navbar";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import Sidebar from "../components/Nav/Sidebar";
+import { Navigate } from "react-router-dom";
 
 function HomePage() {
+  const { userState } = useContext(UserContext);
+  const { authenticated } = userState;
+
+
+  if (!authenticated) return <Navigate to="/login" replace />
+
+
   return (
-    <>
-    <Navbar></Navbar>
-    <HeroSection />
-      <FeatureSection />
-      <WhyUsSection />
-      <TestimonialsSection />
-    </>
+    <main className="flex min-h-screen p-2">
+      <Sidebar/>
+      <div className="text-center flex-1 font-bold text-xl">Contenido</div>
+    </main>
   );
 }
 

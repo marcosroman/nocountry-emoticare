@@ -21,12 +21,17 @@ export const getDoctorById = async (id_doctor) => {
   }
 }
 
-export const getAllDoctorModel = async (id_doctor) => {
-	try {
-		const query = await pool.query(`SELECT * FROM medicos;`);
-		return query.rows;
+export const getAllDoctorModel = async() =>{
+  try {
+    const query = await pool.query(
+      `SELECT u.nro_documento, u.nombre, u.apellido, e.nombre AS especialidad
+      FROM medicos m
+      INNER JOIN usuarios u ON m.usuario_id = u.nro_documento
+      INNER JOIN especialidades e ON m.especialidad_id = e.id;`
+    );
+    return query.rows
   } catch (error) {
-    console.log(error)
+    console.log(object)
   }
 }
 

@@ -7,6 +7,6 @@ type UserContextProps = {
   handleLogout: () => void
 };
 
-export const UserContext = createContext<UserContextProps>( // Fijos
+export const UserContext = createContext<UserContextProps>(
   {} as UserContextProps
 );

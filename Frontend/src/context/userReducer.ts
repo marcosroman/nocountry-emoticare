@@ -1,8 +1,9 @@
-import { UserState, User } from "./types";
+import { UserState, User } from './types';
 
 type UserAction =
   | { type: "login"; payload: User }
-  | { type: "logout"; };
+  | { type: "logout"; }
+  | { type: "init"; payload: UserState }
 
 export const userReducer = ( state: UserState, action: UserAction): UserState => {
   
@@ -11,6 +12,8 @@ export const userReducer = ( state: UserState, action: UserAction): UserState =>
       return { user: action.payload, authenticated: true };
     case "logout":
       return { authenticated: false };
+    case "init":
+      return {user: action.payload.user, authenticated: action.payload.authenticated }
     default:
       return state;
   }

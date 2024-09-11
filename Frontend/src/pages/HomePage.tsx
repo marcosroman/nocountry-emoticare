@@ -5,7 +5,9 @@ function HomePage() {
   return (
     <main className="flex min-h-screen p-2">
       <Sidebar />
-      <Outlet/>
+      <div className="ms-14 md:ms-16 flex-1">
+        <Outlet />
+      </div>
     </main>
   );
 }

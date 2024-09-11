@@ -16,12 +16,12 @@ function SidebarNavItem({ title, Icon, event, state, path }: Props) {
       title={title}
       className={
         state
-          ? "flex items-center gap-2 p-2 rounded-full cursor-pointer text-base hover:text-black hover:bg-white transition-all duration-300 select-none"
-          : "flex justify-center items-center p-2 rounded-full cursor-pointer hover:text-black hover:bg-white transition-all duration-300 select-none"
+          ? "flex items-center gap-3 p-2 rounded-full cursor-pointer text-base hover:text-black hover:bg-white transition-all duration-300 select-none tracking-wider"
+          : "flex justify-center items-center p-2 rounded-full cursor-pointer hover:text-black hover:bg-white transition-all duration-300 select-none tracking-wider"
       }
       onClick={event}
     >
-      <Icon className="size-8" />{" "}
+      <Icon className="size-6 md:size-8" />{" "}
       <p className={state ? "flex" : "hidden"}>{title}</p>
     </NavLink>
   );

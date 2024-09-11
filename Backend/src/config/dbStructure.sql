@@ -151,8 +151,8 @@ CREATE TABLE agendamientos (
 	actualizadaEl VARCHAR(20) NOT NULL
 );
 
--- sesiones: id, id_agendamiento, fechahora_inicio, fechahora_fin, estado 
-CREATE TABLE sesiones (
+-- consultas: id, id_agendamiento, fechahora_inicio, fechahora_fin, estado 
+CREATE TABLE consultas (
 	id SERIAL PRIMARY KEY,
 	id_agendamiento INTEGER REFERENCES agendamientos(id),
 	fechahora_inicio TIMESTAMP NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE sesiones (
 --);
 
 -- notas de sesiones
-CREATE TABLE sesiones_notas (
+CREATE TABLE notas_consultas (
 	id SERIAL PRIMARY KEY,
 	id_sesion INTEGER REFERENCES sesiones(id),
 	nota TEXT NOT NULL,

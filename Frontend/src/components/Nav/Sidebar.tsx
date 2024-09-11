@@ -6,13 +6,13 @@ import DoctorNav from "./DoctorNav";
 import AdminNav from "./AdminNav";
 import SidebarNavItem from "./SidebarNavItem";
 
-import EyeIcon from "../../icons/Eye";
 import ProfileIcon from "../../icons/Profile";
 import LogoutIcon from "../../icons/Logout";
 import MenuIcon from "../../icons/Menu";
 import CloseIcon from "../../icons/Close";
 import { logoutUser } from "../../api/auth";
 import { toast } from "react-toastify";
+import HappyChatboxIcon from "../../icons/HappyChatbox";
 
 function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -30,8 +30,8 @@ function Sidebar() {
     <aside
       className={
         isExpanded
-          ? "flex flex-col justify-between items-center bg-blue-600 text-white border rounded-xl ps-2 pe-4 w-[240px]"
-          : "flex flex-col justify-between items-center bg-blue-600 text-white border rounded-xl px-2"
+          ? "fixed left-2 min-h-[98vh] flex flex-col justify-between items-center bg-blue-600 text-white border rounded-xl ps-2 pe-4 w-[240px]"
+          : "fixed left-2 min-h-[98vh] flex flex-col justify-between items-center bg-blue-600 text-white border rounded-xl px-2"
       }
     >
       <nav
@@ -44,13 +44,13 @@ function Sidebar() {
         <header
           className={
             isExpanded
-              ? "flex items-center border-b gap-4 ps-2 pb-4"
-              : "flex items-center justify-center border-b pb-4 px-2"
+              ? "flex items-center border-b gap-4 ps-2 pt-1 pb-3 select-none"
+              : "flex items-center justify-center border-b pt-1 pb-3 select-none px-2"
           }
         >
-          <EyeIcon className="size-8" />
-          <h1 className={isExpanded ? "text-lg flex gap-2" : "hidden"}>
-            Mind Link
+          <HappyChatboxIcon className="size-6 md:size-8" />
+          <h1 className={isExpanded ? "text-base md:text-lg flex gap-2 font-semibold tracking-widest" : "hidden"}>
+            EmotiCare
           </h1>
         </header>
         {user?.rol === "paciente" ? (
@@ -86,9 +86,9 @@ function Sidebar() {
             onChange={() => setIsExpanded(!isExpanded)}
           />
           {isExpanded ? (
-            <CloseIcon className="size-8" />
+            <CloseIcon className="size-6 md:size-8" />
           ) : (
-            <MenuIcon className="size-8" />
+            <MenuIcon className="size-6 md:size-8" />
           )}
         </label>
       </footer>

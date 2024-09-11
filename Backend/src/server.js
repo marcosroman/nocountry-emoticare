@@ -20,13 +20,17 @@ app.use(session({
 
   }),
   cookie: {
-    maxAge: 1800000
-
+    maxAge: 1800000,
+    httpOnly: true,       // Evita que el frontend acceda a la cookie
+    secure: false,         // Solo envía la cookie a través de HTTPS
    }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 configureRoutes(app)
 app.listen(process.env.PORT,console.log(`Corriendo en http://localhost:${process.env.PORT}`));

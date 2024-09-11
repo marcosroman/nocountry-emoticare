@@ -11,6 +11,8 @@ import ProfileIcon from "../../icons/Profile";
 import BarsIcon from "../../icons/Bars";
 import CloseIcon from "../../icons/Close";
 import LogoutIcon from "../../icons/Logout";
+import { logoutUser } from "../../api/auth";
+import { toast } from "react-toastify";
 
 function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -18,7 +20,10 @@ function Sidebar() {
 
   const { user } = userState;
 
-  const pruebaLogout = async () => {
+
+  const userLogout = async () => {
+    const response = await logoutUser()
+    toast.success(response, { position: "bottom-right" });
     handleLogout();
   };
   return (
@@ -60,12 +65,14 @@ function Sidebar() {
           title="Ver Perfil"
           Icon={ProfileIcon}
           state={isExpanded}
+          path="./"
         />
         <SidebarNavItem
           title="Cerrar Sesión"
           Icon={LogoutIcon}
-          event={pruebaLogout}
+          event={userLogout}
           state={isExpanded}
+          path="/"
         />
       </nav>
       <footer className="flex items-center justify-end w-full py-4">

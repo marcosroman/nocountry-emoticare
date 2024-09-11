@@ -12,6 +12,7 @@ router.post('/login', validateLogin, (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
+      /* req.session.user = user */
       return res.status(200).json({
         message: 'Inicio de sesión exitoso',
         user: user

@@ -36,8 +36,12 @@ function UserProvider({ children }: UserProviderProps) {
       return response;
     };
 
+    // Condicional en caso de ausencia de Backend
+
     verifyAuth().then((res) => {
-      initialRefresh(res)
+      if (res){
+        initialRefresh(res)
+      }
     });
 
   }, []);

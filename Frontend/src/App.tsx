@@ -30,6 +30,31 @@ function App() {
             </Route>
           </Route>
           
+          <Route path="/prueba-paciente/*" element={<HomePage />}>
+            <Route path="mis-consultas" element={<WhyUsSection />} />
+            <Route path="agendar-citas" element={<TestimonialSection />} />
+            <Route path="mis-resultados" element={<FeatureSection />} />
+            <Route path="ver-perfil" element={<FeatureSection />} />
+            <Route path="" element={<Navigate to="mis-consultas" />} />
+          </Route>
+
+          <Route path="/prueba-medico/*" element={<HomePage />}>
+            <Route path="citas-del-dia" element={<WhyUsSection />} />
+            <Route path="consultar-cita-del-mes" element={<TestimonialSection />} />
+            <Route path="consultar-horario" element={<FeatureSection />} />
+            <Route path="listado-de-pacientes" element={<FeatureSection />} />
+            <Route path="ver-perfil" element={<FeatureSection />} />
+            <Route path="" element={<Navigate to="citas-del-dia" />} />
+          </Route>
+
+          <Route path="/prueba-admin/*" element={<HomePage />}>
+            <Route path="listado-de-medicos" element={<WhyUsSection />} />
+            <Route path="crear-un-medico" element={<TestimonialSection />} />
+            <Route path="lista-de-reservas" element={<FeatureSection />} />
+            <Route path="ver-perfil" element={<FeatureSection />} />
+            <Route path="" element={<Navigate to="listado-de-medicos" />} />
+          </Route>
+
 
           <Route path="*" element={<Navigate to="/" />}></Route>
         </Routes>

@@ -18,8 +18,10 @@ export const poblarHorarios = async (
 				minutos_sesion, minutos_descanso)
 		);
 
-    const res = await pool.query(queryString);
-		return res.rows;
+    const result = await pool.query(queryString);
+		const horarios = result[1].rows; // [1] porque [0] son returns de DELETE
+
+		return horarios;
   } catch (error) {
     console.log(error);
   }

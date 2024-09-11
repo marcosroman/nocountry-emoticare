@@ -1,9 +1,9 @@
 import { getDoctorById } from '../models/doctorModel.js';
-import { poblarHorarios }
-	from '../models/horariosModel.js';
+import { poblarHorarios } from '../models/horariosModel.js';
 
 export const updateHorariosController = async (req, res) =>{
-  const { id_medico, dias_disponibles,
+	const { id_medico } = req.params;
+  const { dias_disponibles,
   horario_inicio_jornada, horario_fin_jornada,
   minutos_sesion, minutos_descanso } = req.body;
 
@@ -20,10 +20,8 @@ export const updateHorariosController = async (req, res) =>{
 		} else {
       return res.status(404).json([], {statusText: "medicx no existe"})
 		}
-
   } catch (error) {
     console.error('Error al actualizar horarios', error);
     res.status(500).json({ error: 'Error interno del servidor.' });
   }
 }
-

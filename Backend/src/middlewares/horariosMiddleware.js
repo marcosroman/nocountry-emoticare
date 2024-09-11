@@ -31,7 +31,10 @@ const paramsUpdateHorarios = Joi.object({
       'number.base': 'El campo nro_documento debe ser un número.',
       'number.integer': 'El campo nro_documento debe ser un número entero.',
       'any.required': 'El campo id_medico es obligatorio.'
-    }),
+    })
+});
+
+const bodyUpdateHorarios = Joi.object({
 	dias_disponibles: Joi.array().items(
 		Joi.number().integer().min(0).max(6))
 		.custom(uniqueItems, 'Unique values validation')
@@ -49,16 +52,24 @@ const paramsUpdateHorarios = Joi.object({
 	minutos_descanso: Joi.number().max(60).required()
 });
 
+
 export const validateHorariosUpdate = async (req, res, next) => {
   try {
-    const { error } = paramsUpdateHorarios.validate(req.body);
+    const paramsValidation = paramsUpdateHorarios.validate(req.params);
+    if (paramsValidation.error) {
+      return res.status(200)//fix
+				.json({ error: paramsValidation.error.details[0].message })
+    } 
 
-    if (error) {
-      return res.status(200).json({ error: error.details[0].message })
-    }
+    const bodyValidation = bodyUpdateHorarios.validate(req.body);
+    if (bodyValidation.error) {
+      return res.status(200)//fix
+				.json({ error: bodyValidation.error.details[0].message });
+    } 
 
-    next()
+    next();
   } catch (error) {
-
+		console.log(error);
+		return res.status(500);
   }
 }

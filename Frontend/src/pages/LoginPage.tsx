@@ -3,7 +3,7 @@ import LoginForm from "../components/Form/LoginForm";
 import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Navbar from "../components/Section/Navbar";
+import Navbar from "../components/Nav/Navbar";
 
 function LoginPage() {
   const { userState } = useContext(UserContext);

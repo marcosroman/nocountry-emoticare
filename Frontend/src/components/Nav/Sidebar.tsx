@@ -8,9 +8,9 @@ import SidebarNavItem from "./SidebarNavItem";
 
 import EyeIcon from "../../icons/Eye";
 import ProfileIcon from "../../icons/Profile";
-import BarsIcon from "../../icons/Bars";
-import CloseIcon from "../../icons/Close";
 import LogoutIcon from "../../icons/Logout";
+import MenuIcon from "../../icons/Menu";
+import CloseIcon from "../../icons/Close";
 import { logoutUser } from "../../api/auth";
 import { toast } from "react-toastify";
 
@@ -88,7 +88,7 @@ function Sidebar() {
           {isExpanded ? (
             <CloseIcon className="size-8" />
           ) : (
-            <BarsIcon className="size-8" />
+            <MenuIcon className="size-8" />
           )}
         </label>
       </footer>

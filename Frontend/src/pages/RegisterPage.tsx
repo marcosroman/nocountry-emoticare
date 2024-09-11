@@ -3,7 +3,7 @@ import RegisterForm from "../components/Form/RegisterForm";
 import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Navbar from "../components/Section/Navbar";
+import Navbar from "../components/Nav/Navbar";
 
 function RegisterPage() {
   const { userState } = useContext(UserContext);

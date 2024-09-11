@@ -9,6 +9,8 @@ const router = Router()
  * /horarios/actualizar:
  *   post:
  *     summary: Update horarios habilitados|disponibles por medico
+ *     tags:
+ *       - horarios
  *     requestBody:
  *       required: true
  *       content:

@@ -1,5 +1,5 @@
 import { getAgendamiento, agendar,
-	getAgendamientosDisponibles, setAgendamientoState }
+	getAgendamientosDisponibles, updateAgendamientoState }
 	from '../models/agendamientosModel.js';
 
 export const getAgendamientoController = async (req, res) => {
@@ -50,11 +50,11 @@ export const agendarController = async (req, res) => {
 	}
 }
 
-export const setAgendamientoStateController = async (req, res) => {
+export const updateAgendamientoStateController = async (req, res) => {
 	const { id_agendamiento, estado } = req.body;
 
 	try {
-		const agendamiento = await setAgendamientoState(id_agendamiento, estado);
+		const agendamiento = await updateAgendamientoState(id_agendamiento, estado);
 
 		if (agendamiento) {
 			return res.json(agendamiento);

@@ -33,7 +33,7 @@ const paramsAgendar = Joi.object({
 			'string.isoDate': 'El formato de fecha debe ser string isoDate'})
 });
 
-const paramsSetAgendamientoState = Joi.object({
+const paramsUpdateAgendamientoState = Joi.object({
 	id_agendamiento: Joi.number().required()
 		.messages({
 			'any.required': 'El campo id_agendamiento es obligatorio.'}),
@@ -87,9 +87,9 @@ export const validateAgendar = async (req, res, next) => {
   }
 }
 
-export const validateSetAgendamientoState = async (req, res, next) => {
+export const validateUpdateAgendamientoState = async (req, res, next) => {
   try {
-    const { error } = paramsSetAgendamientoState.validate(req.body);
+    const { error } = paramsUpdateAgendamientoState.validate(req.body);
 
     if (error) {
       return res.status(200).json({ error: error.details[0].message })

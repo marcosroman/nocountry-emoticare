@@ -15,7 +15,7 @@ export const getAgendamiento = async (id_agendamiento) => {
 }
 
 // cambiar estado de un agendamiento
-export const setAgendamientoState = async (id_agendamiento, estado) => {
+export const updateAgendamientoState = async (id_agendamiento, estado) => {
 	try {
 		const res = await pool.query(
 			`UPDATE agendamientos SET estado=$2, actualizadaEl=TO_CHAR(NOW(),
@@ -23,7 +23,7 @@ export const setAgendamientoState = async (id_agendamiento, estado) => {
 			[id_agendamiento, estado]
 		);
 
-		return res.rows;
+		return res.rows[0];
 	} catch(error) {
 		console.log(error);
 	}
@@ -46,7 +46,7 @@ export const agendar = async (id_medico, id_paciente,
 				[id_medico, id_paciente, fechahora_inicio, fechahora_fin]
 			);
 
-			return query.rows;
+			return query.rows[0];
 		} else {
 			return [];
 		}

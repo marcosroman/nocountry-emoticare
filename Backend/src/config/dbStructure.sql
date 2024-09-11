@@ -131,7 +131,7 @@ INSERT INTO dias_semana (id, nombre) VALUES
 (0, 'Domingo'), (1, 'Lunes'), (2, 'Martes'), (3, 'Miercoles'),
 (4, 'Jueves'), (5, 'Viernes'), (6, 'Sabado');
 
-CREATE TABLE horarios_disponibles (
+CREATE TABLE horarios (
 	id_medico INTEGER REFERENCES medicos(id),
 	dia_semana INTEGER REFERENCES dias_semana(id),
 	hora_inicio TIME NOT NULL, -- ver luego, timestamp no contiene zona horaria

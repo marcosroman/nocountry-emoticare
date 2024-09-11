@@ -1,6 +1,5 @@
 import pool from '../config/config.js';
-import { getHorariosDisponiblesPorMedico }
-	from './horariosDisponiblesModel.js';
+import { getHorarios } from './horariosModel.js';
 
 // get agendamiento por id
 export const getAgendamiento = async (id_agendamiento) => {
@@ -15,7 +14,7 @@ export const getAgendamiento = async (id_agendamiento) => {
 	}
 }
 
-// cambiar estado de un turno
+// cambiar estado de un agendamiento
 export const setAgendamientoState = async (id_agendamiento, estado) => {
 	try {
 		const res = await pool.query(
@@ -31,7 +30,7 @@ export const setAgendamientoState = async (id_agendamiento, estado) => {
 }
 
 // agendar turno
-export const agendarTurno = async (id_medico, id_paciente,
+export const agendar = async (id_medico, id_paciente,
 	fechahora_inicio, fechahora_fin) => {
 	try {
 		const isDisponible = await checkTurnoDisponible(id_medico,
@@ -59,7 +58,7 @@ export const agendarTurno = async (id_medico, id_paciente,
 // verificar disponibilidad de turno ( (id_medico, fecha, hora_inicio,
 // hora_fin) => bool (veo que el medico no tenga un turno agendado en 
 // conflicto con el rango hora_inicio-hora_fin)),
-export const checkTurnoDisponible = async (id_medico,
+export const checkAgendamiento = async (id_medico,
 	fechahora_inicio, fechahora_fin) => {
 	try {
 		const res = await pool.query(
@@ -77,7 +76,7 @@ export const checkTurnoDisponible = async (id_medico,
 }
 
 // ver turnos disponibles con un medico para un rango de fechas 
-export const getTurnosDisponibles = async (id_medico,
+export const getAgendamientosDisponibles = async (id_medico,
 	fechahora_inicio, fechahora_fin) => {
 	function generateDateRange(startDateStr, endDateStr) {
     // Parse the ISO date strings into Date objects

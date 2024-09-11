@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { getAgendamientoController, getTurnosDisponiblesController,
+import { getAgendamientoController, getAgendamientosDisponiblesController,
 	agendarController, setAgendamientoStateController }
 	from '../controllers/agendamientosController.js';
-import { validateGetAgendamiento, validateGetTurnosDisponibles,
+import { validateGetAgendamiento, validateGetAgendamientosDisponibles,
 	validateAgendar, validateSetAgendamientoState}
 	from '../middlewares/agendamientosMiddleware.js';
 
@@ -15,6 +15,6 @@ router.post('/agendamientos/estado',
 router.post('/agendamientos/agendar',
 	validateAgendar, agendarController);
 router.post('/agendamientos/disponibles',
-	validateGetTurnosDisponibles, getTurnosDisponiblesController);
+	validateGetAgendamientosDisponibles, getAgendamientosDisponiblesController);
 
 export default router

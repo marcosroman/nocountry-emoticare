@@ -1,19 +1,19 @@
 import pool from '../config/config.js'
 import format from 'pg-format';
 
-// poblar horarios disponibles por medico
-export const poblarHorariosDisponiblesPorMedico = async (
+// poblar horarios habilitados por medico
+export const poblarHorarios = async (
 	id_medico, dias_disponibles,
 	horario_inicio_jornada, horario_fin_jornada,
 	minutos_sesion, minutos_descanso) => {
 	try {
 		const queryString = format(
-			`DELETE FROM horarios_disponibles WHERE id_medico=%s;
-			INSERT INTO horarios_disponibles
+			`DELETE FROM horarios WHERE id_medico=%s;
+ 			 INSERT INTO horarios
 			  (id_medico, dia_semana, hora_inicio, hora_fin) VALUES %L
      			RETURNING *`,
 			id_medico,
-			horariosDisponiblesToInsert(id_medico, dias_disponibles,
+			horariosToInsert(id_medico, dias_disponibles,
 				horario_inicio_jornada, horario_fin_jornada,
 				minutos_sesion, minutos_descanso)
 		);
@@ -25,10 +25,10 @@ export const poblarHorariosDisponiblesPorMedico = async (
   }
 }
 
-export const getHorariosDisponiblesPorMedico = async (id_medico) => {
+export const getHorarios = async (id_medico) => {
 	try {
     const query = await pool.query(
-			`SELECT * from horarios_disponibles WHERE id_medico=%s RETURNING *`);
+			`SELECT * from horarios WHERE id_medico=%s RETURNING *`);
 		return query.rows; // right?
   } catch (error) {
     console.log(error);
@@ -39,7 +39,7 @@ export const getHorariosDisponiblesPorMedico = async (id_medico) => {
 // input:
 //   hora de inicio de jornada (string, 'hh:mm'), hora fin de jornada (same),
 //   duracion de sesion (en minutos), duracion de descanso (same) 
-function generarHorariosDisponibles(
+function generarHorarios(
 	horario_inicio_jornada, horario_fin_jornada,
 	minutos_sesion, minutos_descanso) {
   function timeToDate(timeStr) {
@@ -74,12 +74,12 @@ function generarHorariosDisponibles(
   return lista_horarios;
 }
 
-function horariosDisponiblesToInsert(
+function horariosToInsert(
 	id_medico, dias_disponibles,
 	horario_inicio_jornada, horario_fin_jornada,
 	minutos_sesion, minutos_descanso) {
 	return dias_disponibles.map(dia =>
-		generarHorariosDisponibles(
+		generarHorarios(
 				horario_inicio_jornada, horario_fin_jornada,
 				minutos_sesion, minutos_descanso)
 			.map(h => ({dia, id_medico, ...h})))

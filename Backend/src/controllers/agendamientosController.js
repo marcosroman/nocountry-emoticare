@@ -1,5 +1,5 @@
-import { getAgendamiento, agendarTurno,
-	getTurnosDisponibles, setAgendamientoState }
+import { getAgendamiento, agendar,
+	getAgendamientosDisponibles, setAgendamientoState }
 	from '../models/agendamientosModel.js';
 
 export const getAgendamientoController = async (req, res) => {
@@ -19,11 +19,11 @@ export const getAgendamientoController = async (req, res) => {
 	}
 }
 
-export const getTurnosDisponiblesController = async (req, res) => {
+export const getAgendamientosDisponiblesController = async (req, res) => {
 	const { id_medico, fechahora_inicio, fechahora_fin } = req.body;
 
 	try {
-		const turnosDisponibles = await getTurnosDisponibles(id_medico,
+		const turnosDisponibles = await getAgendamientosDisponibles(id_medico,
 			fechahora_inicio, fechahora_fin);
 
 		return res.json(turnosDisponibles);
@@ -37,7 +37,7 @@ export const agendarController = async (req, res) => {
 	const { id_medico, id_paciente, fechahora_inicio, fechahora_fin } = req.body;
 
 	try {
-		const turno = await agendarTurno(id_medico, id_paciente, fechahora_inicio, fechahora_fin);
+		const turno = await agendar(id_medico, id_paciente, fechahora_inicio, fechahora_fin);
 
 		if (turno) {
 			return res.json(turno);

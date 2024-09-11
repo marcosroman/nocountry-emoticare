@@ -6,7 +6,7 @@ const paramsGetAgendamiento = Joi.object({
 			'any.required': 'El campo id_agendamiento es obligatorio.'})
 });
 
-const paramsGetTurnosDisponibles  = Joi.object({
+const paramsGetAgendamientosDisponibles  = Joi.object({
 	id_medico: Joi.number().required()
 		.messages({
 			'any.required': 'El campo id_medico es obligatorio.'}),
@@ -59,7 +59,7 @@ export const validateGetAgendamiento = async (req, res, next) => {
   }
 }
 
-export const validateGetTurnosDisponibles = async (req, res, next) => {
+export const validateGetAgendamientosDisponibles = async (req, res, next) => {
   try {
     const { error } = paramsGetTurnosDisponibles.validate(req.body);
 

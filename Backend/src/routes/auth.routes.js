@@ -4,7 +4,7 @@ const router = Router()
 
 router.get('/auth/status', (req, res) => {
   if (req.isAuthenticated()) {
-    res.json({ authenticated: true, user: req.session.user });
+    res.json({ authenticated: true, user: req.user });
   } else {
     res.json({ authenticated: false });
   }

@@ -10,6 +10,9 @@ const paramsGetAgendamientosDisponibles  = Joi.object({
 	id_medico: Joi.number().required()
 		.messages({
 			'any.required': 'El campo id_medico es obligatorio.'}),
+});
+
+const queryGetAgendamientosDisponibles  = Joi.object({
 	fechahora_inicio: Joi.string().isoDate().required()
 		.messages({
 			'string.isoDate': 'El formato de fecha debe ser string isoDate'}),
@@ -18,10 +21,14 @@ const paramsGetAgendamientosDisponibles  = Joi.object({
 			'string.isoDate': 'El formato de fecha debe ser string isoDate'})
 });
 
+
 const paramsAgendar = Joi.object({
 	id_medico: Joi.number().required()
 		.messages({
 			'any.required': 'El campo id_medico es obligatorio.'}),
+});
+
+const bodyAgendar = Joi.object({
 	id_paciente: Joi.number().required()
 		.messages({
 			'any.required': 'El campo id_paciente es obligatorio.'}),
@@ -37,6 +44,9 @@ const paramsUpdateAgendamientoState = Joi.object({
 	id_agendamiento: Joi.number().required()
 		.messages({
 			'any.required': 'El campo id_agendamiento es obligatorio.'}),
+});
+
+const bodyUpdateAgendamientoState = Joi.object({
 	estado: Joi.string().required()
 		.valid('RESERVADO', 'INICIADO', 'FINALIZADO', 'CANCELADO')
 		.messages({
@@ -45,58 +55,54 @@ const paramsUpdateAgendamientoState = Joi.object({
 			'any.required': 'Value is required.'})
 });
 
-export const validateGetAgendamiento = async (req, res, next) => {
-  try {
-    const { error } = paramsGetAgendamiento.validate(req.body);
+export const validateGetAgendamiento = (req, res, next) => {
+	const { error } = paramsGetAgendamiento.validate(req.params);
 
-    if (error) {
-      return res.status(200).json({ error: error.details[0].message })
-    }
+	if (error) {
+		return res.status(200).json({ error: error.details[0].message })
+	}
 
-    next()
-  } catch (error) {
-
-  }
+	next();
 }
 
-export const validateGetAgendamientosDisponibles = async (req, res, next) => {
-  try {
-    const { error } = paramsGetTurnosDisponibles.validate(req.body);
+export const validateGetAgendamientosDisponibles = (req, res, next) => {
+	const paramsValidation = paramsGetAgendamientosDisponibles.validate(req.params);
+	if (paramsValidation.error) {
+		return res.status(200).json({ error: paramsValidation.error.details[0].message }) //fix
+	}
 
-    if (error) {
-      return res.status(200).json({ error: error.details[0].message })
-    }
+	const queryValidation = queryGetAgendamientosDisponibles.validate(req.query);
+	if (queryValidation.error) {
+		return res.status(200).json({ error: queryValidation.error.details[0].message }) //fix
+	}
 
-    next()
-  } catch (error) {
-
-  }
+	next();
 }
 
-export const validateAgendar = async (req, res, next) => {
-  try {
-    const { error } = paramsAgendar.validate(req.body);
+export const validateAgendar = (req, res, next) => {
+	const paramsValidation = paramsAgendar.validate(req.params);
+	if (paramsValidation.error) {
+		return res.status(200).json({ error: paramsValidation.error.details[0].message }) //fix
+	}
 
-    if (error) {
-      return res.status(200).json({ error: error.details[0].message })
-    }
+	const bodyValidation = bodyAgendar.validate(req.body);
+	if (bodyValidation.error) {
+		return res.status(200).json({ error: bodyValidation.error.details[0].message }) //fix
+	}
 
-    next()
-  } catch (error) {
-
-  }
+	next();
 }
 
-export const validateUpdateAgendamientoState = async (req, res, next) => {
-  try {
-    const { error } = paramsUpdateAgendamientoState.validate(req.body);
+export const validateUpdateAgendamientoState = (req, res, next) => {
+	const paramsValidation = paramsUpdateAgendamientoState.validate(req.params);
+	if (paramsValidation.error) {
+		return res.status(200).json({ error: paramsValidation.error.details[0].message }) //fix
+	}
 
-    if (error) {
-      return res.status(200).json({ error: error.details[0].message })
-    }
+	const bodyValidation = bodyUpdateAgendamientoState.validate(req.body);
+	if (bodyValidation.error) {
+		return res.status(200).json({ error: bodyValidation.error.details[0].message }) //fix
+	}
 
-    next()
-  } catch (error) {
-
-  }
+	next();
 }

@@ -8,13 +8,13 @@ import { validateGetAgendamiento, validateGetAgendamientosDisponibles,
 
 const router = Router()
 
-router.post('/agendamientos',
+router.get('/agendamientos/:id_agendamiento',
 	validateGetAgendamiento, getAgendamientoController);
-router.post('/agendamientos/estado',
+router.put('/agendamientos/estado/:id_agendamiento',
 	validateUpdateAgendamientoState, updateAgendamientoStateController);
-router.post('/agendamientos/agendar',
+router.post('/agendamientos/agendar/:id_medico',
 	validateAgendar, agendarController);
-router.post('/agendamientos/disponibles',
+router.get('/agendamientos/disponibles/:id_medico',
 	validateGetAgendamientosDisponibles, getAgendamientosDisponiblesController);
 
 export default router

@@ -33,7 +33,7 @@ export const updateAgendamientoState = async (id_agendamiento, estado) => {
 export const agendar = async (id_medico, id_paciente,
 	fechahora_inicio, fechahora_fin) => {
 	try {
-		const isDisponible = await checkTurnoDisponible(id_medico,
+		const isDisponible = await checkAgendamiento(id_medico,
 			fechahora_inicio, fechahora_fin);
 
 		if (isDisponible) {
@@ -90,7 +90,7 @@ export const getAgendamientosDisponibles = async (id_medico,
     let currentDate = new Date(startDate);
 		
 		while (currentDate <= endDate) {
-			// Format the date as ISO string (YYYY-MM-DD)
+			// fecha YYYY-MM-DD y dia de la semana {entre 0 y 6 inclusive}
 			dates.push({
 				fecha: currentDate.toISOString().split('T')[0],
 				dia_semana: currentDate.getDay()
@@ -113,15 +113,17 @@ export const getAgendamientosDisponibles = async (id_medico,
 				[id_medico, fechahora_inicio, fechahora_fin]
 		);
 		const horariosNoDisponibles = res1.rows;
-		
+
+		console.log({horariosNoDisponibles});
 		// obtenemos los horarios habilitados del medico
 		const res2 = await pool.query(
-			`SELECT * FROM horarios_disponibles WHERE
+			`SELECT * FROM horarios WHERE
 			id_medico=$1`,
 			[id_medico]
 		);
 		const horariosHabilitados = res2.rows;
 
+		console.log({horariosHabilitados});
 		// listo las fechas en el rango dado junto con dia de la semana
 		let fechas = generateDateRange(fechahora_inicio, fechahora_fin);
 
@@ -138,17 +140,19 @@ export const getAgendamientosDisponibles = async (id_medico,
 				.filter(h => h.dia_semana === f.dia_semana)
 				// eliminamos horarios fuera del rango solicitado
 				.filter(h =>
-					((h.fechahora_inicio	>= new Date(fechahora_inicio))
-					&& (h.fechahora_fin	<= new Date(fechahora_fin))))
+					((h.fechahora_inicio	>= new Date(fechahora_inicio)) && (h.fechahora_fin	<= new Date(fechahora_fin))))
 				// juntamos todo en un unico array
-				.reduce((t,d) => t.concat(d), []))[0]
-				// eliminamos los turnos en conflicto con los horarios no-disponibles
-				.filter(t =>
-					horariosNoDisponibles
-						.filter(hnd =>
-							!((hnd.fechahora_fin < t.fechahora_inicio)
-								|| (t.fechahora_fin < hnd.fechahora_inicio)))
-						.length === 0)
+				.reduce((t,d) => t.concat(d), [])
+			)[0]
+			// eliminamos los horarios habilitados en conflicto con los horarios no-disponibles
+			.filter(ha =>
+				horariosNoDisponibles
+					.filter(hnd =>
+						!((hnd.fechahora_fin < ha.fechahora_inicio)
+							|| (ha.fechahora_fin < hnd.fechahora_inicio)))
+					.length === 0);
+
+		console.log({horariosDisponibles});
 
 		return horariosDisponibles;
 	} catch(error) {

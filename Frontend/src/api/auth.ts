@@ -60,3 +60,25 @@ export const authPatient = async () => {
     }
   }
 };
+
+export const authDoctor = async () => {
+  try {
+    const response = await frontend.get(`/doctor`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};
+
+export const authAdmin = async () => {
+  try {
+    const response = await frontend.get(`/admin`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};

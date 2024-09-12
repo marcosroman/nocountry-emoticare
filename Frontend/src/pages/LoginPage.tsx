@@ -7,11 +7,11 @@ import Navbar from "../components/Nav/Navbar";
 
 function LoginPage() {
   const { userState } = useContext(UserContext);
-  const { authenticated } = userState;
+  const { authenticated, user } = userState;
 
-  if (authenticated) {
+  if (authenticated && user) {
     toast.info("Ya tiene una sección activa", { position: "bottom-right" });
-    return <Navigate to="/home" replace />;
+    return <Navigate to={`/${user.rol}`} replace />;
   }
 
   return (

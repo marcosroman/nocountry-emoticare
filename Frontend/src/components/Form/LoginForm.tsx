@@ -21,16 +21,26 @@ function LoginForm() {
   const { handleLogin } = useContext(UserContext);
 
   const onSubmit = handleSubmit(async (values) => {
-    const result = await loginUser(values);
+    try {
+      const result = await loginUser(values);
+      if (result.message) {
+        // Si todo salió bien
+        handleLogin(result.user);
+        toast.success(result.message, { position: "bottom-right" });
+        const { rol } = result.user;
+        navigate(`/${rol}`);
+      }
 
-    if (result.message) { // Si todo salió bien
-      handleLogin(result.user);
-      toast.success(result.message, { position: "bottom-right" });
-      navigate("/home");
-    }
-    
-    if (result.error) { // Si hubo un error
-      toast.error(result.error, { position: "bottom-right" });
+      if (result.error) {
+        // Si hubo un error
+        toast.error(result.error, { position: "bottom-right" });
+      }
+    } catch (error) {
+      if (error) {
+        toast.error("Ha ocurrido un error al conectarse con el servidor", {
+          position: "bottom-right",
+        });
+      }
     }
   });
   return (

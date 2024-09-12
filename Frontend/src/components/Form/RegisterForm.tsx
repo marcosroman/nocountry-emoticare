@@ -27,14 +27,22 @@ function RegisterForm({ rol }: Props) {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
-    values.rol = rol;
-    const result = await registerUser(values);
-    if (result.message) {
-      toast.success(result.message, { position: "bottom-right" });
-      navigate("/login");
-    }
-    if (result.error) {
-      toast.error(result.error, { position: "bottom-right" });
+    try {
+      values.rol = rol;
+      const result = await registerUser(values);
+      if (result.message) {
+        toast.success(result.message, { position: "bottom-right" });
+        navigate("/login");
+      }
+      if (result.error) {
+        toast.error(result.error, { position: "bottom-right" });
+      }
+    } catch (error) {
+      if (error) {
+        toast.error("Ha ocurrido un error al conectarse con el servidor", {
+          position: "bottom-right",
+        });
+      }
     }
   });
   return (
@@ -43,7 +51,9 @@ function RegisterForm({ rol }: Props) {
       onSubmit={onSubmit}
     >
       <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none p-10 gap-10">
-        <h2 className="text-xl font-semibold text-black">Información General</h2>
+        <h2 className="text-xl font-semibold text-black">
+          Información General
+        </h2>
         <div className="grid gap-10 md:grid-cols-2">
           <TextInput
             name="nombre"
@@ -107,7 +117,9 @@ function RegisterForm({ rol }: Props) {
       </section>
 
       <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none p-10 gap-10">
-        <h2 className="text-xl font-semibold text-white">Información de Contacto</h2>
+        <h2 className="text-xl font-semibold text-white">
+          Información de Contacto
+        </h2>
 
         <TextInput
           name="nacionalidad"

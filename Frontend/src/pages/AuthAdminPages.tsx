@@ -1,36 +1,36 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { authPatient } from "../api/auth";
+import { authAdmin } from "../api/auth";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading/Loading";
 
-function AuthPatientPages() {
-  const [patientValidation, setPatientValidation] = useState<JSX.Element>(
+function AuthAdminPages() {
+  const [adminValidation, setAdminValidation] = useState<JSX.Element>(
     <Loading />
   );
 
   useEffect(() => {
     const verifyAuth = async () => {
-      const response = await authPatient();
+      const response = await authAdmin();
       return response;
     };
 
     verifyAuth().then((res) => {
       if (res?.error) {
         toast.error(res?.error, { position: "bottom-right" });
-        setPatientValidation(<Navigate to="/login" />);
+        setAdminValidation(<Navigate to="/login" />);
       } else if (typeof res === "undefined") {
         toast.error("Ha ocurrido un error al conectarse con el servidor", {
           position: "bottom-right",
         });
-        setPatientValidation(<Navigate to="/" />);
+        setAdminValidation(<Navigate to="/" />);
       } else {
-        setPatientValidation(<Outlet />);
+        setAdminValidation(<Outlet />);
       }
     });
   }, []);
 
-  return <>{patientValidation}</>;
+  return <>{adminValidation}</>;
 }
 
-export default AuthPatientPages;
+export default AuthAdminPages;

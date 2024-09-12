@@ -25,11 +25,11 @@ function App() {
 
           <Route element={<AuthPatientPages />}>
             <Route path="paciente/*" element={<HomePage />}>
-              <Route path="mis-consultas" element={<WhyUsSection />} />
-              <Route path="agendar-citas" element={<TestimonialSection />} />
+              <Route path="mis-citas" element={<WhyUsSection />} />
+              <Route path="agendar-cita" element={<TestimonialSection />} />
               <Route path="mis-resultados" element={<FeatureSection />} />
               <Route path="ver-perfil" element={<FeatureSection />} />
-              <Route path="*" element={<Navigate to="mis-consultas" />} />
+              <Route path="*" element={<Navigate to="mis-citas" />} />
             </Route>
           </Route>
 
@@ -37,11 +37,11 @@ function App() {
             <Route path="medico/*" element={<HomePage />}>
               <Route path="citas-del-dia" element={<WhyUsSection />} />
               <Route
-                path="consultar-cita-del-mes"
+                path="todas-las-citas"
                 element={<TestimonialSection />}
               />
-              <Route path="consultar-horario" element={<FeatureSection />} />
-              <Route path="listado-de-pacientes" element={<FeatureSection />} />
+              <Route path="ajustar-horario" element={<FeatureSection />} />
+              <Route path="lista-de-pacientes" element={<FeatureSection />} />
               <Route path="ver-perfil" element={<FeatureSection />} />
               <Route path="*" element={<Navigate to="citas-del-dia" />} />
             </Route>
@@ -49,11 +49,11 @@ function App() {
 
           <Route element={<AuthAdminPages />}>
             <Route path="admin/*" element={<HomePage />}>
-              <Route path="listado-de-medicos" element={<WhyUsSection />} />
-              <Route path="crear-un-medico" element={<TestimonialSection />} />
-              <Route path="lista-de-reservas" element={<FeatureSection />} />
+              <Route path="lista-de-medicos" element={<WhyUsSection />} />
+              <Route path="agregar-medico" element={<TestimonialSection />} />
+              <Route path="todas-las-citas" element={<FeatureSection />} />
               <Route path="ver-perfil" element={<FeatureSection />} />
-              <Route path="*" element={<Navigate to="listado-de-medicos" />} />
+              <Route path="*" element={<Navigate to="lista-de-medicos" />} />
             </Route>
           </Route>
 

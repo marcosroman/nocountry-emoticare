@@ -11,8 +11,8 @@ type Props = {
 function PatientNav({state} : Props) {
   return (
     <>
-      <SidebarNavItem title="Mis Consultas" Icon={TimeIcon} state={state} path="./mis-consultas" />
-      <SidebarNavItem title="Agendar Cita" Icon={CalendarIcon} state={state} path="./agendar-citas" />
+      <SidebarNavItem title="Mis Citas" Icon={TimeIcon} state={state} path="./mis-citas" />
+      <SidebarNavItem title="Agendar Cita" Icon={CalendarIcon} state={state} path="./agendar-cita" />
       <SidebarNavItem title="Mis Resultados" Icon={HistoryIcon} state={state} path="./mis-resultados" />
     </>
   );

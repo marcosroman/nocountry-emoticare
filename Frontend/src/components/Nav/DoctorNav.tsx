@@ -1,5 +1,8 @@
 import UsersIcon from "../../icons/Users";
 import SidebarNavItem from "./SidebarNavItem";
+import DayIcon from "../../icons/Day";
+import CalendarMonthIcon from "../../icons/CalendarMonth";
+import TimeEditIcon from "../../icons/TimeEdit";
 
 type Props = {
   state: boolean;
@@ -8,21 +11,24 @@ type Props = {
 function DoctorNav({ state }: Props) {
   return (
     <>
-      <SidebarNavItem title="Citas del Día" Icon={UsersIcon} state={state} />
+      <SidebarNavItem title="Citas del Día" Icon={DayIcon} state={state} path="./citas-del-dia" />
       <SidebarNavItem
-        title="Consultar Citas del Mes"
-        Icon={UsersIcon}
+        title="Todas las Citas"
+        Icon={CalendarMonthIcon}
         state={state}
+        path="./todas-las-citas"
       />
       <SidebarNavItem
-        title="Consultar Horario"
-        Icon={UsersIcon}
+        title="Ajustar Horario"
+        Icon={TimeEditIcon}
         state={state}
+        path="./ajustar-horario"
       />
       <SidebarNavItem
-        title="Listado de Pacientes"
+        title="Lista de Pacientes"
         Icon={UsersIcon}
         state={state}
+        path="./lista-de-pacientes"
       />
     </>
   );

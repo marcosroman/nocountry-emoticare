@@ -8,8 +8,8 @@ type Props = {
 }
 
 const BUTTON_COLORS = {
-    blue: "text-white bg-blue-600",
-    white: "text-black bg-white",
+    blue: "text-white bg-blue-600 hover:bg-blue-700",
+    white: "text-black bg-white hover:bg-slate-200",
   };
 
 function FullButton({title, type="button", color}: Props) {

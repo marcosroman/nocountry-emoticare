@@ -23,6 +23,17 @@ const timeSchema = Joi.string()
 	.required()
 	.messages({'any.invalid': 'Formato de hora invalido. usar hh:mm (string)'});
 
+const paramsGetHorarios = Joi.object({
+	id_medico: Joi.number()
+    .integer()
+    .required()
+    .messages({
+      'number.base': 'El campo nro_documento debe ser un número.',
+      'number.integer': 'El campo nro_documento debe ser un número entero.',
+      'any.required': 'El campo id_medico es obligatorio.'
+    })
+});
+
 const paramsUpdateHorarios = Joi.object({
 	id_medico: Joi.number()
     .integer()
@@ -52,24 +63,28 @@ const bodyUpdateHorarios = Joi.object({
 	minutos_descanso: Joi.number().max(60).required()
 });
 
+export const validateGetHorarios = (req, res, next) => {
+	const paramsValidation = paramsGetHorarios.validate(req.params);
+	if (paramsValidation.error) {
+		return res.status(200)//fix
+			.json({ error: paramsValidation.error.details[0].message })
+	} 
 
-export const validateHorariosUpdate = async (req, res, next) => {
-  try {
-    const paramsValidation = paramsUpdateHorarios.validate(req.params);
-    if (paramsValidation.error) {
-      return res.status(200)//fix
-				.json({ error: paramsValidation.error.details[0].message })
-    } 
+	next();
+}
 
-    const bodyValidation = bodyUpdateHorarios.validate(req.body);
-    if (bodyValidation.error) {
-      return res.status(200)//fix
-				.json({ error: bodyValidation.error.details[0].message });
-    } 
+export const validateUpdateHorarios = (req, res, next) => {
+	const paramsValidation = paramsUpdateHorarios.validate(req.params);
+	if (paramsValidation.error) {
+		return res.status(200)//fix
+			.json({ error: paramsValidation.error.details[0].message })
+	} 
 
-    next();
-  } catch (error) {
-		console.log(error);
-		return res.status(500);
-  }
+	const bodyValidation = bodyUpdateHorarios.validate(req.body);
+	if (bodyValidation.error) {
+		return res.status(200)//fix
+			.json({ error: bodyValidation.error.details[0].message });
+	} 
+
+	next();
 }

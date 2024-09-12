@@ -1,7 +1,20 @@
 import { getDoctorById } from '../models/doctorModel.js';
-import { poblarHorarios } from '../models/horariosModel.js';
+import { getHorarios, poblarHorarios } from '../models/horariosModel.js';
 
-export const updateHorariosController = async (req, res) =>{
+export const getHorariosController = async (req, res) => {
+	const { id_medico } = req.params;
+
+	try {
+		const horarios = await getHorarios(id_medico);
+
+		return res.status(400).json(horarios);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({error});
+	}
+}
+
+export const updateHorariosController = async (req, res) => {
 	const { id_medico } = req.params;
   const { dias_disponibles,
   horario_inicio_jornada, horario_fin_jornada,
@@ -11,7 +24,7 @@ export const updateHorariosController = async (req, res) =>{
     const findMedicoId = await getDoctorById(id_medico);
 
 		if (findMedicoId) {
-			const horarios= await poblarHorarios(
+			const horarios = await poblarHorarios(
 				id_medico, dias_disponibles,
 				horario_inicio_jornada, horario_fin_jornada,
 				minutos_sesion, minutos_descanso);

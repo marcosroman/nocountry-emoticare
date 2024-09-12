@@ -30,7 +30,9 @@ export const poblarHorarios = async (
 export const getHorarios = async (id_medico) => {
 	try {
     const query = await pool.query(
-			`SELECT * from horarios WHERE id_medico=%s RETURNING *`);
+			`SELECT * from horarios WHERE id_medico=$1;`,
+			[id_medico]
+		);
 		return query.rows;
   } catch (error) {
     console.log(error);

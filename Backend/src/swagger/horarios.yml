@@ -1,20 +1,16 @@
 paths:
-  /horarios:
-    post:
+  /horarios/{id_medico}:
+    get:
       summary: Obtener horarios habilitados de atencion para un medico
       tags:
         - horarios
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id_medico:
-                  type: integer
-              required:
-                - id_medico
+      parameters:
+        - in: path
+          name: id_medico
+          description: id del medico
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: horarios habilitados

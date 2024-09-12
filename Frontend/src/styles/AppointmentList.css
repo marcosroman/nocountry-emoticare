@@ -1,0 +1,55 @@
+.appointments-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .appointments-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .appointments-table th,
+  .appointments-table td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .appointments-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .appointments-table td {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .appointments-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .appointments-table td:nth-child(5) {
+    font-weight: bold;
+    color: #007BFF;
+  }
+  
+  .appointments-table td:nth-child(5):contains('Pendiente') {
+    color: #FFC107;
+  }
+  
+  .appointments-table td:nth-child(5):contains('Cancelada') {
+    color: #DC3545;
+  }

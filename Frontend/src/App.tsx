@@ -11,6 +11,9 @@ import AuthPatientPages from "./pages/AuthPatientPages";
 import WhyUsSection from "./components/Section/WhyUsSection";
 import TestimonialSection from "./components/Section/TestimonialsSection";
 import FeatureSection from "./components/Section/FeatureSection";
+import AppointmentsList from "./components/Section/Dashboard-Dr.tsx/AppointmentList";
+import DailyAppointments from "./components/Section/Dashboard-Dr.tsx/DailyAppointments";
+import ScheduleAppointments from "./components/Section/Dashboard-Dr.tsx/ScheduleAppointment";
 
 function App() {
   return (
@@ -39,9 +42,9 @@ function App() {
           </Route>
 
           <Route path="/prueba-medico/*" element={<HomePage />}>
-            <Route path="citas-del-dia" element={<WhyUsSection />} />
-            <Route path="consultar-cita-del-mes" element={<TestimonialSection />} />
-            <Route path="consultar-horario" element={<FeatureSection />} />
+            <Route path="citas-del-dia" element={<DailyAppointments />} />
+            <Route path="consultar-cita-del-mes" element={<AppointmentsList />} />
+            <Route path="consultar-horario" element={<ScheduleAppointments />} />
             <Route path="listado-de-pacientes" element={<FeatureSection />} />
             <Route path="ver-perfil" element={<FeatureSection />} />
             <Route path="" element={<Navigate to="citas-del-dia" />} />

@@ -1,3 +1,5 @@
+import CalendarMonthIcon from "../../icons/CalendarMonth";
+import UserPlusIcon from "../../icons/UserPlus";
 import UsersIcon from "../../icons/Users";
 import SidebarNavItem from "./SidebarNavItem";
 
@@ -9,15 +11,17 @@ function AdminNav({ state }: Props) {
   return (
     <>
       <SidebarNavItem
-        title="Listado de Médicos"
+        title="Lista de Médicos"
         Icon={UsersIcon}
         state={state}
+        path="./lista-de-medicos"
       />
-      <SidebarNavItem title="Agregar Médico" Icon={UsersIcon} state={state} />
+      <SidebarNavItem title="Agregar Médico" Icon={UserPlusIcon} state={state} path="./agregar-medico" />
       <SidebarNavItem
-        title="Listado de Reservas"
-        Icon={UsersIcon}
+        title="Todas las Citas"
+        Icon={CalendarMonthIcon}
         state={state}
+        path="./todas-las-citas"
       />
     </>
   );

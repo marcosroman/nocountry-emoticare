@@ -1,0 +1,70 @@
+paths:
+  /consultas:
+    get:
+      summary: buscar consultas por (paciente|medico) #y/o (rango de fechas)
+      tags:
+        - consultas
+      parameters:
+        - in: query
+          name: id_medico
+          descripcion: id del medico
+          schema:
+            type: integer
+        - in: query
+          name: id_paciente
+          descripcion: id del paciente
+          schema:
+            type: integer
+  /consultas/{id_consulta}:
+    get:
+      summary: datos sobre consulta
+      tags:
+        - consultas
+      parameters:
+        - in: path
+          name: id_consulta
+          descripcion: id de la consulta
+          schema:
+            type: integer
+          required: true
+  /consultas/iniciar/{id_agendamiento}:
+    put:
+      summary: iniciar consulta agendadda
+      tags:
+        - consultas
+        - agendamientos
+      parameters:
+        - in: path
+          name: id_agendamiento
+          descripcion: id del agendamiento
+          schema:
+            type: integer
+          required: true
+  /consultas/{id_consulta}/finalizar:
+    put:
+      summary: finalizar consulta
+      tags:
+        - consultas
+      parameters:
+        - in: path
+          name: id_consulta
+          description: id de la consulta
+  /consultas/{id_consulta}/notas:
+    get:
+      summary: notas de consulta
+      tags:
+        - consultas
+        - notas_consultas
+  /consultas/{id_consulta}/notas/agregar:
+    post:
+      summary: agregar nota en consulta
+      tags:
+        - consultas
+        - notas_consultas
+  /consultas/notas:
+    get:
+      summary: buscar notas de consultas por medico o paciente ?o rango de fechas
+      tags:
+        - consultas
+        - notas_consultas
+

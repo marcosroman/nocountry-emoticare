@@ -131,7 +131,7 @@ INSERT INTO dias_semana (id, nombre) VALUES
 (0, 'Domingo'), (1, 'Lunes'), (2, 'Martes'), (3, 'Miercoles'),
 (4, 'Jueves'), (5, 'Viernes'), (6, 'Sabado');
 
-CREATE TABLE horarios_disponibles (
+CREATE TABLE horarios (
 	id_medico INTEGER REFERENCES medicos(id),
 	dia_semana INTEGER REFERENCES dias_semana(id),
 	hora_inicio TIME NOT NULL, -- ver luego, timestamp no contiene zona horaria
@@ -151,8 +151,8 @@ CREATE TABLE agendamientos (
 	actualizadaEl VARCHAR(20) NOT NULL
 );
 
--- sesiones: id, id_agendamiento, fechahora_inicio, fechahora_fin, estado 
-CREATE TABLE sesiones (
+-- consultas: id, id_agendamiento, fechahora_inicio, fechahora_fin, estado 
+CREATE TABLE consultas (
 	id SERIAL PRIMARY KEY,
 	id_agendamiento INTEGER REFERENCES agendamientos(id),
 	fechahora_inicio TIMESTAMP NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE sesiones (
 --);
 
 -- notas de sesiones
-CREATE TABLE sesiones_notas (
+CREATE TABLE notas_consultas (
 	id SERIAL PRIMARY KEY,
 	id_sesion INTEGER REFERENCES sesiones(id),
 	nota TEXT NOT NULL,

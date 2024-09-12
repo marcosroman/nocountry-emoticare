@@ -1,6 +1,5 @@
 import pool from '../config/config.js';
-import { getHorariosDisponiblesPorMedico }
-	from './horariosDisponiblesModel.js';
+import { getHorarios } from './horariosModel.js';
 
 // get agendamiento por id
 export const getAgendamiento = async (id_agendamiento) => {
@@ -15,8 +14,8 @@ export const getAgendamiento = async (id_agendamiento) => {
 	}
 }
 
-// cambiar estado de un turno
-export const setAgendamientoState = async (id_agendamiento, estado) => {
+// cambiar estado de un agendamiento
+export const updateAgendamientoState = async (id_agendamiento, estado) => {
 	try {
 		const res = await pool.query(
 			`UPDATE agendamientos SET estado=$2, actualizadaEl=TO_CHAR(NOW(),
@@ -24,17 +23,17 @@ export const setAgendamientoState = async (id_agendamiento, estado) => {
 			[id_agendamiento, estado]
 		);
 
-		return res.rows;
+		return res.rows[0];
 	} catch(error) {
 		console.log(error);
 	}
 }
 
 // agendar turno
-export const agendarTurno = async (id_medico, id_paciente,
+export const agendar = async (id_medico, id_paciente,
 	fechahora_inicio, fechahora_fin) => {
 	try {
-		const isDisponible = await checkTurnoDisponible(id_medico,
+		const isDisponible = await checkAgendamiento(id_medico,
 			fechahora_inicio, fechahora_fin);
 
 		if (isDisponible) {
@@ -47,7 +46,7 @@ export const agendarTurno = async (id_medico, id_paciente,
 				[id_medico, id_paciente, fechahora_inicio, fechahora_fin]
 			);
 
-			return query.rows;
+			return query.rows[0];
 		} else {
 			return [];
 		}
@@ -59,7 +58,7 @@ export const agendarTurno = async (id_medico, id_paciente,
 // verificar disponibilidad de turno ( (id_medico, fecha, hora_inicio,
 // hora_fin) => bool (veo que el medico no tenga un turno agendado en 
 // conflicto con el rango hora_inicio-hora_fin)),
-export const checkTurnoDisponible = async (id_medico,
+export const checkAgendamiento = async (id_medico,
 	fechahora_inicio, fechahora_fin) => {
 	try {
 		const res = await pool.query(
@@ -77,7 +76,7 @@ export const checkTurnoDisponible = async (id_medico,
 }
 
 // ver turnos disponibles con un medico para un rango de fechas 
-export const getTurnosDisponibles = async (id_medico,
+export const getAgendamientosDisponibles = async (id_medico,
 	fechahora_inicio, fechahora_fin) => {
 	function generateDateRange(startDateStr, endDateStr) {
     // Parse the ISO date strings into Date objects
@@ -91,7 +90,7 @@ export const getTurnosDisponibles = async (id_medico,
     let currentDate = new Date(startDate);
 		
 		while (currentDate <= endDate) {
-			// Format the date as ISO string (YYYY-MM-DD)
+			// fecha YYYY-MM-DD y dia de la semana {entre 0 y 6 inclusive}
 			dates.push({
 				fecha: currentDate.toISOString().split('T')[0],
 				dia_semana: currentDate.getDay()
@@ -114,15 +113,17 @@ export const getTurnosDisponibles = async (id_medico,
 				[id_medico, fechahora_inicio, fechahora_fin]
 		);
 		const horariosNoDisponibles = res1.rows;
-		
+
+		console.log({horariosNoDisponibles});
 		// obtenemos los horarios habilitados del medico
 		const res2 = await pool.query(
-			`SELECT * FROM horarios_disponibles WHERE
+			`SELECT * FROM horarios WHERE
 			id_medico=$1`,
 			[id_medico]
 		);
 		const horariosHabilitados = res2.rows;
 
+		console.log({horariosHabilitados});
 		// listo las fechas en el rango dado junto con dia de la semana
 		let fechas = generateDateRange(fechahora_inicio, fechahora_fin);
 
@@ -139,17 +140,19 @@ export const getTurnosDisponibles = async (id_medico,
 				.filter(h => h.dia_semana === f.dia_semana)
 				// eliminamos horarios fuera del rango solicitado
 				.filter(h =>
-					((h.fechahora_inicio	>= new Date(fechahora_inicio))
-					&& (h.fechahora_fin	<= new Date(fechahora_fin))))
+					((h.fechahora_inicio	>= new Date(fechahora_inicio)) && (h.fechahora_fin	<= new Date(fechahora_fin))))
 				// juntamos todo en un unico array
-				.reduce((t,d) => t.concat(d), []))[0]
-				// eliminamos los turnos en conflicto con los horarios no-disponibles
-				.filter(t =>
-					horariosNoDisponibles
-						.filter(hnd =>
-							!((hnd.fechahora_fin < t.fechahora_inicio)
-								|| (t.fechahora_fin < hnd.fechahora_inicio)))
-						.length === 0)
+				.reduce((t,d) => t.concat(d), [])
+			)[0]
+			// eliminamos los horarios habilitados en conflicto con los horarios no-disponibles
+			.filter(ha =>
+				horariosNoDisponibles
+					.filter(hnd =>
+						!((hnd.fechahora_fin < ha.fechahora_inicio)
+							|| (ha.fechahora_fin < hnd.fechahora_inicio)))
+					.length === 0);
+
+		console.log({horariosDisponibles});
 
 		return horariosDisponibles;
 	} catch(error) {

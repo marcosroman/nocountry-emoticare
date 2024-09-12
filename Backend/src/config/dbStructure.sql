@@ -117,10 +117,7 @@ VALUES
 
 
 
---tablas: horarios_disponibles, agendamientos, sesiones, videollamadas, sesiones_notas
-
--- horarios_disponibles: id_medico, dia_semana, hora_inicio, hora_fin (los turnos disponibles de la semana; se puede generar con una funcion (id_medico, array_dias_de_trabajo, hora_inicio, hora_fin, duracion_consulta, duracion_descanso)=>(query sql p/ borrar los datos relacionados a ese medico y cargarlos nuevamente)
--- tambien se podria completar manualmente supongo
+--tablas: horarios_disponibles, agendamientos, consultas, videollamadas?, notas_consultas
 
 CREATE TABLE dias_semana (
 	id INTEGER PRIMARY KEY,
@@ -138,7 +135,6 @@ CREATE TABLE horarios (
 	hora_fin TIME NOT NULL
 );
 
--- agendamientos: id, id_medico, id_paciente, fechahora_inicio, fechahora_fin, estado, fechahora_creado, fechahora_actualizado
 CREATE TYPE estado_agendamiento AS ENUM ('RESERVADO', 'INICIADO', 'FINALIZADO', 'CANCELADO');
 CREATE TABLE agendamientos (
 	id SERIAL PRIMARY KEY,
@@ -151,7 +147,6 @@ CREATE TABLE agendamientos (
 	actualizadaEl VARCHAR(20) NOT NULL
 );
 
--- consultas: id, id_agendamiento, fechahora_inicio, fechahora_fin, estado 
 CREATE TABLE consultas (
 	id SERIAL PRIMARY KEY,
 	id_agendamiento INTEGER REFERENCES agendamientos(id),
@@ -161,12 +156,12 @@ CREATE TABLE consultas (
 	actualizadaEl VARCHAR(20) NOT NULL
 );
 
----- videollamadas: id, id_sesion, hora_inicio, hora_fin
+---- videollamadas: id, id_consulta, hora_inicio, hora_fin
 ---- para saber a que fechahora encienden camaras y microfono
 --CREATE TYPE evento_videollamada AS ENUM ('START','END','MIC:ON','MIC:OFF','CAM:ON','CAM:OFF','DROP');
 --CREATE TABLE videollamadas_eventos (
 --	id SERIAL PRIMARY KEY,
---	id_sesion INTEGER REFERENCES sesiones(id) NOT NULL,
+--	id_consulta INTEGER REFERENCES consultas(id) NOT NULL,
 --	id_medico INTEGER REFERENCES medicos(id),
 --	id_paciente INTEGER REFERENCES pacientes(id),
 --	fechahora TIMESTAMP NOT NULL,
@@ -177,10 +172,10 @@ CREATE TABLE consultas (
 --	)
 --);
 
--- notas de sesiones
+-- notas de consultas
 CREATE TABLE notas_consultas (
 	id SERIAL PRIMARY KEY,
-	id_sesion INTEGER REFERENCES sesiones(id),
+	id_consulta INTEGER REFERENCES consultas(id),
 	nota TEXT NOT NULL,
 	creadaEl VARCHAR(20) NOT NULL,
 	actualizadaEl VARCHAR(20) NOT NULL

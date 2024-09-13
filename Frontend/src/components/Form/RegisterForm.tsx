@@ -32,7 +32,9 @@ function RegisterForm({ rol }: Props) {
       const result = await registerUser(values);
       if (result.message) {
         toast.success(result.message, { position: "bottom-right" });
-        navigate("/login");
+        if (rol === "paciente") {
+          navigate("/login");
+        }
       }
       if (result.error) {
         toast.error(result.error, { position: "bottom-right" });
@@ -47,7 +49,7 @@ function RegisterForm({ rol }: Props) {
   });
   return (
     <form
-      className="shadow-lg grid md:grid-cols-2 max-w-5xl"
+      className="grid md:grid-cols-2 max-w-5xl shadow-focused rounded-lg"
       onSubmit={onSubmit}
     >
       <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none p-10 gap-10">
@@ -121,6 +123,32 @@ function RegisterForm({ rol }: Props) {
           Información de Contacto
         </h2>
 
+        {rol === "medico" && (
+          <SelectInput
+            name="especialidad_id"
+            placeholder="Especialidad"
+            options={[
+              { name: "Psicología", value: 1 },
+              { name: "Psiquiatría", value: 2 },
+            ]}
+            register={register}
+            errors={errors}
+            error_color="yellow"
+            classes="text-white placeholder:text-white bg-transparent"
+          />
+        )}
+
+        {rol === "medico" && (
+          <NumberInput
+            name="numero_registro"
+            placeholder="Nro de Registro Médico"
+            register={register}
+            errors={errors}
+            error_color="yellow"
+            classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
+          />
+        )}
+
         <TextInput
           name="nacionalidad"
           placeholder="País"
@@ -161,14 +189,16 @@ function RegisterForm({ rol }: Props) {
           classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
         />
 
-        <TextInput
-          name="direccion"
-          placeholder="Dirección"
-          register={register}
-          errors={errors}
-          error_color="yellow"
-          classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
-        />
+        {rol === "paciente" && (
+          <TextInput
+            name="direccion"
+            placeholder="Dirección"
+            register={register}
+            errors={errors}
+            error_color="yellow"
+            classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
+          />
+        )}
 
         <FullButton title="Confirmar Registro" color="white" type="submit" />
       </section>

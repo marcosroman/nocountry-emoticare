@@ -3,7 +3,7 @@ import Sidebar from "../components/Nav/Sidebar";
 
 function HomePage() {
   return (
-    <main className="flex min-h-screen p-2">
+    <main className="flex min-h-screen p-2 bg-[#f2f2f2]">
       <Sidebar />
       <div className="ms-14 md:ms-16 flex-1">
         <Outlet />

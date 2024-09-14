@@ -9,6 +9,16 @@ tags:
     description: Everything about user
   - name: login
     description: Access to app
+  - horarios:
+    descrription: Horarios habilitados de atencion
+  - agendamientos:
+    description: Agendamiento de consultas
+  - consultas:
+    description: Registro de consultas
+  - notas_consultas:
+    description: Notas de medico durante consulta
+  - conclusiones_consultas:
+    description: Conclusiones de una consulta (para el paciente)
 paths:
   /register:
     post:

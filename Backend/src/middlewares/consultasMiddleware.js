@@ -36,6 +36,25 @@ const bodyPostNotaConsulta = Joi.object({
 			'any.required': 'El campo nota es obligatorio.'})
 });
 
+const paramsGetConclusionConsulta = Joi.object({
+	id_consulta: Joi.number().required()
+		.messages({
+			'any.required': 'El campo id_consulta es obligatorio.'})
+});
+
+const paramsPostConclusionConsulta = Joi.object({
+	id_consulta: Joi.number().required()
+		.messages({
+			'any.required': 'El campo id_agendamiento es obligatorio.'})
+});
+
+const bodyPostConclusionConsulta = Joi.object({
+	nota: Joi.string().required()
+		.messages({
+			'any.required': 'El campo nota es obligatorio.'})
+});
+
+
 export const validateGetConsulta = (req, res, next) => {
   try {
     const paramsValidation = paramsGetConsulta.validate(req.params);
@@ -123,3 +142,42 @@ export const validatePostNotaConsulta = (req, res, next) => {
 		return res.status(500).json({ error });
   }
 }
+
+export const validateGetConclusionConsulta = (req, res, next) => {
+  try {
+    const paramsValidation = paramsGetConclusionConsulta.validate(req.params);
+
+    if (paramsValidation.error) {
+      return res.status(400).json({
+				error: paramsValidation.error.details[0].message });
+    }
+
+    next();
+  } catch (error) {
+		console.error(error);
+		return res.status(500).json({ error });
+  }
+}
+
+export const validatePostConclusionConsulta = (req, res, next) => {
+  try {
+    const paramsValidation = paramsPostConclusionConsulta.validate(req.params);
+    if (paramsValidation.error) {
+      return res.status(400).json({
+				error: paramsValidation.error.details[0].message });
+    }
+
+    const bodyValidation = bodyPostConclusionConsulta.validate(req.body);
+    if (bodyValidation.error) {
+      return res.status(400).json({
+				error: bodyValidation.error.details[0].message });
+    }
+
+    next();
+  } catch (error) {
+		console.error(error);
+		return res.status(500).json({ error });
+  }
+}
+
+

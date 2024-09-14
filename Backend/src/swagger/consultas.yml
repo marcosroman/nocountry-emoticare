@@ -61,6 +61,18 @@ paths:
       tags:
         - consultas
         - notas_consultas
+  /consultas/{id_consulta}/notas/conclusion:
+    get:
+      summary: ver conclusion de consulta (notas para el paciente)
+      tags:
+        - consultas
+        - conclusiones_consultas
+  /consultas/{id_consulta}/notas/conclusion/agregar:
+    post:
+      summary: agregar conclusion de consulta (nota para paciente)
+      tags:
+        - consultas
+        - conclusiones_consultas
   /consultas/notas:
     get:
       summary: buscar notas de consultas por medico o paciente ?o rango de fechas

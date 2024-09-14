@@ -67,4 +67,17 @@ paths:
       tags:
         - consultas
         - notas_consultas
+components:
+  schemas:
+    Consultas:
+      type: object
+      properties:
+        id:
+          type: integer
+        id_agendamiento:
+          type: integer
+        fechahora_inicio:
+          type: string
+        fechahora_fin:
+          type: string
 

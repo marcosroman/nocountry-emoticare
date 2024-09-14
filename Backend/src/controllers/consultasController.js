@@ -1,11 +1,27 @@
-import { startConsulta, endConsulta } from '../models/consultasModel.js';
+import { getConsulta, startConsulta, endConsulta, getNotasConsulta, postNotaConsulta } from '../models/consultasModel.js';
+
+export const getConsultaController = async (req, res) => {
+	const { id_consulta } = req.params;
+
+	try {
+		const consulta = await getConsulta(id_consulta);
+		
+		if (consulta) {
+			return res.status(400).json(consulta);
+		} else {
+			return res.status(500);
+		}
+	} catch(error) {
+		console.error(error);
+	}
+}
 
 export const startConsultaController = async (req, res) => {
-	const { id_agendamiento, fechahora_inicio } = req.body;
-	
-	try {
-		const consulta = await startConsulta(id_agendamiento, fechahora_inicio);
+	const { id_agendamiento } = req.params;
 
+	try {
+		const consulta = await startConsulta(id_agendamiento);
+		
 		if (consulta) {
 			return res.status(400).json(consulta);
 		} else {
@@ -17,11 +33,11 @@ export const startConsultaController = async (req, res) => {
 }
 
 export const endConsultaController = async (req, res) => {
-	const { id, fechahora_fin } = req.body;
-	
-	try {
-		const consulta = await endConsulta(id, fechahora_fin);
+	const { id_consulta } = req.params;
 
+	try {
+		const consulta = await endConsulta(id_consulta);
+		
 		if (consulta) {
 			return res.status(400).json(consulta);
 		} else {
@@ -32,3 +48,35 @@ export const endConsultaController = async (req, res) => {
 	}
 }
 
+export const getNotasConsultaController = async (req, res) => {
+	const { id_consulta } = req.params;
+	
+	try {
+		const consulta = await getConsulta(id_consulta);
+
+		if (notas) {
+			return res.status(400).json(notas);
+		} else {
+			return res.status(500);
+		}
+	} catch(error) {
+		console.error(error);
+	}
+}
+
+export const postNotaConsultaController = async (req, res) => {
+	const { id_consulta } = req.params;
+	const { nota } = req.body;
+	
+	try {
+		const nota = await postNotaConsulta(id_consulta, nota);
+
+		if (nota) {
+			return res.status(400).json(nota);
+		} else {
+			return res.status(500);
+		}
+	} catch(error) {
+		console.error(error);
+	}
+}

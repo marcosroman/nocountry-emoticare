@@ -1,5 +1,6 @@
 import "../../styles/HeroSection.css";
 import mental from "../../images/production2Ftreatment2FmentalHealth-removebg-preview.png"
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -14,16 +15,15 @@ const Hero = () => {
         </div>
         <div>
           <div className="main_text">
-            <h2>Urgent Care</h2>
-            <h1>Quick and Easy Online Consultations</h1>
+            <h2 className="font-bold text-2xl tracking-wider">Emoticare</h2>
+            <h1>Citas Rápidas para un cuidado emocional eficaz</h1>
             <p>
-              Access professional healthcare from the comfort of your home,
-              anytime, anywhere.
+              Accede a un cuidado profesional desde la comodidad de tu hogar, cuando lo necesites
             </p>
           </div>
           <div className="section_button">
-          <button className="hero-button">
-            <p>Start your Consultation</p>
+          <Link to="/login" className="hero-button">
+            <p>¡Agenda tu Cita!</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -38,7 +38,7 @@ const Hero = () => {
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               ></path>
             </svg>
-          </button>
+          </Link>
           </div>
         </div>
       </div>

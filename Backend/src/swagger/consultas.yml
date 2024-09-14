@@ -1,3 +1,10 @@
+tags:
+  - name: consultas
+    description: Registro de consultas
+  - name: notas_consultas
+    description: Notas de medico durante consulta
+  - name: conclusiones_consultas
+    description: Conclusiones de una consulta (para el paciente)
 paths:
   /consultas:
     get:

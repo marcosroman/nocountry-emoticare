@@ -1,3 +1,6 @@
+tags:
+  - name: agendamientos
+    description: Agendamiento de consultas
 paths:
   /agendamientos/{id}:
     get:

@@ -177,8 +177,17 @@ CREATE TABLE consultas (
 --	)
 --);
 
--- notas de sesiones
+-- notas de medico durante consultas
 CREATE TABLE notas_consultas (
+	id SERIAL PRIMARY KEY,
+	id_sesion INTEGER REFERENCES sesiones(id),
+	nota TEXT NOT NULL,
+	creadaEl VARCHAR(20) NOT NULL,
+	actualizadaEl VARCHAR(20) NOT NULL
+);
+
+-- conclusiones de medico post consulta
+CREATE TABLE conclusiones_consultas (
 	id SERIAL PRIMARY KEY,
 	id_sesion INTEGER REFERENCES sesiones(id),
 	nota TEXT NOT NULL,

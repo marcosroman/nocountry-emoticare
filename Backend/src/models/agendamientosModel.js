@@ -1,6 +1,18 @@
 import pool from '../config/config.js';
 import { getHorarios } from './horariosModel.js';
 
+export const getAllAgendamientos = async () => {
+	try {
+		const res = await pool.query(
+			`SELECT * FROM agendamientos;`
+		);
+
+		return res.rows;
+	} catch(error) {
+		console.log(error);
+	}
+}
+
 // get agendamiento por id
 export const getAgendamiento = async (id_agendamiento) => {
 	try {

@@ -52,7 +52,7 @@ function RegisterForm({ rol }: Props) {
       className="grid md:grid-cols-2 max-w-5xl shadow-focused rounded-lg"
       onSubmit={onSubmit}
     >
-      <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none p-10 gap-10">
+      <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none py-10 p-5 md:p-10 gap-10">
         <h2 className="text-xl font-semibold text-black">
           Información General
         </h2>
@@ -118,7 +118,7 @@ function RegisterForm({ rol }: Props) {
         />
       </section>
 
-      <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none p-10 gap-10">
+      <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none py-10 p-5 md:p-10 gap-10">
         <h2 className="text-xl font-semibold text-white">
           Información de Contacto
         </h2>

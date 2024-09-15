@@ -1,3 +1,6 @@
+tags:
+  - name: agendamientos
+    description: Agendamiento de consultas
 paths:
   /agendamientos/{id}:
     get:
@@ -44,8 +47,7 @@ paths:
                   type: string
                   enum:
                     - RESERVADO
-                    - INICIADO
-                    - FINALIZADO
+                    - COMPLETADO
                     - CANCELADO
               required:
                 - estado
@@ -116,8 +118,7 @@ components:
           type: string
           enum:
             - RESERVADO
-            - INICIADO
-            - FINALIZADO
+            - COMPLETADO
             - CANCELADO
         creadaEl:
           type: string

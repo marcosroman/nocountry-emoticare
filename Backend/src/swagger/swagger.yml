@@ -7,8 +7,6 @@ servers:
 tags:
   - name: user
     description: Everything about user
-  - name: login
-    description: Access to app
 paths:
   /register:
     post:

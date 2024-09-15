@@ -154,7 +154,7 @@ function AllConsultSection() {
   };
 
   const nextPage = () => {
-    if (currentPage + 12 <= lastPage && filter === "") {
+    if (currentPage + 12 < lastPage && filter === "") {
       setCurrentPage(currentPage + 12);
     }
     const filtered = consults.filter((element) =>
@@ -169,7 +169,7 @@ function AllConsultSection() {
       ]?.includes(search)
     );
 
-    if (filtered && currentPage + 12 <= filtered.length) {
+    if (filtered && currentPage + 12 < filtered.length) {
       setCurrentPage(currentPage + 12);
     }
   };

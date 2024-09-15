@@ -1,5 +1,17 @@
 import { getDoctorById } from '../models/doctorModel.js';
-import { getHorarios, poblarHorarios } from '../models/horariosModel.js';
+import { getAllHorarios, getHorarios, poblarHorarios } from '../models/horariosModel.js';
+
+export const getAllHorariosController = async (req, res) => {
+	try {
+		const horarios = await getAllHorarios();
+
+		return res.status(400).json(horarios);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({error});
+	}
+}
+
 
 export const getHorariosController = async (req, res) => {
 	const { id_medico } = req.params;

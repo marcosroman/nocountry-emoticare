@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { getConsultaController, startConsultaController,
-	endConsultaController, getNotasConsultaController,
+import { getAllConsultasController, getConsultaController,
+	startConsultaController, endConsultaController, getNotasConsultaController,
 	postNotaConsultaController, getConclusionConsultaController,
 	postConclusionConsultaController }
 	from '../controllers/consultasController.js';
@@ -12,6 +12,8 @@ import { validateGetConsulta, validateStartConsulta,
 
 const router = Router();
 
+router.get('/consultas',
+	getAllConsultasController);
 router.get('/consultas/:id_consulta',
 	validateGetConsulta, getConsultaController);
 router.put('/consultas/iniciar/:id_agendamiento',

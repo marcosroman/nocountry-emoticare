@@ -39,6 +39,18 @@ export const getHorarios = async (id_medico) => {
   }
 }
 
+export const getAllHorarios = async () => {
+	try {
+    const query = await pool.query(
+			`SELECT * from horarios`
+		);
+		return query.rows;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 // genera lista de objetos de la forma {hora_inicio, hora_fin}
 // input:
 //   hora de inicio de jornada (string, 'hh:mm'), hora fin de jornada (same),

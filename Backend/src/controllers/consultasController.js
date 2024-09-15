@@ -1,4 +1,19 @@
-import { getConsulta, startConsulta, endConsulta, getNotasConsulta, postNotaConsulta } from '../models/consultasModel.js';
+import { getAllConsultas, getConsulta, startConsulta, endConsulta,
+	getNotasConsulta, postNotaConsulta } from '../models/consultasModel.js';
+
+export const getAllConsultasController = async (req, res) => {
+	try {
+		const consultas = await getAllConsultas();
+		
+		if (consultas) {
+			return res.status(400).json(consultas);
+		} else {
+			return res.status(500);
+		}
+	} catch(error) {
+		console.error(error);
+	}
+}
 
 export const getConsultaController = async (req, res) => {
 	const { id_consulta } = req.params;

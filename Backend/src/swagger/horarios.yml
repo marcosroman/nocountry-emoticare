@@ -1,3 +1,6 @@
+tags:
+  - name: horarios
+    description: Horarios habilitados de atencion
 paths:
   /horarios/{id_medico}:
     get:

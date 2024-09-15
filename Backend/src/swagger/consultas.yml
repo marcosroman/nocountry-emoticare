@@ -1,3 +1,10 @@
+tags:
+  - name: consultas
+    description: Registro de consultas
+  - name: notas_consultas
+    description: Notas de medico durante consulta
+  - name: conclusiones_consultas
+    description: Conclusiones de una consulta (para el paciente)
 paths:
   /consultas:
     get:
@@ -61,10 +68,35 @@ paths:
       tags:
         - consultas
         - notas_consultas
+  /consultas/{id_consulta}/notas/conclusion:
+    get:
+      summary: ver conclusion de consulta (notas para el paciente)
+      tags:
+        - consultas
+        - conclusiones_consultas
+  /consultas/{id_consulta}/notas/conclusion/agregar:
+    post:
+      summary: agregar conclusion de consulta (nota para paciente)
+      tags:
+        - consultas
+        - conclusiones_consultas
   /consultas/notas:
     get:
       summary: buscar notas de consultas por medico o paciente ?o rango de fechas
       tags:
         - consultas
         - notas_consultas
+components:
+  schemas:
+    Consultas:
+      type: object
+      properties:
+        id:
+          type: integer
+        id_agendamiento:
+          type: integer
+        fechahora_inicio:
+          type: string
+        fechahora_fin:
+          type: string
 

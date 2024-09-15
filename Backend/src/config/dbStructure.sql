@@ -135,7 +135,8 @@ CREATE TABLE horarios (
 	hora_fin TIME NOT NULL
 );
 
-CREATE TYPE estado_agendamiento AS ENUM ('RESERVADO', 'INICIADO', 'FINALIZADO', 'CANCELADO');
+-- agendamientos: id, id_medico, id_paciente, fechahora_inicio, fechahora_fin, estado, fechahora_creado, fechahora_actualizado
+CREATE TYPE estado_agendamiento AS ENUM ('RESERVADO', 'COMPLETADO', 'CANCELADO');
 CREATE TABLE agendamientos (
 	id SERIAL PRIMARY KEY,
 	id_medico INTEGER REFERENCES medicos(id),
@@ -176,6 +177,15 @@ CREATE TABLE consultas (
 CREATE TABLE notas_consultas (
 	id SERIAL PRIMARY KEY,
 	id_consulta INTEGER REFERENCES consultas(id),
+	nota TEXT NOT NULL,
+	creadaEl VARCHAR(20) NOT NULL,
+	actualizadaEl VARCHAR(20) NOT NULL
+);
+
+-- conclusiones de medico post consulta
+CREATE TABLE conclusiones_consultas (
+	id SERIAL PRIMARY KEY,
+	id_sesion INTEGER REFERENCES sesiones(id),
 	nota TEXT NOT NULL,
 	creadaEl VARCHAR(20) NOT NULL,
 	actualizadaEl VARCHAR(20) NOT NULL

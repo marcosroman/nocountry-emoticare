@@ -9,7 +9,7 @@ import { getAllSpecialtyController } from '../controllers/specialtyController.js
 const router = Router()
 
 router.get('/admin', isAuthenticated, isAdmin,(req,res)=>{
-  res.send('Bienvenido '+ req.user.nombre)
+  res.status(200).send({message: "Autorizado"})
 })
 
 router.get('/admin/doctors', isAuthenticated, isAdmin, getAllDoctorController)

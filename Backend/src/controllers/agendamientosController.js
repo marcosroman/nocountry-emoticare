@@ -1,17 +1,15 @@
-import { getAgendamiento, agendarTurno,
-	getTurnosDisponibles, setAgendamientoState }
+import { getAllAgendamientos, getAgendamiento, agendar,
+	getAgendamientosDisponibles, updateAgendamientoState }
 	from '../models/agendamientosModel.js';
 
-export const getAgendamientoController = async (req, res) => {
-	const { id_agendamiento } = req.body;
-
+export const getAllAgendamientosController = async (req, res) => {
 	try {
-		const agendamiento = await getAgendamiento(id_agendamiento);
+		const agendamientos = await getAllAgendamientos();
 
-		if (agendamiento) {
-			return res.json(agendamiento);
+		if (agendamientos) {
+			return res.json(agendamientos);
 		} else {
-			return res.json({error: "agendamiento no disponible"});
+			return res.json({error: "?"});
 		}
 	} catch (error) {
 		console.error('Error al buscar agendamiento');
@@ -19,11 +17,32 @@ export const getAgendamientoController = async (req, res) => {
 	}
 }
 
-export const getTurnosDisponiblesController = async (req, res) => {
-	const { id_medico, fechahora_inicio, fechahora_fin } = req.body;
+
+export const getAgendamientoController = async (req, res) => {
+	const { id_agendamiento } = req.params;
 
 	try {
-		const turnosDisponibles = await getTurnosDisponibles(id_medico,
+		const agendamiento = await getAgendamiento(id_agendamiento);
+
+		if (agendamiento) {
+			return res.json(agendamiento);
+		} else {
+			return res.json({error: "agendamiento no existe"});
+		}
+	} catch (error) {
+		console.error('Error al buscar agendamiento');
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+
+export const getAgendamientosDisponiblesController = async (req, res) => {
+	const { id_medico }  = req.params;
+	const { fechahora_inicio, fechahora_fin } = req.query;
+
+	console.log({fechahora_inicio,fechahora_fin});
+
+	try {
+		const turnosDisponibles = await getAgendamientosDisponibles(id_medico,
 			fechahora_inicio, fechahora_fin);
 
 		return res.json(turnosDisponibles);
@@ -34,10 +53,12 @@ export const getTurnosDisponiblesController = async (req, res) => {
 }
 
 export const agendarController = async (req, res) => {
-	const { id_medico, id_paciente, fechahora_inicio, fechahora_fin } = req.body;
+	const { id_medico } = req.params;
+	const { id_paciente, fechahora_inicio, fechahora_fin } = req.body;
 
 	try {
-		const turno = await agendarTurno(id_medico, id_paciente, fechahora_inicio, fechahora_fin);
+		const turno = await agendar(id_medico, id_paciente,
+			fechahora_inicio, fechahora_fin);
 
 		if (turno) {
 			return res.json(turno);
@@ -50,11 +71,12 @@ export const agendarController = async (req, res) => {
 	}
 }
 
-export const setAgendamientoStateController = async (req, res) => {
-	const { id_agendamiento, estado } = req.body;
+export const updateAgendamientoStateController = async (req, res) => {
+	const { id_agendamiento } = req.params;
+	const { estado } = req.body;
 
 	try {
-		const agendamiento = await setAgendamientoState(id_agendamiento, estado);
+		const agendamiento = await updateAgendamientoState(id_agendamiento, estado);
 
 		if (agendamiento) {
 			return res.json(agendamiento);
@@ -66,4 +88,3 @@ export const setAgendamientoStateController = async (req, res) => {
 		res.status(500).json({ error: 'Error interno del servidor.' });
 	}
 }
-

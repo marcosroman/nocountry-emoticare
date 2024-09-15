@@ -1,0 +1,126 @@
+tags:
+  - name: agendamientos
+    description: Agendamiento de consultas
+paths:
+  /agendamientos/{id}:
+    get:
+      summary: datos de agendamiento
+      tags:
+        - agendamientos
+      parameters:
+        - in: path
+          name: id
+          description: id de agendamiento
+          schema:
+            type: integer
+          example: 19
+          required: true
+      responses:
+        200:
+          description: datos de agendamiento
+          content:
+            application/json:
+              $ref: '#/components/schemas/Agendamientos'
+        404:
+          description: agendamiento no encontrado
+  /agendamientos/estado/{id}:
+    put:
+      summary: actualizar el estado de un agendamiento
+      tags:
+        - agendamientos
+      parameters:
+        - in: path
+          name: id
+          description: id del agendamiento
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  description: estado del agendamiento
+                  type: string
+                  enum:
+                    - RESERVADO
+                    - COMPLETADO
+                    - CANCELADO
+              required:
+                - estado
+  /agendamientos/agendar/{id_medico}:
+    post:
+      summary: agendar consulta con un medico
+      tags:
+        - agendamientos
+      parameters:
+        - in: path
+          name: id_medico
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application-json:
+            schema:
+              type: object
+              properties:
+                id_paciente:
+                  type: integer
+                fechahora_inicio:
+                  type: string
+                fechahora_fin:
+                  type: string
+              required:
+                - id_paciente
+                - fechahora_inicio
+                - fechahora_fin
+  /agendamientos/disponibles/{id_medico}:
+    get:
+      summary: horarios de consulta disponibles
+      tags:
+        - agendamientos
+      parameters:
+        - in: path
+          name: id_medico
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: fechahora_inicio
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: fechahora_fin
+          schema:
+            type: string
+          required: true
+components:
+  schemas:
+    Agendamientos:
+      type: object
+      properties:
+        id:
+          type: integer
+        id_medico:
+          type: integer
+        id_paciente:
+          type: integer
+        fechahora_inicio:
+          type: string
+        fechahora_fin:
+          type: string
+        estado:
+          type: string
+          enum:
+            - RESERVADO
+            - COMPLETADO
+            - CANCELADO
+        creadaEl:
+          type: string
+        actualizadaEl:
+          type: string

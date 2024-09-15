@@ -2,7 +2,6 @@ import "./Navbar.css";
 
 import LoginIcon from "../../icons/LogIn";
 import { NavLink } from "react-router-dom";
-import About_icon from "../../icons/About_us";
 import MenuIcon from "../../icons/Menu";
 import ProfileIcon from "../../icons/Profile";
 import { useEffect, useState } from "react";
@@ -27,7 +26,7 @@ function Navbar() {
             />
             <div className="logo_announce">
               <span className="text-sm md:text-base font-bold tracking-widest">
-                EmotiHealth
+                EmotiCare
               </span>
               <span className="sub_text">Telemedicina</span>
             </div>
@@ -44,20 +43,6 @@ function Navbar() {
           }
         >
           <div className="flex flex-col gap-2 md:hidden lg:flex lg:flex-row lg:justify-end">
-            <NavLink
-              to="/"
-              className="flex rounded-full px-4 py-2 items-center gap-2 cursor-pointer text-black hover:text-blue-600"
-            >
-              <About_icon className="size-7"></About_icon>
-              <span className="text-lg md:text-xl">About us</span>
-            </NavLink>
-            <NavLink
-              to="/"
-              className="flex rounded-full px-4 py-2 items-center gap-2 cursor-pointer text-black hover:text-blue-600"
-            >
-              <About_icon className="size-7"></About_icon>
-              <span className="text-lg md:text-xl">Specialties</span>
-            </NavLink>
           </div>
           <section className="flex flex-col gap-2 md:flex-row lg:justify-end">
             <NavLink
@@ -71,7 +56,7 @@ function Navbar() {
               to="/register"
               className="flex rounded-full px-4 py-2 items-center gap-2 cursor-pointer text-white bg-blue-600 hover:bg-blue-700"
             >
-              <ProfileIcon className="size-7" fill="white"></ProfileIcon>
+              <ProfileIcon className="size-7"></ProfileIcon>
               <span className="text-lg md:text-xl"> Registrarse </span>
             </NavLink>
           </section>

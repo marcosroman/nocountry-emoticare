@@ -65,7 +65,7 @@ function Sidebar() {
           title="Ver Perfil"
           Icon={ProfileIcon}
           state={isExpanded}
-          path="./"
+          path="./ver-perfil"
         />
         <SidebarNavItem
           title="Cerrar Sesión"

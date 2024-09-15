@@ -27,23 +27,35 @@ function RegisterForm({ rol }: Props) {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
-    values.rol = rol;
-    const result = await registerUser(values);
-    if (result.message) {
-      toast.success(result.message, { position: "bottom-right" });
-      navigate("/login");
-    }
-    if (result.error) {
-      toast.error(result.error, { position: "bottom-right" });
+    try {
+      values.rol = rol;
+      const result = await registerUser(values);
+      if (result.message) {
+        toast.success(result.message, { position: "bottom-right" });
+        if (rol === "paciente") {
+          navigate("/login");
+        }
+      }
+      if (result.error) {
+        toast.error(result.error, { position: "bottom-right" });
+      }
+    } catch (error) {
+      if (error) {
+        toast.error("Ha ocurrido un error al conectarse con el servidor", {
+          position: "bottom-right",
+        });
+      }
     }
   });
   return (
     <form
-      className="shadow-lg grid md:grid-cols-2 max-w-5xl"
+      className="grid md:grid-cols-2 max-w-5xl shadow-focused rounded-lg"
       onSubmit={onSubmit}
     >
-      <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none p-10 gap-10">
-        <h2 className="text-xl font-semibold text-black">Información General</h2>
+      <section className="flex flex-col bg-white rounded-t-lg md:rounded-s-lg md:rounded-e-none py-10 p-5 md:p-10 gap-10">
+        <h2 className="text-xl font-semibold text-black">
+          Información General
+        </h2>
         <div className="grid gap-10 md:grid-cols-2">
           <TextInput
             name="nombre"
@@ -106,8 +118,36 @@ function RegisterForm({ rol }: Props) {
         />
       </section>
 
-      <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none p-10 gap-10">
-        <h2 className="text-xl font-semibold text-white">Información de Contacto</h2>
+      <section className="flex flex-col bg-blue-700 rounded-b-lg md:rounded-e-lg md:rounded-s-none py-10 p-5 md:p-10 gap-10">
+        <h2 className="text-xl font-semibold text-white">
+          Información de Contacto
+        </h2>
+
+        {rol === "medico" && (
+          <SelectInput
+            name="especialidad_id"
+            placeholder="Especialidad"
+            options={[
+              { name: "Psicología", value: 1 },
+              { name: "Psiquiatría", value: 2 },
+            ]}
+            register={register}
+            errors={errors}
+            error_color="yellow"
+            classes="text-white placeholder:text-white bg-transparent"
+          />
+        )}
+
+        {rol === "medico" && (
+          <NumberInput
+            name="numero_registro"
+            placeholder="Nro de Registro Médico"
+            register={register}
+            errors={errors}
+            error_color="yellow"
+            classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
+          />
+        )}
 
         <TextInput
           name="nacionalidad"
@@ -149,14 +189,16 @@ function RegisterForm({ rol }: Props) {
           classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
         />
 
-        <TextInput
-          name="direccion"
-          placeholder="Dirección"
-          register={register}
-          errors={errors}
-          error_color="yellow"
-          classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
-        />
+        {rol === "paciente" && (
+          <TextInput
+            name="direccion"
+            placeholder="Dirección"
+            register={register}
+            errors={errors}
+            error_color="yellow"
+            classes="text-white placeholder:text-white placeholder:text-opacity-40 focus:border-gray-300 autofill:input-dark-background"
+          />
+        )}
 
         <FullButton title="Confirmar Registro" color="white" type="submit" />
       </section>

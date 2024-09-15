@@ -1,0 +1,119 @@
+tags:
+  - name: horarios
+    description: Horarios habilitados de atencion
+paths:
+  /horarios/{id_medico}:
+    get:
+      summary: Obtener horarios habilitados de atencion para un medico
+      tags:
+        - horarios
+      parameters:
+        - in: path
+          name: id_medico
+          description: id del medico
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: horarios habilitados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Horarios'
+  /horarios/actualizar/{id_medico}:
+    put:
+      summary: Update horarios habilitados|disponibles por medico
+      tags:
+        - horarios
+      parameters:
+        - in: path
+          name: id_medico
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                dias_disponibles:
+                  description: array de dias de la semana disponibles para el medico (0=domingo, 1=lunes, ...)
+                  type: array
+                  items:
+                    type: integer
+                    minimum: 0
+                    maximum: 6
+                    uniqueItems: true
+                horario_inicio_jornada:
+                  description: hora de inicio de jornada del medico (hh:mm)
+                  type: string
+                  format: time
+                  pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+                horario_fin_jornada:
+                  description: hora de fin de jornada del medico (hh:mm)
+                  type: string
+                  format: time
+                  pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+                minutos_sesion:
+                  description: duracion de una sesion
+                  type: integer
+                  minimum: 0
+                minutos_descanso:
+                  description: duracion de descanso entre turnos
+                  type: integer
+                  minimum: 0
+              required:
+                - dias_disponibles
+                - horario_inicio_jornada
+                - horario_fin_jornada
+                - minutos_sesion
+                - minutos_descanso
+            example:
+              dias_disponibles: [1,2,3,4]
+              horario_inicio_jornada: "09:00"
+              horario_fin_jornada: "17:00"
+              minutos_sesion: 45
+              minutos_descanso: 15
+      responses:
+        200:
+          description: horarios habilitados
+          content:
+            application/json:
+              $ref: '#/components/schemas/Horarios'
+        404:
+          description: medico no existe
+          content:
+            application/json:
+              schema:
+                horarios_disponibles:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id_medico:
+                        type: integer
+components:
+  schemas:
+    Horarios:
+      type: object
+      properties:
+        id_medico:
+          type: integer
+        dia_semana:
+          type: integer
+        horario_inicio:
+          type: string
+          format: time
+        horario_fin:
+          type: string
+          format: time
+      example:
+        id_medico: 19
+        dia_semana: 3
+        hora_inicio: '10:00'
+        hora_fin: '10:50'

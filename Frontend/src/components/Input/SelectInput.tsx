@@ -3,7 +3,7 @@ import InputError from "../Message/InputError";
 
 type Props = {
   name: string;
-  options: { name: string; value: string }[];
+  options: { name: string; value: string | number }[];
   placeholder: string;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<FieldValues>;
@@ -34,7 +34,7 @@ function SelectInput({
             message: "Este campo es obligatorio",
           },
           validate: (value) => {
-            if (options.some((option) => option.value === value)) {
+            if (options.some((option) => option.value == value)) {
               return true;
             } else {
               return "Seleccione una de las opciones disponibles";

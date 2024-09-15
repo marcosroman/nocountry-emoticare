@@ -16,7 +16,7 @@ function AdminNav({ state }: Props) {
         state={state}
         path="./lista-de-medicos"
       />
-      <SidebarNavItem title="Agregar Médico" Icon={UserPlusIcon} state={state} path="./agregar-medico" />
+      <SidebarNavItem title="Registrar Médico" Icon={UserPlusIcon} state={state} path="./registrar-medico" />
       <SidebarNavItem
         title="Todas las Citas"
         Icon={CalendarMonthIcon}

@@ -13,6 +13,8 @@ import TestimonialSection from "./components/Section/TestimonialsSection";
 import FeatureSection from "./components/Section/FeatureSection";
 import AuthDoctorPages from "./pages/AuthDoctorPages";
 import AuthAdminPages from "./pages/AuthAdminPages";
+import AddDoctorSection from "./components/Section/AddDoctorSection";
+import AllConsultsSection from "./components/Section/AllConsultsSection";
 
 function App() {
   return (
@@ -50,8 +52,8 @@ function App() {
           <Route element={<AuthAdminPages />}>
             <Route path="admin/*" element={<HomePage />}>
               <Route path="lista-de-medicos" element={<WhyUsSection />} />
-              <Route path="agregar-medico" element={<TestimonialSection />} />
-              <Route path="todas-las-citas" element={<FeatureSection />} />
+              <Route path="registrar-medico" element={<AddDoctorSection />} />
+              <Route path="todas-las-citas" element={<AllConsultsSection />} />
               <Route path="ver-perfil" element={<FeatureSection />} />
               <Route path="*" element={<Navigate to="lista-de-medicos" />} />
             </Route>
@@ -82,8 +84,8 @@ function App() {
 
           <Route path="/prueba-admin/*" element={<HomePage />}>
             <Route path="listado-de-medicos" element={<WhyUsSection />} />
-            <Route path="crear-un-medico" element={<TestimonialSection />} />
-            <Route path="lista-de-reservas" element={<FeatureSection />} />
+            <Route path="registrar-medico" element={<AddDoctorSection />} />
+            <Route path="todas-las-citas" element={<AllConsultsSection />} />
             <Route path="ver-perfil" element={<FeatureSection />} />
             <Route path="" element={<Navigate to="listado-de-medicos" />} />
           </Route>

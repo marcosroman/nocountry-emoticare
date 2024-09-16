@@ -4,7 +4,12 @@ import { getHorarios } from './horariosModel.js';
 export const getAllAgendamientos = async () => {
 	try {
 		const res = await pool.query(
-			`SELECT * FROM agendamientos;`
+			`SELECT *, 
+			fechahora_inicio::date fecha_inicio,
+			fechahora_inicio::time hora_inicio,
+			fechahora_fin::date fecha_fin,
+			fechahora_fin::time hora_fin,
+			FROM agendamientos;`
 		);
 
 		return res.rows;
@@ -17,7 +22,12 @@ export const getAllAgendamientos = async () => {
 export const getAgendamiento = async (id_agendamiento) => {
 	try {
 		const res = await pool.query(
-			`SELECT * FROM agendamientos WHERE id=$1`,
+			`SELECT *,
+			fechahora_inicio::date fecha_inicio,
+			fechahora_inicio::time hora_inicio,
+			fechahora_fin::date fecha_fin,
+			fechahora_fin::time hora_fin,
+			FROM agendamientos WHERE id=$1`,
 			[id_agendamiento]
 		);
 		return res.rows[0];
@@ -49,7 +59,7 @@ export const agendar = async (id_medico, id_paciente,
 			fechahora_inicio, fechahora_fin);
 
 		if (isDisponible) {
-			const query = await pool.query(
+			const res = await pool.query(
 				`INSERT INTO agendamientos (id_medico, id_paciente,
 					fechahora_inicio, fechahora_fin, estado, creadaEl, actualizadaEl)
 					VALUES ($1, $2, $3, $4, 'RESERVADO',
@@ -57,8 +67,9 @@ export const agendar = async (id_medico, id_paciente,
 					RETURNING *`,
 				[id_medico, id_paciente, fechahora_inicio, fechahora_fin]
 			);
+			const agendamiento = res.rows[0];
 
-			return query.rows[0];
+			return {};
 		} else {
 			return [];
 		}
@@ -135,7 +146,6 @@ export const getAgendamientosDisponibles = async (id_medico,
 		);
 		const horariosHabilitados = res2.rows;
 
-		console.log({horariosHabilitados});
 		// listo las fechas en el rango dado junto con dia de la semana
 		let fechas = generateDateRange(fechahora_inicio, fechahora_fin);
 
@@ -163,8 +173,6 @@ export const getAgendamientosDisponibles = async (id_medico,
 						!((hnd.fechahora_fin < ha.fechahora_inicio)
 							|| (ha.fechahora_fin < hnd.fechahora_inicio)))
 					.length === 0);
-
-		console.log({horariosDisponibles});
 
 		return horariosDisponibles;
 	} catch(error) {

@@ -1,13 +1,17 @@
 import { Router } from 'express'
-import { getAgendamientoController, getAgendamientosDisponiblesController,
-	agendarController, updateAgendamientoStateController }
+import { getAllAgendamientosController, getAgendamientoController,
+	getAgendamientosDisponiblesController, agendarController,
+	updateAgendamientoStateController }
 	from '../controllers/agendamientosController.js';
-import { validateGetAgendamiento, validateGetAgendamientosDisponibles,
-	validateAgendar, validateUpdateAgendamientoState}
+import { validateGetAgendamiento,
+	validateGetAgendamientosDisponibles, validateAgendar,
+	validateUpdateAgendamientoState}
 	from '../middlewares/agendamientosMiddleware.js';
 
 const router = Router()
 
+router.get('/agendamientos',
+	getAllAgendamientosController);
 router.get('/agendamientos/:id_agendamiento',
 	validateGetAgendamiento, getAgendamientoController);
 router.put('/agendamientos/estado/:id_agendamiento',

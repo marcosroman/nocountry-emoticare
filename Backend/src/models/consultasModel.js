@@ -1,6 +1,19 @@
 import pool from '../config/config.js';
 import { updateAgendamientoState } from './agendamientosModel.js';
 
+export const getAllConsultas = async () => {
+	try {
+		const res = await pool.query(
+			`SELECT * from consultas`
+		);
+		
+		return res.rows;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+
 // crear|iniciar consulta (con id_agendamiento, fechahora_inicio), cambia estado del agendamiento (turno) a INICIADO
 export const startConsulta = async (id_agendamiento) => {
 	try {

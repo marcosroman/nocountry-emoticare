@@ -1,6 +1,22 @@
-import { getAgendamiento, agendar,
+import { getAllAgendamientos, getAgendamiento, agendar,
 	getAgendamientosDisponibles, updateAgendamientoState }
 	from '../models/agendamientosModel.js';
+
+export const getAllAgendamientosController = async (req, res) => {
+	try {
+		const agendamientos = await getAllAgendamientos();
+
+		if (agendamientos) {
+			return res.json(agendamientos);
+		} else {
+			return res.json({error: "?"});
+		}
+	} catch (error) {
+		console.error('Error al buscar agendamiento');
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+
 
 export const getAgendamientoController = async (req, res) => {
 	const { id_agendamiento } = req.params;

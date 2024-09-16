@@ -82,3 +82,14 @@ export const authAdmin = async () => {
     }
   }
 };
+
+export const getConsult = async () => {
+  try {
+    const response = await frontend.get(`/agendamientos`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};

@@ -5,9 +5,9 @@ import HappyChatboxIcon from "../../icons/HappyChatbox";
 
 const Hero = () => {
   return (
-    <section className="bg-[url('./bg-tele.jpg')] bg-cover flex">
+    <section className="bg-[url('/images/bg-tele.jpg')] bg-cover flex">
       <div className="flex w-full xl:justify-center">
-        <figure className="flex-1 max-w-screen-md flex items-center justify-center">
+        <figure className="max-w-screen-md flex items-center justify-center">
           <img
             src={mental}
             alt="Doctor"

@@ -1,10 +1,15 @@
 import { Router } from 'express'
 import { getAllAgendamientosController, getAgendamientoController,
-	getAgendamientosDisponiblesController, agendarController,
+	getAgendamientosDisponiblesController,
+	getAgendamientosDisponiblesPorEspecialidadController,
+	getAllAgendamientosDisponiblesController,
+	agendarController,
 	updateAgendamientoStateController }
 	from '../controllers/agendamientosController.js';
 import { validateGetAgendamiento,
 	validateGetAgendamientosDisponibles, validateAgendar,
+	validateGetAgendamientosDisponiblesPorEspecialidad,
+	validateGetAllAgendamientosDisponibles,
 	validateUpdateAgendamientoState}
 	from '../middlewares/agendamientosMiddleware.js';
 
@@ -18,7 +23,13 @@ router.put('/agendamientos/estado/:id_agendamiento',
 	validateUpdateAgendamientoState, updateAgendamientoStateController);
 router.post('/agendamientos/agendar/:id_medico',
 	validateAgendar, agendarController);
-router.get('/agendamientos/disponibles/:id_medico',
+router.get('/agendamientos/disponibles/todos',
+	validateGetAllAgendamientosDisponibles,
+	getAllAgendamientosDisponiblesController);
+router.get('/agendamientos/disponibles/medico/:id_medico',
 	validateGetAgendamientosDisponibles, getAgendamientosDisponiblesController);
+router.get('/agendamientos/disponibles/especialidad/:id_especialidad',
+	validateGetAgendamientosDisponiblesPorEspecialidad,
+	getAgendamientosDisponiblesPorEspecialidadController);
 
 export default router

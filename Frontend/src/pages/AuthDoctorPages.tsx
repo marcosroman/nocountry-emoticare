@@ -6,7 +6,7 @@ import Loading from "../components/Loading/Loading";
 
 function AuthDoctorPages() {
   const [doctorValidation, setDoctorValidation] = useState<JSX.Element>(
-    <main className="min-h-screen">
+    <main className="min-h-screen flex">
       <Loading />
     </main>
   );

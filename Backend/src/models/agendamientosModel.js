@@ -334,4 +334,16 @@ export const getAllAgendamientosDisponibles = async (fechahora_inicio, fechahora
 	}
 }
 
+export const setUrlVideollamada = async (id_agendamiento, urlVideollamada) {
+	try {
+		const res = await pool.query(
+			`UPDATE agendamientos SET url_videollamada=$2 WHERE id_agendamiento=$1 RETURNING *`,
+			[id_agendamiento, urlVideollamada]
+		);
+
+		return res.rows[0];
+	} catch(error) {
+		console.error(error);
+	}
+}
 

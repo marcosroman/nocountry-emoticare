@@ -144,6 +144,7 @@ CREATE TABLE agendamientos (
 	fechahora_inicio TIMESTAMP NOT NULL,
 	fechahora_fin TIMESTAMP NOT NULL,
 	estado estado_agendamiento NOT NULL,
+	url_videollamada VARCHAR(50),
 	creadaEl VARCHAR(20) NOT NULL,
 	actualizadaEl VARCHAR(20) NOT NULL
 );

@@ -4,7 +4,8 @@ import { getAllAgendamientosController, getAgendamientoController,
 	getAgendamientosDisponiblesPorEspecialidadController,
 	getAllAgendamientosDisponiblesController,
 	agendarController,
-	updateAgendamientoStateController }
+	updateAgendamientoStateController, 
+	getAgendamientosPacienteController}
 	from '../controllers/agendamientosController.js';
 import { validateGetAgendamiento,
 	validateGetAgendamientosDisponibles, validateAgendar,
@@ -19,6 +20,7 @@ router.get('/agendamientos',
 	getAllAgendamientosController);
 router.get('/agendamientos/:id_agendamiento',
 	validateGetAgendamiento, getAgendamientoController);
+router.get('/agendamientos/paciente/:id_paciente', getAgendamientosPacienteController)
 router.put('/agendamientos/estado/:id_agendamiento',
 	validateUpdateAgendamientoState, updateAgendamientoStateController);
 router.post('/agendamientos/agendar/:id_medico',

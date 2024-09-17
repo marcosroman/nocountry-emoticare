@@ -16,9 +16,10 @@ import DailyAppointments from "./components/Section/Dashboard-Dr.tsx/DailyAppoin
 import ScheduleAppointments from "./components/Section/Dashboard-Dr.tsx/ScheduleAppointment";
 import AuthDoctorPages from "./pages/AuthDoctorPages";
 import AuthAdminPages from "./pages/AuthAdminPages";
-import AddDoctorSection from "./components/Section/AddDoctorSection";
-import AllConsultsSection from "./components/Section/AllConsultsSection";
-import AllDoctorsSection from "./components/Section/AllDoctorsSection";
+import AddDoctorSection from "./components/Section/Admin/AddDoctorSection";
+import AllConsultsSection from "./components/Section/Admin/AllConsultsSection";
+import AllDoctorsSection from "./components/Section/Admin/AllDoctorsSection";
+import MyConsultSection from "./components/Section/Patient/MyConsultsSection";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
 
           <Route element={<AuthPatientPages />}>
             <Route path="paciente/*" element={<HomePage />}>
-              <Route path="mis-citas" element={<WhyUsSection />} />
+              <Route path="mis-citas" element={<MyConsultSection />} />
               <Route path="agendar-cita" element={<TestimonialSection />} />
               <Route path="mis-resultados" element={<FeatureSection />} />
               <Route path="ver-perfil" element={<FeatureSection />} />

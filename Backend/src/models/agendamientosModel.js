@@ -18,7 +18,8 @@ export const getAgendamiento = async (id_agendamiento) => {
 	try {
 		const res = await pool.query(
 			`SELECT *
-			FROM agendamientos_view WHERE id=$1`,
+			FROM agendamientos_view
+			WHERE id=$1`,
 			[id_agendamiento]
 		);
 		return res.rows[0];
@@ -26,6 +27,21 @@ export const getAgendamiento = async (id_agendamiento) => {
 		console.log(error);
 	}
 }
+
+export const getAllAgendamientosPaciente = async (id_paciente) => {
+	try {
+		const res = await pool.query(
+			`SELECT *
+			FROM agendamientos_view
+			WHERE id_paciente=$1`,
+			[id_paciente]
+		);
+		return res.rows;
+	} catch(error) {
+		console.log(error);
+	}
+}
+
 
 // cambiar estado de un agendamiento
 export const updateAgendamientoState = async (id_agendamiento, estado) => {

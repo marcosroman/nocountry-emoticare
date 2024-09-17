@@ -1,5 +1,7 @@
-import { getAllAgendamientos, getAllAgendamientosPaciente, getAgendamiento, agendar,
-	getAgendamientosDisponibles, updateAgendamientoState }
+import { getAllAgendamientos, getAllAgendamientosPaciente,
+	getAgendamiento, agendar, getAllAgendamientosDisponibles,
+	getAgendamientosDisponibles, getAgendamientosDisponiblesPorEspecialidad,
+	updateAgendamientoState }
 	from '../models/agendamientosModel.js';
 
 export const getAllAgendamientosController = async (req, res) => {
@@ -48,15 +50,42 @@ export const getAgendamientosDisponiblesController = async (req, res) => {
 	const { id_medico }  = req.params;
 	const { fechahora_inicio, fechahora_fin } = req.query;
 
-	console.log({fechahora_inicio,fechahora_fin});
-
 	try {
-		const turnosDisponibles = await getAgendamientosDisponibles(id_medico,
+		const agendamientosDisponibles = await getAgendamientosDisponibles(id_medico,
 			fechahora_inicio, fechahora_fin);
 
-		return res.json(turnosDisponibles);
+		return res.json(agendamientosDisponibles);
 	} catch(error) {
-		console.log('Error al buscar turnos disponibles');
+		console.log('Error al buscar agendamientos disponibles');
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+
+export const getAllAgendamientosDisponiblesController = async (req, res) => {
+	const { fechahora_inicio, fechahora_fin } = req.query;
+
+	console.log('get all disponibles');
+	try {
+		const agendamientosDisponibles = await getAllAgendamientosDisponibles(
+			fechahora_inicio, fechahora_fin);
+
+		return res.json(agendamientosDisponibles);
+	} catch(error) {
+		console.log('Error al buscar agendamientos disponibles');
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+
+export const getAgendamientosDisponiblesPorEspecialidadController = async (req, res) => {
+	const { id_especialidad } = req.params;
+	const { fechahora_inicio, fechahora_fin } = req.query;
+
+	try {
+		const agendamientosDisponibles = await getAgendamientosDisponiblesPorEspecialidad(id_especialidad, fechahora_inicio, fechahora_fin);
+
+		return res.json(agendamientosDisponibles);
+	} catch(error) {
+		console.log('Error al buscar agendamientos disponibles');
 		res.status(500).json({ error: 'Error interno del servidor.' });
 	}
 }

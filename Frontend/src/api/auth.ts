@@ -83,7 +83,7 @@ export const authAdmin = async () => {
   }
 };
 
-export const getConsult = async () => {
+export const getAllConsult = async () => {
   try {
     const response = await frontend.get(`/agendamientos`);
     return response;

@@ -32,6 +32,7 @@ function RegisterForm({ rol }: Props) {
   const onSubmit = handleSubmit(async (values) => {
     try {
       values.rol = rol;
+      values.fecha_nacimiento = values.fecha_nacimiento.split("-").reverse().join("-")
       setIsLoading(<ButtonLoading/>)
       const result = await registerUser(values);
       if (result.message) {

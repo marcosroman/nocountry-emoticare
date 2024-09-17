@@ -2,13 +2,13 @@ import CalendarMonthIcon from "../../icons/CalendarMonth";
 import HospitalIcon from "../../icons/Hospital";
 import ProfileIcon from "../../icons/Profile";
 import TimeIcon from "../../icons/Time";
-import { Consult } from "../Section/Admin/AllConsultsSection";
+import { Consult } from "../Section/Patient/MyConsultsSection";
 
 type Props = {
   consult: Consult;
 };
 
-function ConsultCard({ consult }: Props) {
+function MyConsultCard({ consult }: Props) {
   const statusClasses = {
     CANCELADO:
       "p-2 rounded-full text-sm max-w-fit justify-self-end bg-red-300 text-red-900 lowercase first-letter:uppercase",
@@ -19,8 +19,6 @@ function ConsultCard({ consult }: Props) {
     INICIADO:
       "p-2 rounded-full text-sm max-w-fit justify-self-end bg-yellow-300 text-yellow-900 lowercase first-letter:uppercase",
   };
-  consult.paciente = consult.nombre_paciente + " " + consult.apellido_paciente
-  consult.medico = consult.nombre_medico + " " + consult.apellido_medico
 
   return (
     <li className="p-4 mx-auto w-full bg-white shadow-lg flex flex-col rounded-xl gap-2 max-w-80 border-2 hover:border-black transition-all duration-300 select-none">
@@ -35,7 +33,7 @@ function ConsultCard({ consult }: Props) {
         <HospitalIcon className="text-blue-600" /> {consult.medico}
       </span>
       <span className="flex gap-2">
-        <ProfileIcon className="text-blue-600" /> {consult.paciente}
+        <ProfileIcon className="text-blue-600" /> Psicología
       </span>
       <span className="flex gap-2">
         <TimeIcon className="text-blue-600" />
@@ -46,4 +44,4 @@ function ConsultCard({ consult }: Props) {
   );
 }
 
-export default ConsultCard;
+export default MyConsultCard;

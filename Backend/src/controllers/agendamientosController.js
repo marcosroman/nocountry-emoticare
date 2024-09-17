@@ -29,6 +29,24 @@ export const getAllAgendamientosController = async (req, res) => {
 	}
 }
 
+export const getAgendamientosPacienteController = async (req, res) => {
+	const { id_paciente } = req.params;
+
+	try {
+		const agendamientos = await getAllAgendamientosPaciente(id_paciente);
+
+		if (agendamientos) {
+			return res.json(agendamientos);
+		} else {
+			return res.json({error: "?"});
+		}
+	} catch (error) {
+		console.error(error);
+		console.error('Error al buscar agendamiento');
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+
 export const getAgendamientoController = async (req, res) => {
 	const { id_agendamiento } = req.params;
 

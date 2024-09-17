@@ -33,7 +33,7 @@ export const getAllAgendamientosPaciente = async (id_paciente) => {
 		const res = await pool.query(
 			`SELECT *
 			FROM agendamientos_view
-			WHERE id_paciente=$1`,
+			WHERE uid_paciente=$1`,
 			[id_paciente]
 		);
 		return res.rows;

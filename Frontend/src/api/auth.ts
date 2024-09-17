@@ -94,6 +94,17 @@ export const getAllConsult = async () => {
   }
 };
 
+export const getConsult = async (nro_documento: number = 0) => {
+  try {
+    const response = await frontend.get(`/agendamientos/paciente/${nro_documento}`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};
+
 export const getAllDoctors = async () => {
   try {
     const response = await frontend.get(`/admin/doctors`);

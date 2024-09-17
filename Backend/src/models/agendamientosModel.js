@@ -4,12 +4,7 @@ import { getHorarios } from './horariosModel.js';
 export const getAllAgendamientos = async () => {
 	try {
 		const res = await pool.query(
-			`SELECT *, 
-			fechahora_inicio::date fecha_inicio,
-			fechahora_inicio::time hora_inicio,
-			fechahora_fin::date fecha_fin,
-			fechahora_fin::time hora_fin,
-			FROM agendamientos;`
+			`SELECT * FROM agendamientos_view;`
 		);
 
 		return res.rows;
@@ -22,12 +17,8 @@ export const getAllAgendamientos = async () => {
 export const getAgendamiento = async (id_agendamiento) => {
 	try {
 		const res = await pool.query(
-			`SELECT *,
-			fechahora_inicio::date fecha_inicio,
-			fechahora_inicio::time hora_inicio,
-			fechahora_fin::date fecha_fin,
-			fechahora_fin::time hora_fin,
-			FROM agendamientos WHERE id=$1`,
+			`SELECT *
+			FROM agendamientos_view WHERE id=$1`,
 			[id_agendamiento]
 		);
 		return res.rows[0];

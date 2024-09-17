@@ -49,7 +49,7 @@ function DoctorConsultSection() {
           filter as
             | "fechahora_inicio"
             | "fechahora_fin"
-            | "medico"
+            | "paciente"
             | "estado"
         ].includes(search)
       )
@@ -66,7 +66,7 @@ function DoctorConsultSection() {
         filter as
           | "fechahora_inicio"
           | "fechahora_fin"
-          | "medico"
+          | "paciente"
           | "estado"
       ]?.includes(search)
     );

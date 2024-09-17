@@ -27,9 +27,12 @@ export const getConsultaController = async (req, res) => {
 
 export const startConsultaController = async (req, res) => {
 	const { id_agendamiento } = req.params;
+	const { urlVideollamada } = req.body;
 	
 	try {
 		const consulta = await startConsulta(id_agendamiento);
+		const agendamiento = await setUrlVideollamada(
+			id_agendamiento, urlVideollamada);
 		
 		if (consulta) {
 			return res.status(200).json(consulta);

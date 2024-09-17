@@ -17,14 +17,10 @@ export const getAllAgendamientosController = async (req, res) => {
 		else 
 			agendamientos = await getAllAgendamientos();
 
-		if (agendamientos) {
-			return res.json(agendamientos);
-		} else {
-			return res.json({error: "?"});
-		}
+		return res.status(200).json(agendamientos);
 	} catch (error) {
-		console.error(error);
 		console.error('Error al buscar agendamiento');
+		console.error(error);
 		res.status(500).json({ error: 'Error interno del servidor.' });
 	}
 }
@@ -36,12 +32,13 @@ export const getAgendamientoController = async (req, res) => {
 		const agendamiento = await getAgendamiento(id_agendamiento);
 
 		if (agendamiento) {
-			return res.json(agendamiento);
+			return res.status(200).json(agendamiento);
 		} else {
-			return res.json({error: "agendamiento no existe"});
+			return res.status(404).json({error: "agendamiento no existe"});
 		}
 	} catch (error) {
 		console.error('Error al buscar agendamiento');
+		console.error(error);
 		res.status(500).json({ error: 'Error interno del servidor.' });
 	}
 }
@@ -54,7 +51,7 @@ export const getAgendamientosDisponiblesController = async (req, res) => {
 		const agendamientosDisponibles = await getAgendamientosDisponibles(id_medico,
 			fechahora_inicio, fechahora_fin);
 
-		return res.json(agendamientosDisponibles);
+		return res.status(200).json(agendamientosDisponibles);
 	} catch(error) {
 		console.log('Error al buscar agendamientos disponibles');
 		res.status(500).json({ error: 'Error interno del servidor.' });
@@ -64,12 +61,11 @@ export const getAgendamientosDisponiblesController = async (req, res) => {
 export const getAllAgendamientosDisponiblesController = async (req, res) => {
 	const { fechahora_inicio, fechahora_fin } = req.query;
 
-	console.log('get all disponibles');
 	try {
 		const agendamientosDisponibles = await getAllAgendamientosDisponibles(
 			fechahora_inicio, fechahora_fin);
 
-		return res.json(agendamientosDisponibles);
+		return res.status(200).json(agendamientosDisponibles);
 	} catch(error) {
 		console.log('Error al buscar agendamientos disponibles');
 		res.status(500).json({ error: 'Error interno del servidor.' });
@@ -83,7 +79,7 @@ export const getAgendamientosDisponiblesPorEspecialidadController = async (req, 
 	try {
 		const agendamientosDisponibles = await getAgendamientosDisponiblesPorEspecialidad(id_especialidad, fechahora_inicio, fechahora_fin);
 
-		return res.json(agendamientosDisponibles);
+		return res.status(200).json(agendamientosDisponibles);
 	} catch(error) {
 		console.log('Error al buscar agendamientos disponibles');
 		res.status(500).json({ error: 'Error interno del servidor.' });
@@ -99,7 +95,7 @@ export const agendarController = async (req, res) => {
 			fechahora_inicio, fechahora_fin);
 
 		if (turno) {
-			return res.json(turno);
+			return res.status(201).json(turno);
 		} else {
 			return res.json({error: 'no se puede agendar el turno'});
 		}
@@ -117,9 +113,9 @@ export const updateAgendamientoStateController = async (req, res) => {
 		const agendamiento = await updateAgendamientoState(id_agendamiento, estado);
 
 		if (agendamiento) {
-			return res.json(agendamiento);
+			return res.status(200).json(agendamiento);
 		} else {
-			return res.json({error: 'no se pudo cambiar el estado'});
+			return res.status(400).json({error: 'no se pudo cambiar el estado'});
 		}
 	} catch(error) {
 		console.log('Error al cambiar estado de agendamiento');

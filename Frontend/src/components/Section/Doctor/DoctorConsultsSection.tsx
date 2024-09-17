@@ -1,23 +1,22 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import SearchIcon from "../../../icons/Search";
-import { getConsult } from "../../../api/auth";
+import { getDoctorConsult } from "../../../api/auth";
 import Loading from "../../Loading/Loading";
-import MyConsultCard from "../../Card/MyConsultCard";
 import { UserContext } from "../../../context/UserContext";
+import DoctorConsultCard from "../../Card/DoctorConsultCard";
 
 export type Consult = {
   fechahora_inicio: string;
   fechahora_fin: string;
   fecha_inicio: string;
   fecha_fin: string;
-  medico: string;
-  nombre_medico: string;
-  apellido_medico: string;
-  nombre_esp_medico: string;
+  paciente: string;
+  nombre_paciente: string;
+  apellido_paciente: string;
   estado: "RESERVADO" | "FINALIZADO" | "CANCELADO" | "INICIADO";
 };
 
-function MyConsultSection() {
+function DoctorConsultSection() {
   const [consults, setConsults] = useState<Consult[] | []>([]);
   const [isLoading, setIsLoading] = useState(true)
   const { userState } = useContext(UserContext);
@@ -25,7 +24,7 @@ function MyConsultSection() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await getConsult(user?.nro_documento);
+      const response = await getDoctorConsult(user?.nro_documento);
       return response;
     };
 
@@ -50,7 +49,7 @@ function MyConsultSection() {
           filter as
             | "fechahora_inicio"
             | "fechahora_fin"
-            | "medico"
+            | "paciente"
             | "estado"
         ].includes(search)
       )
@@ -67,7 +66,7 @@ function MyConsultSection() {
         filter as
           | "fechahora_inicio"
           | "fechahora_fin"
-          | "medico"
+          | "paciente"
           | "estado"
       ]?.includes(search)
     );
@@ -139,7 +138,7 @@ function MyConsultSection() {
       ) : filterData().length > 0 ? (
         <ul className="p-4 min-w-full grid gap-8 sm:grid-cols-2 md:p-8 lg:px-10 lg:grid-cols-3 xl:px-20 xl:grid-cols-4 ">
           {filterData().map((element, id) => {
-            return <MyConsultCard key={id} consult={element as Consult} />;
+            return <DoctorConsultCard key={id} consult={element as Consult} />;
           })}
         </ul>
       ) : (
@@ -151,4 +150,4 @@ function MyConsultSection() {
   );
 }
 
-export default MyConsultSection;
+export default DoctorConsultSection;

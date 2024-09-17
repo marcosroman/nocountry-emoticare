@@ -20,6 +20,8 @@ import AddDoctorSection from "./components/Section/Admin/AddDoctorSection";
 import AllConsultsSection from "./components/Section/Admin/AllConsultsSection";
 import AllDoctorsSection from "./components/Section/Admin/AllDoctorsSection";
 import MyConsultSection from "./components/Section/Patient/MyConsultsSection";
+import VideoCall from "./components/VideoCall/VideoCall";
+import EndVideoCall from "./components/VideoCall/EndVideoCall";
 
 function App() {
   return (
@@ -42,7 +44,7 @@ function App() {
 
           <Route element={<AuthDoctorPages />}>
             <Route path="medico/*" element={<HomePage />}>
-              <Route path="citas-del-dia" element={<WhyUsSection />} />
+              <Route path="citas-del-dia" element={<MyConsultSection />} />
               <Route
                 path="todas-las-citas"
                 element={<TestimonialSection />}
@@ -91,6 +93,9 @@ function App() {
             <Route path="ver-perfil" element={<FeatureSection />} />
             <Route path="" element={<Navigate to="lista-de-medicos" />} />
           </Route>
+
+          <Route path="/videollamada" element={<VideoCall/>}></Route>
+          <Route path="/informe-medico" element={<EndVideoCall/>}></Route>
 
           <Route path="*" element={<Navigate to="/" />}></Route>
         </Routes>

@@ -1,6 +1,9 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useContext, useEffect } from "react";
+import { endConsult, startConsult } from "../../api/auth";
+import { UserContext } from "../../context/UserContext";
 
 function randomID(len) {
   let result = "";
@@ -17,14 +20,39 @@ function randomID(len) {
 
 export function getUrlParams(url = window.location.href) {
   console.log(url);
-  let urlStr = url.split("?")[1];
+  const urlStr = url.split("?")[1];
   return new URLSearchParams(urlStr);
 }
 
 export default function VideoCall() {
+  const { userState } = useContext(UserContext);
+  const { user } = userState;
+  const { id_agendamiento } = useParams();
+  const roomID = getUrlParams().get("roomID") || randomID(5);
+  const url_videollamada = window.location.pathname + "?roomID=" + roomID;
+
+  useEffect(() => {
+    const createRoom = async () => {
+      const response = await startConsult(
+        Number(id_agendamiento),
+        url_videollamada
+      );
+      return response;
+    };
+    if (user?.rol === "medico" && !window.location.href.split("?")[1]) {
+      createRoom().then((res) => {
+        if (!res.error) {
+          toast.success("La sala se ha creado exitosamente", {
+            position: "bottom-right",
+          });
+        }
+        console.log(res);
+      });
+    }
+  }, [id_agendamiento, url_videollamada, user]);
+
   const navigate = useNavigate();
 
-  const roomID = getUrlParams().get("roomID") || randomID(5);
   let myMeeting = async (element) => {
     // generate Kit Token
     const appID = 1792283924;
@@ -57,11 +85,27 @@ export default function VideoCall() {
       scenario: {
         mode: ZegoUIKitPrebuilt.GroupCall, // To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
       },
-      onLeaveRoom: () => {
-        toast.success("Consulta finalizada exitosamente", {
-          position: "bottom-right",
-        });
-        navigate("/informe-medico");
+      onLeaveRoom: async () => {
+        if (user?.rol === "medico") {
+          try {
+            const response = await endConsult(Number(id_agendamiento));
+            if (!response.error) {
+              toast.success("Consulta finalizada exitosamente", {
+                position: "bottom-right",
+              });
+              navigate(`/informe-medico/${id_agendamiento}`);
+            }
+          } catch (error) {
+            if (error) {
+              toast.error(
+                "Ha ocurrido un error al momento de finalizar la consulta",
+                { position: "bottom-right" }
+              );
+            }
+          }
+        } else {
+          navigate(`/paciente/mis-citas`)
+        }
       },
     });
   };

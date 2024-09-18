@@ -255,6 +255,7 @@ CREATE VIEW agendamientos_view AS
 		fechahora_inicio,
 		fechahora_fin,
 		estado,
+		url_videollamada,
 		creadael, actualizadael,
 		p.*, m.*
 	FROM

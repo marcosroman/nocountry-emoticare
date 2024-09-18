@@ -23,6 +23,7 @@ import MyConsultSection from "./components/Section/Patient/MyConsultsSection";
 import VideoCall from "./components/VideoCall/VideoCall";
 import EndVideoCall from "./components/VideoCall/EndVideoCall";
 import DoctorConsultSection from "./components/Section/Doctor/DoctorConsultsSection";
+import ScheduleConsult from "./components/Section/Patient/ScheduleConsult";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
           <Route element={<AuthPatientPages />}>
             <Route path="paciente/*" element={<HomePage />}>
               <Route path="mis-citas" element={<MyConsultSection />} />
-              <Route path="agendar-cita" element={<TestimonialSection />} />
+              <Route path="agendar-cita" element={<ScheduleConsult />} />
               <Route path="mis-resultados" element={<FeatureSection />} />
               <Route path="ver-perfil" element={<FeatureSection />} />
               <Route path="*" element={<Navigate to="mis-citas" />} />

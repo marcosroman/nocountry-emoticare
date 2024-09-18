@@ -126,3 +126,14 @@ export const getAllDoctors = async () => {
     }
   }
 };
+
+export const getAvailableConsult = async (id_especialidad: number) => {
+  try {
+    const response = await frontend.get(`/horarios/especialidad/${id_especialidad}`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};

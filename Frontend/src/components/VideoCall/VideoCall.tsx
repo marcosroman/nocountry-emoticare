@@ -70,18 +70,6 @@ export default function VideoCall() {
     // start the call
     zp.joinRoom({
       container: element,
-      sharedLinks: [
-        {
-          name: "Personal link",
-          url:
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            window.location.pathname +
-            "?roomID=" +
-            roomID,
-        },
-      ],
       scenario: {
         mode: ZegoUIKitPrebuilt.GroupCall, // To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
       },

@@ -144,10 +144,10 @@ export const agendarController = async (req, res) => {
 
 export const updateAgendamientoStateController = async (req, res) => {
 	const { id_agendamiento } = req.params;
-	const { estado } = req.body;
+	const { estado, url_videollamada  } = req.body;
 
 	try {
-		const agendamiento = await updateAgendamientoState(id_agendamiento, estado);
+		const agendamiento = await updateAgendamientoState(id_agendamiento, estado, url_videollamada);
 
 		if (agendamiento) {
 			return res.status(200).json(agendamiento);

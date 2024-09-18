@@ -83,6 +83,17 @@ export const authAdmin = async () => {
   }
 };
 
+export const getConsult = async (id_agendamiento: number) => {
+  try {
+    const response = await frontend.get(`/agendamientos/${id_agendamiento}`)
+    return response
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+}
+
 export const getAllConsult = async () => {
   try {
     const response = await frontend.get(`/agendamientos`);
@@ -94,7 +105,7 @@ export const getAllConsult = async () => {
   }
 };
 
-export const getConsult = async (nro_documento: number = 0) => {
+export const getPatientConsults = async (nro_documento: number = 0) => {
   try {
     const response = await frontend.get(`/agendamientos/paciente/${nro_documento}`);
     return response;
@@ -105,7 +116,7 @@ export const getConsult = async (nro_documento: number = 0) => {
   }
 };
 
-export const getDoctorConsult = async (nro_documento: number = 0) => {
+export const getDoctorConsults = async (nro_documento: number = 0) => {
   try {
     const response = await frontend.get(`/agendamientos/medico/${nro_documento}`);
     return response;
@@ -130,6 +141,28 @@ export const getAllDoctors = async () => {
 export const getAvailableConsult = async (id_especialidad: number) => {
   try {
     const response = await frontend.get(`/horarios/especialidad/${id_especialidad}`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};
+
+export const startConsult = async (id_agendamiento: number, url_videollamada: string) => {
+  try {
+    const response = await frontend.put(`/agendamientos/estado/${id_agendamiento}`, {estado: "INICIADO", url_videollamada});
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};
+
+export const endConsult = async (id_agendamiento: number) => {
+  try {
+    const response = await frontend.put(`/agendamientos/estado/${id_agendamiento}`, {estado: "FINALIZADO", url_videollamada: " "});
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {

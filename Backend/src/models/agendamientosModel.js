@@ -19,7 +19,7 @@ export const getAgendamiento = async (id_agendamiento) => {
 		const res = await pool.query(
 			`SELECT *
 			FROM agendamientos_view
-			WHERE id=$1`,
+			WHERE id_agendamiento=$1`,
 			[id_agendamiento]
 		);
 		return res.rows[0];
@@ -58,12 +58,12 @@ export const getAllAgendamientosMedico = async (id_medico) => {
 
 
 // cambiar estado de un agendamiento
-export const updateAgendamientoState = async (id_agendamiento, estado) => {
+export const updateAgendamientoState = async (id_agendamiento, estado, url_videollamada) => {
 	try {
 		const res = await pool.query(
 			`UPDATE agendamientos SET estado=$2, actualizadaEl=TO_CHAR(NOW(),
-				'DD-MM-YYYY') WHERE id=$1 RETURNING *`,
-			[id_agendamiento, estado]
+				'DD-MM-YYYY'), url_videollamada=$3 WHERE id=$1 RETURNING *`,
+			[id_agendamiento, estado, url_videollamada]
 		);
 
 		return res.rows[0];

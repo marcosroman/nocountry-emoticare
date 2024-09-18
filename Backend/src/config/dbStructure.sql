@@ -264,3 +264,23 @@ CREATE VIEW agendamientos_view AS
 		JOIN medicos_view m
 			ON m.id_medico=a.id_medico;
 
+CREATE view usuarios_view AS
+	SELECT * from usuarios
+		LEFT JOIN (
+			SELECT 
+				id id_paciente,
+				usuario_id puid
+			FROM pacientes) p
+			ON usuarios.nro_documento=p.puid
+		LEFT JOIN (
+			SELECT 
+				id id_medico,
+				usuario_id muid
+			FROM medicos) m
+			ON usuarios.nro_documento=m.muid
+		LEFT JOIN (
+			SELECT 
+				id id_admin,
+				usuario_id auid
+			FROM admins) a
+			ON usuarios.nro_documento=a.auid;

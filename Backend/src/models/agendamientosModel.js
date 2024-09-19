@@ -4,7 +4,8 @@ import { getHorarios } from './horariosModel.js';
 export const getAllAgendamientos = async () => {
 	try {
 		const res = await pool.query(
-			`SELECT * FROM agendamientos_view;`
+			`SELECT * FROM agendamientos_view
+			ORDER BY fechahora_inicio;`
 		);
 
 		return res.rows;
@@ -33,7 +34,8 @@ export const getAllAgendamientosPaciente = async (id_paciente) => {
 		const res = await pool.query(
 			`SELECT *
 			FROM agendamientos_view
-			WHERE uid_paciente=$1`,
+			WHERE uid_paciente=$1
+			ORDER BY fechahora_inicio`,
 			[id_paciente]
 		);
 		return res.rows;
@@ -47,7 +49,8 @@ export const getAllAgendamientosMedico = async (id_medico) => {
 		const res = await pool.query(
 			`SELECT *
 			FROM agendamientos_view
-			WHERE uid_medico=$1`,
+			WHERE uid_medico=$1
+			ORDER BY fechahora_inicio`,
 			[id_medico]
 		);
 		return res.rows;

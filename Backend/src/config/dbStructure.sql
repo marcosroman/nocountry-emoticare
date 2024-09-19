@@ -145,6 +145,7 @@ CREATE TABLE agendamientos (
 	fechahora_fin TIMESTAMP NOT NULL,
 	estado estado_agendamiento NOT NULL,
 	url_videollamada VARCHAR(50),
+	nota_conclusion TEXT,
 	creadaEl VARCHAR(20) NOT NULL,
 	actualizadaEl VARCHAR(20) NOT NULL
 );
@@ -256,6 +257,7 @@ CREATE VIEW agendamientos_view AS
 		fechahora_fin,
 		estado,
 		url_videollamada,
+		nota_conclusion,
 		creadael, actualizadael,
 		p.*, m.*
 	FROM

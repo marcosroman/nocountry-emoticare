@@ -31,7 +31,6 @@ function MyConsultSection() {
     };
 
     getData().then((res) => {
-      console.log(res.data)
       setIsLoading(false)
       setConsults(res.data as Consult[]);
     });

@@ -170,3 +170,25 @@ export const endConsult = async (id_agendamiento: number) => {
     }
   }
 };
+
+export const cancelConsult = async (id_agendamiento: number) => {
+  try {
+    const response = await frontend.put(`/agendamientos/estado/${id_agendamiento}`, {estado: "CANCELADO", url_videollamada: " "});
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};
+
+export const scheduleConsult = async (id_medico: number, id_paciente: number, fechahora_inicio: Date, fechahora_fin: Date ) => {
+  try {
+    const response = await frontend.post(`/agendamientos/agendar/${id_medico}`, {id_paciente, fechahora_inicio, fechahora_fin});
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};

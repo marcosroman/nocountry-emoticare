@@ -135,7 +135,7 @@ export const agendarController = async (req, res) => {
 		if (turno) {
 			return res.status(201).json(turno);
 		} else {
-			return res.json({error: 'no se puede agendar el turno'});
+			return res.status(400).json({error: 'no se puede agendar el turno'});
 		}
 	} catch(error) {
 		console.log('Error al agendar turno');

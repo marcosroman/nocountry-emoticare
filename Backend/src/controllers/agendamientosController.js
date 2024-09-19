@@ -2,7 +2,8 @@ import { getAllAgendamientos, getAllAgendamientosPaciente,
 	getAgendamiento, agendar, getAllAgendamientosDisponibles,
 	getAgendamientosDisponibles, getAgendamientosDisponiblesPorEspecialidad,
 	updateAgendamientoState, 
-	getAllAgendamientosMedico}
+	getAllAgendamientosMedico,
+	getNotaConclusion, postNotaConclusion }
 	from '../models/agendamientosModel.js';
 
 export const getAllAgendamientosController = async (req, res) => {
@@ -159,3 +160,32 @@ export const updateAgendamientoStateController = async (req, res) => {
 		res.status(500).json({ error: 'Error interno del servidor.' });
 	}
 }
+
+
+export const getNotaConclusionController = async (req, res) => {
+	const { id_agendamiento } = req.params;
+
+	try {
+		const nota = await getNotaConclusion(id_agendamiento);
+
+		return res.status(200).json(nota);
+	} catch(error) {
+		console.error(error);
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+
+export const postNotaConclusionController = async (req, res) => {
+	const { id_agendamiento } = req.params;
+	const { nota } = req.body;
+
+	try {
+		const conclusion = await postNotaConclusion(id_agendamiento, nota);
+
+		return res.status(201).json(conclusion);
+	} catch(error) {
+		console.error(error);
+		res.status(500).json({ error: 'Error interno del servidor.' });
+	}
+}
+

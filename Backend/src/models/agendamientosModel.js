@@ -361,3 +361,29 @@ export const setUrlVideollamada = async (id_agendamiento, urlVideollamada) => {
 	}
 }
 
+export const getNotaConclusion = async (id_agendamiento) => {
+	try {
+		const res = await pool.query(
+			`SELECT nota_conclusion FROM agendamientos WHERE id=$1`,
+			[id_agendamiento]
+		);
+
+		return res.rows[0];
+	} catch(error) {
+		console.error(error);
+	}
+}
+
+export const postNotaConclusion = async (id_agendamiento, nota) => {
+	try {
+		const res = await pool.query(
+			`UPDATE agendamientos SET nota_conclusion=$2 WHERE id=$1 RETURNING *`,
+			[id_agendamiento, nota]
+		);
+
+		return res.rows[0];
+	} catch(error) {
+		console.error(error);
+	}
+}
+

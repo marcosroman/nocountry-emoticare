@@ -4,7 +4,7 @@ import BorderedTextInput from "../Input/BorderedTextInput";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { endConsult, getConsult } from "../../api/auth";
+import { endConsult, getConsult, saveConsultNotes } from "../../api/auth";
 
 type Props = {
   id_agendamiento: number;
@@ -45,14 +45,11 @@ function DiagnosticForm({ id_agendamiento }: Props) {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
-    values.id_agendamiento = id_agendamiento;
-    alert(`Informe Médico de la Consulta
-        Fecha: ${values.fecha}
-        Médico: ${values.medico}
-        Paciente: ${values.paciente}
-        Agendamiento: ${values.id_agendamiento}
-        Diagnóstico: ${values.diagnostico}`);
-    navigate("/medico/todas-las-citas");
+    const response = await saveConsultNotes(id_agendamiento, values.diagnostico)
+    if (!response.error){
+      toast.success("El diagnóstico ha sido guardado exitosamente", {position: "bottom-right"})
+      navigate("/medico/todas-las-citas");
+    }
   });
 
   return (

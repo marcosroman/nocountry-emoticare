@@ -5,12 +5,13 @@ import { useContext, useEffect } from "react";
 import { endConsult, startConsult } from "../../api/auth";
 import { UserContext } from "../../context/UserContext";
 
-function randomID(len) {
+function randomID(len: number) {
   let result = "";
   if (result) return result;
-  var chars = "12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP",
-    maxPos = chars.length,
-    i;
+  const chars =
+    "12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP";
+  const maxPos = chars.length
+  let i;
   len = len || 5;
   for (i = 0; i < len; i++) {
     result += chars.charAt(Math.floor(Math.random() * maxPos));
@@ -18,6 +19,7 @@ function randomID(len) {
   return result;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function getUrlParams(url = window.location.href) {
   console.log(url);
   const urlStr = url.split("?")[1];
@@ -53,7 +55,7 @@ export default function VideoCall() {
 
   const navigate = useNavigate();
 
-  let myMeeting = async (element) => {
+  const myMeeting = async (element: never) => {
     // generate Kit Token
     const appID = 1792283924;
     const serverSecret = "bae2b985ab25570968161eb502165f7a";
@@ -92,7 +94,7 @@ export default function VideoCall() {
             }
           }
         } else {
-          navigate(`/paciente/mis-citas`)
+          navigate(`/paciente/mis-citas`);
         }
       },
     });

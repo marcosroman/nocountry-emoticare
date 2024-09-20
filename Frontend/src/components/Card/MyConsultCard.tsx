@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import BrainIcon from "../../icons/Brain";
 import CalendarMonthIcon from "../../icons/CalendarMonth";
 import LoginIcon from "../../icons/LogIn";
 import TimeIcon from "../../icons/Time";
@@ -25,7 +24,7 @@ function MyConsultCard({ consult }: Props) {
     "Martha Alvarez": "bg-[url('/images/Martha_Alvarez.webp')]",
     "Juan Pérez": "bg-[url('/images/Juan_Perez.webp')]",
     "Carlos Vargas": "bg-[url('/images/Carlos_Vargas.webp')]",
-    "Joey Tribbiani": "bg-[url('/images/Joey_Tribbiani.webp')]"
+    "Joey Tribbiani": "bg-[url('/images/Joey_Tribbiani.webp')]",
   };
 
   consult.medico = consult.nombre_medico + " " + consult.apellido_medico;
@@ -36,7 +35,13 @@ function MyConsultCard({ consult }: Props) {
         <figure
           className={
             "absolute top-6 p-1 rounded-full bg-white text-blue-600 border shadow-lg size-20 bg-center bg-cover " +
-            doctorsWithPhoto[consult.medico]
+            doctorsWithPhoto[
+              consult.medico as
+                | "Martha Alvarez"
+                | "Juan Pérez"
+                | "Carlos Vargas"
+                | "Joey Tribbiani"
+            ]
           }
         ></figure>
       </header>

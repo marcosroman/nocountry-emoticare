@@ -3,7 +3,6 @@ import CalendarMonthIcon from "../../icons/CalendarMonth";
 import LoginIcon from "../../icons/LogIn";
 import TimeIcon from "../../icons/Time";
 import { Consult } from "../Section/Doctor/DoctorConsultsSection";
-import ProfileIcon from "../../icons/Profile";
 
 type Props = {
   consult: Consult;
@@ -39,7 +38,7 @@ function DoctorConsultCard({ consult }: Props) {
         <figure
           className={
             "absolute top-6 p-1 rounded-full bg-white text-blue-600 border shadow-lg size-20 bg-center bg-cover " +
-            patientsWithPhoto[consult.paciente]
+            patientsWithPhoto[consult.paciente as "Jaime Vargas" | "Ana Gómez" | "Laura Fernández" | "Rebeca Pereira"]
           }
         ></figure>
       </header>

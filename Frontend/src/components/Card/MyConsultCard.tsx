@@ -21,14 +21,24 @@ function MyConsultCard({ consult }: Props) {
       "p-2 rounded-lg text-sm max-w-fit justify-self-end bg-yellow-200 text-yellow-900 lowercase first-letter:uppercase",
   };
 
+  const doctorsWithPhoto = {
+    "Martha Alvarez": "bg-[url('/images/Martha_Alvarez.webp')]",
+    "Juan Pérez": "bg-[url('/images/Juan_Perez.webp')]",
+    "Carlos Vargas": "bg-[url('/images/Carlos_Vargas.webp')]",
+    "Joey Tribbiani": "bg-[url('/images/Joey_Tribbiani.webp')]"
+  };
+
   consult.medico = consult.nombre_medico + " " + consult.apellido_medico;
 
   return (
     <li className="p-4 mx-auto w-full bg-white shadow-lg flex flex-col rounded-xl gap-2 max-w-80 border-2 hover:border-black transition-all duration-300 select-none">
       <header className="bg-[url('/images/bg-tele.jpg')] bg-cover bg-center relative py-10 rounded-lg flex items-center justify-center">
-        <figure className="absolute top-12 p-1 rounded-full bg-white text-blue-600 border shadow-lg">
-          <BrainIcon className="size-12" />
-        </figure>
+        <figure
+          className={
+            "absolute top-6 p-1 rounded-full bg-white text-blue-600 border shadow-lg size-20 bg-center bg-cover " +
+            doctorsWithPhoto[consult.medico]
+          }
+        ></figure>
       </header>
       <section className="mt-6">
         <h2 className="text-xl text-center tracking-wider">{consult.medico}</h2>
@@ -47,8 +57,15 @@ function MyConsultCard({ consult }: Props) {
 
         <span className="flex gap-2 mt-2 ps-2">
           <TimeIcon className="text-blue-600" />
-          {new Date(consult.fechahora_inicio).toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"})} -{" "}
-          {new Date(consult.fechahora_fin).toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"})}
+          {new Date(consult.fechahora_inicio).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}{" "}
+          -{" "}
+          {new Date(consult.fechahora_fin).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </span>
         <footer className="flex items-center justify-center mt-4">
           {consult.estado === "INICIADO" && (

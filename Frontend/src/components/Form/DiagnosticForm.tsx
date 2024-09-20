@@ -4,7 +4,7 @@ import BorderedTextInput from "../Input/BorderedTextInput";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { endConsult, getConsult, saveConsultNotes } from "../../api/auth";
+import {getConsult, saveConsultNotes } from "../../api/auth";
 
 type Props = {
   id_agendamiento: number;

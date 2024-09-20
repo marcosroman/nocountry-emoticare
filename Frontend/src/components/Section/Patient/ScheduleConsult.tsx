@@ -158,6 +158,13 @@ function ScheduleConsult() {
     }
   };
 
+  const doctorsWithPhoto = {
+    "Martha Alvarez": "bg-[url('/images/Martha_Alvarez.webp')]",
+    "Juan Pérez": "bg-[url('/images/Juan_Perez.webp')]",
+    "Carlos Vargas": "bg-[url('/images/Carlos_Vargas.webp')]",
+    "Joey Tribbiani": "bg-[url('/images/Joey_Tribbiani.webp')]"
+  };
+
   return (
     <main className="flex flex-col gap-4 items-center justify-center py-6 ">
       <section className="grid grid-cols-[1.5fr_1fr] justify-center w-full px-8 gap-x-12 gap-y-4">
@@ -220,14 +227,14 @@ function ScheduleConsult() {
                       {disponibilidad.hora_inicio.slice(0, 5)} -{" "}
                       {disponibilidad.hora_fin.slice(0, 5)}
                     </span>
-                    <ProfileIcon />
+                    <figure className={"h-8 w-8 bg-cover bg-center rounded-full " + doctorsWithPhoto[disponibilidad.nombre_completo]}></figure>
                     <span>{disponibilidad.nombre_completo}</span>
                   </li>
                 );
               })
             ) : (
               <p className="text-center font-semibold text-lg">
-                {especialidad ? "No hay disponibilidad para este día" : ""}
+                {especialidad && daySelected.length > 0 ? "No hay disponibilidad para este día" : ""}
               </p>
             )}
           </ul>

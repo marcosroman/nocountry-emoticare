@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { getAvailableConsult, scheduleConsult } from "../../../api/auth";
 import Calendar from "react-calendar";
-import PointIcon from "../../../icons/Point";
 import "../../../styles/ReactCalendar.css";
 import TimeIcon from "../../../icons/Time";
-import ProfileIcon from "../../../icons/Profile";
 import { UserContext } from "../../../context/UserContext";
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 type ValuePiece = Date | null;
 
@@ -47,14 +45,14 @@ function ScheduleConsult() {
 
   const { userState } = useContext(UserContext);
   const { user } = userState;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Función que recibe el dia de la semana como un numero y devuelve la fecha más próxima de ese dia
   const whatDayIs = (day: number) => {
     const date = new Date();
     const Nday = date.getDay() == 0 ? 7 : date.getDay();
-    const SumDay = Nday <= 4 ? Nday-8 : 7 - Nday;
-    const result = date.getDate() + SumDay + day
+    const SumDay = day - Nday < 0 ? 7 + (day - Nday) : day - Nday;
+    const result = date.getDate() + SumDay;
     date.setDate(result < date.getDate() ? result + 7 : result);
     return date.toLocaleDateString();
   };
@@ -85,7 +83,7 @@ function ScheduleConsult() {
     date,
     view,
   }: {
-    date: string;
+    date: { toLocaleDateString: () => string };
     view: string;
   }) => {
     return view === "month" && daysAvailable.includes(date.toLocaleDateString())
@@ -96,8 +94,8 @@ function ScheduleConsult() {
   // Función propia de React Calendar que permite ejecutar una determinada lógica cuando se hace click a ciertos días en el calendario. Recibe como parámetros el valor del día y, si se cumple determinada condición, se ejecuta la lógica establecida
   const showInfoAvailableDays = (value: {
     toLocaleDateString: (
-      locale: string,
-      options: { weekday: string; year: string; month: string; day: string }
+      locale?: string,
+      options?: { weekday: string; year: string; month: string; day: string }
     ) => string;
   }) => {
     setSelection(
@@ -125,20 +123,24 @@ function ScheduleConsult() {
       const [day, month, year] = cita.fecha.split("/");
       const [hoursInit, minutesInit] = cita.hora_inicio.split(":");
       const [hoursEnd, minutesEnd] = cita.hora_fin.split(":");
-      const fechahora_inicio = new Date(Date.UTC(
-        Number(year),
-        Number(month) - 1,
-        Number(day),
-        Number(hoursInit),
-        Number(minutesInit)
-      ));
-      const fechahora_fin = new Date(Date.UTC(
-        Number(year),
-        Number(month) - 1,
-        Number(day),
-        Number(hoursEnd),
-        Number(minutesEnd)
-      ));
+      const fechahora_inicio = new Date(
+        Date.UTC(
+          Number(year),
+          Number(month) - 1,
+          Number(day),
+          Number(hoursInit),
+          Number(minutesInit)
+        )
+      );
+      const fechahora_fin = new Date(
+        Date.UTC(
+          Number(year),
+          Number(month) - 1,
+          Number(day),
+          Number(hoursEnd),
+          Number(minutesEnd)
+        )
+      );
       const response = await scheduleConsult(
         cita.id_medico,
         user.id_paciente,
@@ -149,13 +151,20 @@ function ScheduleConsult() {
         toast.success("Cita agendada exitosamente", {
           position: "bottom-right",
         });
-        navigate("/paciente/mis-citas")
+        navigate("/paciente/mis-citas");
       } else {
         toast.error("Ha ocurrido un error al agendar su cita", {
           position: "bottom-right",
         });
       }
     }
+  };
+
+  const doctorsWithPhoto = {
+    "Martha Alvarez": "bg-[url('/images/Martha_Alvarez.webp')]",
+    "Juan Pérez": "bg-[url('/images/Juan_Perez.webp')]",
+    "Carlos Vargas": "bg-[url('/images/Carlos_Vargas.webp')]",
+    "Joey Tribbiani": "bg-[url('/images/Joey_Tribbiani.webp')]",
   };
 
   return (
@@ -220,14 +229,27 @@ function ScheduleConsult() {
                       {disponibilidad.hora_inicio.slice(0, 5)} -{" "}
                       {disponibilidad.hora_fin.slice(0, 5)}
                     </span>
-                    <ProfileIcon />
+                    <figure
+                      className={
+                        "h-8 w-8 bg-cover bg-center rounded-full " +
+                        doctorsWithPhoto[
+                          disponibilidad.nombre_completo as
+                            | "Martha Alvarez"
+                            | "Juan Pérez"
+                            | "Carlos Vargas"
+                            | "Joey Tribbiani"
+                        ]
+                      }
+                    ></figure>
                     <span>{disponibilidad.nombre_completo}</span>
                   </li>
                 );
               })
             ) : (
               <p className="text-center font-semibold text-lg">
-                {especialidad ? "No hay disponibilidad para este día" : ""}
+                {especialidad && daySelected.length > 0
+                  ? "No hay disponibilidad para este día"
+                  : ""}
               </p>
             )}
           </ul>

@@ -37,7 +37,7 @@ const DailyAppointments = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="4">No hay citas para el día de hoy</td>
+              <td colSpan={4}>No hay citas para el día de hoy</td>
             </tr>
           )}
         </tbody>

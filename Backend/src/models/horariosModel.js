@@ -46,7 +46,8 @@ export const getHorariosBySpeciality = async (id_especialidad) => {
 			INNER JOIN medicos ON horarios.id_medico = medicos.id
 			INNER JOIN usuarios ON medicos.usuario_id = usuarios.nro_documento
 			INNER JOIN especialidades ON especialidades.id = medicos.especialidad_id 
-			WHERE medicos.especialidad_id = $1;`,
+			WHERE medicos.especialidad_id = $1
+			ORDER BY horarios.hora_inicio;`,
 			[id_especialidad]
 		);
 		return query.rows;

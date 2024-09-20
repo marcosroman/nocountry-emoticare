@@ -32,7 +32,7 @@ function ScheduleConsult() {
 
   const [infoDays, setInfoDays] = useState<infoDays[] | []>([]); // Estado que almacena un arreglo con todos los horarios que corresponden con la especialidad
 
-  const [daysAvailable, setDaysAvailable] = useState([]); // Estado que almacena un arreglo con unicamente la fecha en formato string de cada horario que corresponde con la especialidad
+  const [daysAvailable, setDaysAvailable] = useState<string[]>([]); // Estado que almacena un arreglo con unicamente la fecha en formato string de cada horario que corresponde con la especialidad
 
   const [daySelected, setDaySelected] = useState<infoDays[] | []>([]); // Estado que almacena un arreglo con los horarios que correspondan con la fecha seleccionada por el usuario
 
@@ -53,8 +53,9 @@ function ScheduleConsult() {
   const whatDayIs = (day: number) => {
     const date = new Date();
     const Nday = date.getDay() == 0 ? 7 : date.getDay();
-    const SumDay = 7 - Nday;
-    date.setDate(date.getDate() + SumDay + day + 1);
+    const SumDay = Nday <= 4 ? Nday-8 : 7 - Nday;
+    const result = date.getDate() + SumDay + day
+    date.setDate(result < date.getDate() ? result + 7 : result);
     return date.toLocaleDateString();
   };
 
@@ -90,20 +91,6 @@ function ScheduleConsult() {
     return view === "month" && daysAvailable.includes(date.toLocaleDateString())
       ? "text-white bg-blue-600 rounded-full flex items-center justify-center"
       : null;
-  };
-
-  // Función propia de React Calendar que permite agregar un elemento a ciertos días en el calendario. Recibe como parámetros el día y la vista del calendario, y, si se cumple determinada condición, agrega el elemento en el día
-  const pointAvailableDays = ({
-    date,
-    view,
-  }: {
-    date: string;
-    view: string;
-  }) => {
-    return view === "month" &&
-      daysAvailable.includes(date.toLocaleDateString()) ? (
-      <PointIcon className="text-blue-600 peer absolute -top-1 right-4 size-4" />
-    ) : null;
   };
 
   // Función propia de React Calendar que permite ejecutar una determinada lógica cuando se hace click a ciertos días en el calendario. Recibe como parámetros el valor del día y, si se cumple determinada condición, se ejecuta la lógica establecida

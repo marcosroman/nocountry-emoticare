@@ -192,3 +192,14 @@ export const scheduleConsult = async (id_medico: number, id_paciente: number, fe
     }
   }
 };
+
+export const saveConsultNotes = async (id_agendamiento: number, nota: string ) => {
+  try {
+    const response = await frontend.post(`/agendamientos/${id_agendamiento}/nota_conclusion`, {nota});
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data;
+    }
+  }
+};
